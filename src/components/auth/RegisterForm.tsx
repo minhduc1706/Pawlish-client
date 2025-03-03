@@ -27,19 +27,18 @@ const RegisterForm = ({ switchToLogin }: { switchToLogin: () => void }) => {
   });
 
   const onSubmit = async (data: RegisterFormData) => {
-    try {
-      const result = await dispatch(
-        registerThunk({
-          email: data.email,
-          password: data.password,
-        })
-      );
+    const result = await dispatch(
+      registerThunk({ email: data.email, password: data.password })
+    );
+
+    if (registerThunk.fulfilled.match(result)) {
+      console.log("User registered successfully:", result.payload);
       switchToLogin();
-      console.log("User registered successfully:", result);
-    } catch (error) {
-      console.error("Error during registration:", error);
+    } else {
+      console.error("Registration failed:", result.payload as string);
     }
   };
+
   return (
     <Form {...registerForm}>
       <form
@@ -55,6 +54,7 @@ const RegisterForm = ({ switchToLogin }: { switchToLogin: () => void }) => {
               <FormControl>
                 <Input
                   {...field}
+                  autoComplete="email"
                   placeholder="Email"
                   className={`w-full ${
                     registerForm.formState.errors.email
@@ -80,6 +80,7 @@ const RegisterForm = ({ switchToLogin }: { switchToLogin: () => void }) => {
                 <Input
                   {...field}
                   type="password"
+                  autoComplete="new-password"
                   placeholder="Password"
                   className={`w-full ${
                     registerForm.formState.errors.password
@@ -105,6 +106,7 @@ const RegisterForm = ({ switchToLogin }: { switchToLogin: () => void }) => {
                 <Input
                   {...field}
                   type="password"
+                  autoComplete="new-password"
                   placeholder="Confirm Password"
                   className={`w-full ${
                     registerForm.formState.errors.confirmPassword

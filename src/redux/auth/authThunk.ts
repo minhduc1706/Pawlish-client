@@ -8,13 +8,13 @@ export const loginThunk = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      return await loginApi(credentials);
+      const data = await loginApi(credentials);
+      return data;
     } catch (error: unknown) {
-      return rejectWithValue(
-        error instanceof Error
-          ? error.message
-          : "Login failed. Please try again."
-      );
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue("Login failed. Please try again.");
     }
   }
 );
@@ -26,13 +26,13 @@ export const registerThunk = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      return await registerApi(userData);
+      const data = await registerApi(userData);
+      return data;
     } catch (error: unknown) {
-      return rejectWithValue(
-        error instanceof Error
-          ? error.message
-          : "Registration failed. Please try again."
-      );
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue("Registration failed. Please try again.");
     }
   }
 );

@@ -29,20 +29,16 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (data: LoginFormData) => {
-    try {
-      const result = await dispatch(
-        loginThunk({
-          email: data.email,
-          password: data.password,
-        })
-      );
-      if (loginThunk.fulfilled.match(result)) {
-        navigate("/");
-        await syncCartAfterLogin(dispatch);
-      }
-      console.log("User login successfully:", result);  
-    } catch (error) {
-      console.error("Error during login:", error);
+    const result = await dispatch(
+      loginThunk({ email: data.email, password: data.password })
+    );
+
+    if (loginThunk.fulfilled.match(result)) {
+      console.log("User login successfully:", result.payload);
+      navigate("/");
+      await syncCartAfterLogin(dispatch);
+    } else {
+      console.error(" Login failed:", result.payload as string);
     }
   };
 
@@ -58,6 +54,7 @@ const LoginForm = () => {
               <FormControl>
                 <Input
                   {...field}
+                  autoComplete="email" 
                   placeholder="Email"
                   className={`w-full ${
                     loginForm.formState.errors.email
@@ -83,6 +80,7 @@ const LoginForm = () => {
                 <Input
                   {...field}
                   type="password"
+                  autoComplete="current-password"
                   placeholder="Password"
                   className={`w-full ${
                     loginForm.formState.errors.password
