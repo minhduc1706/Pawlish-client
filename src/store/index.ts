@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import rootReducer from "./rootReducer";
+import { rootReducer } from "./rootReducer";
 import { setStore } from "../config/axiosClient";
 
 export const store = configureStore({
@@ -14,4 +14,4 @@ export const store = configureStore({
 setStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-export type AppStore = typeof store; 
+export type AppStore = typeof store;

@@ -1,13 +1,14 @@
 import axios from "axios";
 import { setAccessToken, logout, setUser } from "../redux/auth/authSlice";
 import { AppStore } from "../store";
+import { logoutThunk } from "@/redux/auth/authThunk";
 
 const apiClient = axios.create({
   baseURL: "http://localhost:4000/api/v1",
   withCredentials: true,
 });
 
-let storeRef: AppStore | null = null;
+export let storeRef: AppStore | null = null;
 
 export const setStore = (store: AppStore) => {
   storeRef = store;
@@ -39,7 +40,7 @@ apiClient.interceptors.response.use(
 
     if (
       error.response?.status === 401 &&
-      error.response?.data?.message?.toLowerCase().includes("token expired") &&
+      error.response?.data?.error?.message?.toLowerCase().includes("token expired") &&
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
@@ -71,8 +72,7 @@ apiClient.interceptors.response.use(
           return apiClient(originalRequest);
         } catch (refreshError) {
           isRefreshing = false;
-          console.error("Refresh token failed", refreshError)
-          
+
           const errorInstance =
             refreshError instanceof Error
               ? refreshError
@@ -82,6 +82,7 @@ apiClient.interceptors.response.use(
 
           if (storeRef) {
             storeRef.dispatch(logout());
+            storeRef.dispatch(logoutThunk());
           }
           return Promise.reject(refreshError);
         }
@@ -102,5 +103,6 @@ apiClient.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
 
 export default apiClient;

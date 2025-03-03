@@ -1,46 +1,32 @@
 import withSEO from "@/components/commons/withSEO";
 import { Button } from "@/components/ui/button";
 import { CartItem } from "@/interfaces/Cart";
+import { useProducts } from "@/queries/useProduct";
 import { addItemToCart } from "@/redux/cart/cartSlice";
 import { useAppDispatch } from "@/store/hooks";
 
-const fakeProducts = [
-  {
-    productId: {
-      _id: "67bce82fefd8535953d996e2",
-      name: "Pet Shampoo",
-      price: 15.99,
-      imgUrl: "/images/shampoo.jpg",
-    },
-    quantity: 1,
-  },
-  {
-    productId: {
-      _id: "67bce82fefd8535953d996e3",
-      name: "Pet Grooming Scissors",
-      price: 25.99,
-      imgUrl: "/images/scissors.jpg",
-    },
-    quantity: 1,
-  },
-];
-
 const HomeComponent = () => {
   const dispatch = useAppDispatch();
+  const { data: products, isLoading, error } = useProducts();
 
   const addToCart = (product: CartItem) => {
     dispatch(addItemToCart(product));
   };
 
+  if (isLoading) return <p>Loading products...</p>;
+  if (error) return <p>Error loading products!</p>;
+
   return (
     <div>
-      <h1 className="">Welcome to Pawlish!</h1>
-      {fakeProducts.map((product) => (
-        <div key={product.productId._id}>
-          <img src={product.productId.imgUrl} alt={product.productId.name} />
-          <h3>{product.productId.name}</h3>
-          <p>Price: ${product.productId.price}</p>
-          <Button onClick={() => addToCart(product)}>Add to Cart</Button>
+      <h1>Welcome to Pawlish!</h1>
+      {products?.map((product) => (
+        <div key={product._id}>
+          <img src={product.imgUrl} alt={product.name} />
+          <h3>{product.name}</h3>
+          <p>Price: ${product.price}</p>
+          <Button onClick={() => addToCart({ productId: product, quantity: 1 })}>
+            Add to Cart
+          </Button>
         </div>
       ))}
     </div>

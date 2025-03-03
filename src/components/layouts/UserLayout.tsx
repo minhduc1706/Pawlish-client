@@ -9,7 +9,7 @@ const UserLayout = () => {
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
 
   const scrollToTop = () => {
-    window.scrollTo({top: 0, behavior: "smooth"})
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const UserLayout = () => {
           onClick={scrollToTop}
           className="fixed bottom-4 right-4 p-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 cursor-pointer"
         >
-          <ChevronsUp/>
+          <ChevronsUp />
         </button>
       )}
     </div>
