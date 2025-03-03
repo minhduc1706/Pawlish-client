@@ -4,56 +4,83 @@ import {
   removeItemFromCart,
   syncCartAfterLogin,
 } from "@/api/cartApi";
-import { CartItem } from "@/interfaces/Cart";
+
+import { Cart } from "@/interfaces/Cart";
 import { useAppDispatch } from "@/store/hooks";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const useCart = (userId: string) => {
-  const queryClient = useQueryClient();
-  const dispatch = useAppDispatch();
-  
-  const cartQuery = useQuery({
+export const useCart = (userId: string) =>
+  useQuery<Cart | null>({
     queryKey: ["cart", userId],
-    queryFn: () => (userId ? getCart() : null),
+    queryFn: () => (userId ? getCart() : Promise.resolve(null)),
     enabled: !!userId,
   });
 
-  const addToCartMutation = useMutation({
-    mutationFn: (params: CartItem) => addItemToCart(params),
-    onSuccess: () => {
-      if (userId) {
-        queryClient.invalidateQueries({ queryKey: ["cart", userId] });
-      }
+export const useAddToCart = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: addItemToCart,
+    onMutate: async (newItem) => {
+      await queryClient.cancelQueries({ queryKey: ["cart"] });
+      const previousCart = queryClient.getQueryData(["cart"]);
+
+      queryClient.setQueryData(["cart"], (oldCart: Cart) => {
+        return {
+          ...oldCart,
+          items: [...oldCart.items, newItem],
+        };
+      });
+
+      return { previousCart };
     },
-    onError: (error) => {
-      console.error("Failed to add item to cart:", error);
+    onError: (_error, _newItem, context) => {
+      queryClient.setQueryData(["cart"], context?.previousCart);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
   });
+};
 
-  const removeFromCartMutation = useMutation({
-    mutationFn: (itemId: string) => removeItemFromCart(itemId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cart", userId] });
+export const useRemoveFromCart = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: removeItemFromCart,
+    onMutate: async (itemId) => {
+      await queryClient.cancelQueries({ queryKey: ["cart"] });
+      const previousCart = queryClient.getQueryData(["cart"]);
+
+      queryClient.setQueryData(["cart"], (oldCart: Cart) => {
+        return {
+          ...oldCart,
+          items: oldCart.items.filter((item) => item.productId._id !== itemId),
+        };
+      });
+
+      return { previousCart };
     },
-    onError: (error) => {
-      console.error("Failed to remove item from cart:", error);
+    onError: (_error, _itemId, context) => {
+      queryClient.setQueryData(["cart"], context?.previousCart);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
   });
+};
 
-  const syncCartMutation = useMutation({
-    mutationFn: () => syncCartAfterLogin(dispatch),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cart", userId] });
+export const useSyncCart = () => {
+  const queryClient = useQueryClient();
+  const dispatch = useAppDispatch();
+
+  return useMutation({
+    mutationFn: async () => {
+      const updatedCart = await syncCartAfterLogin(dispatch);
+      queryClient.setQueryData(["cart"], updatedCart);
     },
     onError: (error) => {
-      console.error("Failed to sync with server:", error);
+      console.log("sync cart failed", error);
     },
   });
-
-  return {
-    cartQuery,
-    addToCartMutation,
-    removeFromCartMutation,
-    syncCartMutation,
-  };
 };

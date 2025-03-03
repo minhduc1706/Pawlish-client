@@ -1,2 +1,7 @@
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
+
+
+[data-slot="command-input-wrapper"] {
+    border-bottom: none !important;
+  }
