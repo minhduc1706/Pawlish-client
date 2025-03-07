@@ -55,19 +55,17 @@ const SearchBar = () => {
     const handleKeyDown: EventListener = (e: Event) => {
       const event = e as unknown as KeyboardEvent;
 
-      // Check if Ctrl/Cmd + K is pressed to toggle search
       if (event.key.toLowerCase() === "k" && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         if (open) {
-          dispatch(closeSearch()); // Close the search if it's open
+          dispatch(closeSearch()); 
         } else {
-          dispatch(openSearch()); // Open the search if it's closed
+          dispatch(openSearch()); 
         }
-        setSelectedIndex(-1); // Reset the selected index when toggling
+        setSelectedIndex(-1); 
         return;
       }
 
-      // Handle arrow key navigation and enter press
       if (open && ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter"].includes(event.key)) {
         event.preventDefault();
 
@@ -103,13 +101,13 @@ const SearchBar = () => {
 
   const handleQueryChange = (value: string) => {
     dispatch(setQuery(value));
-    setSelectedIndex(-1); // Reset when typing again
+    setSelectedIndex(-1); 
   };
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       dispatch(closeSearch());
-      setSelectedIndex(-1); // Reset when closing
+      setSelectedIndex(-1); 
     }
   };
 
