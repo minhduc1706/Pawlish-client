@@ -4,7 +4,7 @@ import { AppStore } from "../store";
 import { logoutThunk } from "@/redux/auth/authThunk";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:4000/api/v1",
+  baseURL: import.meta.env.BASE_URL,
   withCredentials: true,
 });
 
@@ -40,7 +40,9 @@ apiClient.interceptors.response.use(
 
     if (
       error.response?.status === 401 &&
-      error.response?.data?.error?.message?.toLowerCase().includes("token expired") &&
+      error.response?.data?.error?.message
+        ?.toLowerCase()
+        .includes("token expired") &&
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
@@ -103,6 +105,5 @@ apiClient.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
 
 export default apiClient;
