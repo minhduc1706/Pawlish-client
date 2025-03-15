@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import UserLayout from "./components/layouts/UserLayout";
 import Home from "./pages/Home";
 import AuthLayout from "./components/auth/AuthLayout";
-import BlogExp from "./pages/blog/BlogExp";
+import BlogExp from "./components/blog/BlogExp";
 function App() {
   return (
     <BrowserRouter>
