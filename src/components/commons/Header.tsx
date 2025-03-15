@@ -68,9 +68,9 @@ const menuItems: MenuItem[] = [
     title: "Blog",
     path: "/blog",
     subMenu: [
-      { path: "/blog/tech", label: "Tech" },
-      { path: "/blog/lifestyle", label: "Lifestyle" },
-      { path: "/blog/travel", label: "Travel" },
+      { path: "/blog/experience", label: "Experience" },
+      { path: "/blog/service", label: "Service" },
+      { path: "/blog/entertainment", label: "Entertainment" },
     ],
   },
   { title: "Contact", path: "/contact" },

@@ -14,6 +14,7 @@ import PetHomeCare from "./pages/PetHomeCare";
 import PetBathPage from "./pages/PetBathPage";
 import CutPetHairPage from "./pages/CutPetHairPage";
 
+import BlogExp from "./components/blog/BlogExp";
 function App() {
   return (
     <BrowserRouter>
@@ -47,6 +48,8 @@ function App() {
         <Route path="auth" element={<AuthLayout />} />
 
         {/* Các route khác (nếu có) */}
+        <Route path="blog/experience" element={<BlogExp />}/>
+        
         {/* <Route path="/login" element={<LoginPage />} />
         <Route path="/unauthorized" element={<Unauthorized />} /> */}
 

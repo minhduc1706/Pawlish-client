@@ -19,16 +19,22 @@ const HomeComponent = () => {
   return (
     <div>
       <h1>Welcome to Pawlish!</h1>
-      {products?.map((product) => (
-        <div key={product._id}>
-          <img src={product.imgUrl} alt={product.name} />
-          <h3>{product.name}</h3>
-          <p>Price: ${product.price}</p>
-          <Button onClick={() => addToCart({ productId: product, quantity: 1 })}>
-            Add to Cart
-          </Button>
-        </div>
-      ))}
+      {Array.isArray(products) && products.length > 0 ? (
+        products.map((product) => (
+          <div key={product._id}>
+            <img src={product.imgUrl} alt={product.name} />
+            <h3>{product.name}</h3>
+            <p>Price: ${product.price}</p>
+            <Button
+              onClick={() => addToCart({ productId: product, quantity: 1 })}
+            >
+              Add to Cart
+            </Button>
+          </div>
+        ))
+      ) : (
+        <p>No products available</p>
+      )}
     </div>
   );
 };
