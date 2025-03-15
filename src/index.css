@@ -1,7 +1,39 @@
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
 
-
 [data-slot="command-input-wrapper"] {
-    border-bottom: none !important;
-  }
+  border-bottom: none !important;
+}
+
+.CommandList {
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  background: white; /* Màu nền xanh đậm giống topbar */
+}
+
+/* Thanh cuộn cho Webkit (Chrome, Safari) */
+.CommandList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.CommandList::-webkit-scrollbar-track {
+  background: #3B4371; /* Xanh đậm nhạt hơn */
+  border-radius: 4px;
+}
+
+.CommandList::-webkit-scrollbar-thumb {
+  background: #64748B; /* Xám xanh nhẹ */
+  border-radius: 4px;
+}
+
+.CommandList::-webkit-scrollbar-thumb:hover {
+  background: #9CA3AF; /* Sáng hơn khi hover */
+}
+
+/* Thanh cuộn cho Firefox */
+.CommandList {
+  scrollbar-width: thin;
+  scrollbar-color: gray white;
+}

@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import UserLayout from "./components/layouts/UserLayout";
 import Home from "./pages/Home";
 import AuthLayout from "./components/auth/AuthLayout";
-
+import BlogExp from "./components/blog/BlogExp";
 function App() {
   return (
     <BrowserRouter>
@@ -11,7 +11,8 @@ function App() {
           <Route path="/" element={<Home />} />
         </Route>
         <Route path="auth" element={<AuthLayout />} />
-
+        <Route path="blog/experience" element={<BlogExp />}/>
+        
         {/* <Route path="/login" element={<LoginPage />} />
         <Route path="/unauthorized" element={<Unauthorized />} /> */}
 
