@@ -1,106 +1,104 @@
 const TakeDogWalkPage = () => {
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-md">
+    <div className="max-w-[66vw] w-2/3 mx-auto p-6 bg-white rounded-xl shadow-md">
       <section className="mb-6">
-        <h2 className="text-[35px] font-bold mb-4">Giới thiệu về PAWLISH</h2>
+        <h2 className="text-[35px] font-bold mb-4">Introduction to PAWLISH</h2>
 
         <p className="text-[20px] text-gray-700">
-          PAWLISH ra đời với mong muốn để thú cưng của bạn được chỉnh chu nhất.
-          Ở Việt Nam, việc nuôi thú cưng đã rất quen thuộc với mọi người. Việc
-          chăm sóc thú cưng như thế nào là đúng cách, nếu bạn không có thời gian
-          thì đây là vấn đề mà chúng tôi đặt ra. Đặc biệt, chúng tôi đã quyết
-          định mang đến khách hàng dịch vụ dắt chó đi dạo độc quyền tại TP HCM.
+          PAWLISH was created with the desire to make sure your pets are
+          well-groomed and well-cared for. In Vietnam, owning pets has become
+          very familiar to everyone. Proper pet care is important, but if you
+          don’t have the time, that's where we come in. Specifically, we have
+          decided to bring our exclusive dog walking service to Ho Chi Minh
+          City.
         </p>
       </section>
 
       <section className="mb-6">
         <h2 className="text-[35px] font-bold mb-4">
-          Dịch Vụ Dắt Chó Đi Dạo Độc Quyền
+          Exclusive Dog Walking Service
         </h2>
         <img
           src="https://images.ctfassets.net/sfnkq8lmu5d7/7HjKLIlzG4H91YOiK9VIA4/36ed17fa9402782bba9cd959ab12bdfd/The_Wildest_How_to_Start_a_Professional_Dog-Walking_Service_hero_AdobeStock_468896651.jpg?w=1000&h=750&fl=progressive&q=70&fm=jpg"
-          alt="Dịch vụ dắt chó đi dạo"
+          alt="Dog walking service"
           className="w-full h-auto rounded-md mb-4 object-cover"
         />
         <p className="text-[20px] text-gray-700">
-          Các dòng chó cần vận động như: Alaska, Husky, Samoyed, Chow Chow,
-          Becgie, Golden, Poodle, Phốc sóc, Chihuahua, Nhật... sẽ được dắt đi
-          dạo giúp giải tỏa căng thẳng và đảm bảo sức khỏe.
+          High-energy dog breeds such as Alaska, Husky, Samoyed, Chow Chow,
+          German Shepherd, Golden Retriever, Poodle, Pomeranian, Chihuahua, and
+          Japanese breeds will be walked to help them relieve stress and stay
+          healthy.
         </p>
       </section>
 
       <section className="mb-6">
         <h2 className="text-[35px] font-bold mb-4">
-          2. Tại Sao Bạn Nên Chọn Dịch Vụ Của PAWLISH?
+          2. Why Choose PAWLISH Services?
         </h2>
         <img
           src="https://images.squarespace-cdn.com/content/v1/611b3a86fb6a226aadffcf79/f52ed36c-150c-49d8-8192-f9281f75f5f4/how+to+become+a+dog+walker.png"
-          alt="Lợi ích PAWLISH"
+          alt="PAWLISH Benefits"
           className="w-full h-auto rounded-md mb-4 object-cover"
         />
         <ul className="list-disc pl-6 text-[20px] text-gray-700">
           <li>
-            Đảm bảo đội ngủ nhân viên chuyên nghiệp, uy tín, trách nhiệm và có
-            nhiều kinh nghiệm chăm sóc thú cưng.
+            Professional, reputable, and responsible staff with extensive
+            experience in pet care.
           </li>
-          <li>Đảm bảo trang thiết bị hiện đại, tiên tiến.</li>
+          <li>Modern and advanced equipment.</li>
           <li>
-            Chúng tôi hiểu được tâm lý của thú cưng, giúp thú cưng thoải mái,
-            khỏe mạnh sau khi được ra ngoài vui chơi.
-          </li>
-          <li>
-            Bạn không có thời gian, chúng tôi có thể thay bạn làm điều đó với
-            tình yêu thương động vật và tinh thần trách nhiệm.
-          </li>
-          <li>Giá cả hợp lý, thường xuyên có chương trình khuyến mãi.</li>
-          <li>
-            Nhân viên trực điện thoại 24/24, tư vấn trực tiếp hoặc thông qua các
-            trang xã hội (facebook, zalo, instargram).
+            We understand pet psychology, helping your pets feel comfortable and
+            healthy after outdoor activities.
           </li>
           <li>
-            Phục vụ tất cả các khung giờ để phù hợp công việc của khách hàng.
+            If you don’t have time, we can take care of it for you with love and
+            responsibility.
           </li>
+          <li>Reasonable pricing with frequent promotions.</li>
           <li>
-            Chúng tôi cung cấp dịch vụ tắm, sấy, vệ sinh sau khi chúng chạy nhảy
-            vui đùa.
+            24/7 phone support, direct consultation, or through social media
+            platforms (Facebook, Zalo, Instagram).
+          </li>
+          <li>Available at all hours to fit your schedule.</li>
+          <li>
+            We provide bathing, drying, and cleaning services after your pet has
+            had fun outdoors.
           </li>
         </ul>
       </section>
 
       <section className="mb-6">
-        <h2 className="text-[35px] font-bold mb-4">3. Cam Kết Của PAWLISH</h2>
+        <h2 className="text-[35px] font-bold mb-4">3. PAWLISH Commitments</h2>
 
         <ul className="list-disc pl-6 text-[20px] text-gray-700">
           <li>
-            UY TÍN – là vẫn đề mà chúng tôi chú trọng và đặt lên làm tiêu chí
-            khách hàng.
+            TRUST – is our top priority and the foundation of our customer
+            service.
           </li>
           <li>
-            Cam kết sẽ hoàn tiền 100% nếu không hài lòng về chất lượng dịch vụ.
+            We guarantee a 100% refund if you are not satisfied with the service
+            quality.
           </li>
           <li>
-            Nhân viên cập nhật hình ảnh, vị trí liên tục thú cưng vui chơi, chạy
-            nhảy.
+            Staff will continuously update you with images and location of your
+            pet while they are playing and running.
           </li>
-          <li>Có thể tự do theo dõi dịch vụ.</li>
-          <li>Hướng dẫn đi vệ sinh đúng chỗ.</li>
-          <li>
-            Chúng tôi có đội ngũ theo dõi tình hình sức khỏe hàng tuần cho thú
-            cưng của bạn.
-          </li>
+          <li>You have the freedom to monitor the service at any time.</li>
+          <li>Guidance on proper potty training.</li>
+          <li>We have a team that monitors your pet's health weekly.</li>
         </ul>
       </section>
 
       <section className="mb-6">
         <h2 className="text-[35px] font-bold mb-4">
-          4. PAWLISH-Thông Tin Liên Hệ
+          4. PAWLISH – Contact Information
         </h2>
 
         <p className="text-[17px] text-gray-700">
-          Hãy liên hệ ngay với PAWLISH qua thông tin bên dưới:
+          Contact PAWLISH using the information below:
         </p>
         <p className="text-[17px] text-gray-700">
-          <strong>Hotline 24/7:</strong> 0898 520 760
+          <strong>24/7 Hotline:</strong> 0898 520 760
         </p>
         <p className="text-[17px] text-gray-700">
           <strong>Email:</strong> pawlish@gmail.com
@@ -108,25 +106,25 @@ const TakeDogWalkPage = () => {
       </section>
 
       <section className="mb-6">
-        <h2 className="text-[17px] font mb-4">
-          Trọn Vẹn Trải Nghiệm - Các Dịch Vụ Khác
+        <h2 className="text-[17px] font-bold mb-4">
+          Complete Experience – Other Services
         </h2>
 
         <p className="text-[20px] text-gray-700">
-          <strong>Những dịch vụ mà PAWLISH đáp ứng:</strong> Grooming tại spa,
-          Cắt tỉa lông tại nhà, Tắm thú cưng tại nhà, Khách sạn thú cưng….
+          <strong>Services provided by PAWLISH:</strong> Grooming at spa, Home
+          hair trimming, Home pet bathing, Pet hotel, and more...
         </p>
         <p className="text-[13px] font-bold text-gray-700 italic">
-          PET SERVICE CAM KẾT
+          PET SERVICE COMMITMENT
         </p>
-        <p className="text-[13px]  text-gray-700">
-          <strong>– ĐEM LẠI DỊCH VỤ TỐT NHẤT VỚI GIÁ TỐT NHẤT</strong>
+        <p className="text-[13px] text-gray-700">
+          <strong>– PROVIDING THE BEST SERVICE AT THE BEST PRICE</strong>
         </p>
-        <p className="text-[13px] text-gray-700 ">
-          <strong> – ĐỘI NGŨ CHĂM SÓC KHÁCH HÀNG CHUYÊN NGHIỆP</strong>
+        <p className="text-[13px] text-gray-700">
+          <strong>– PROFESSIONAL CUSTOMER SERVICE TEAM</strong>
         </p>
-        <p className="text-[13px]  text-gray-700 ">
-          <strong> – NHÂN VIÊN ĐẾN TẠI NHÀ</strong>
+        <p className="text-[13px] text-gray-700">
+          <strong>– IN-HOME SERVICE AVAILABLE</strong>
         </p>
         <span className="elementor-share-btn__icon">
           <i className="fab fa-pinterest" aria-hidden="true"></i>

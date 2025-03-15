@@ -22,22 +22,22 @@ const menuItems: MenuItem[] = [
         path: "/services/PetSpaServices",
         label: "Pet Spa Services",
         subMenu: [
-          { path: "/services/Combo1", label: "Combo 1 – Tắm vệ sinh" },
+          { path: "/services/Combo1", label: "Combo 1 – Hygiene bath" },
           {
             path: "/services/Combo3",
-            label: "Combo 3 – Tắm vệ sinh cắt tỉa lông",
+            label: "Combo 3 - Bath, grooming and hair trimming",
           },
-          { path: "/services/Combo4", label: "Combo 4 – Cạo tắm vệ sinh" },
+          { path: "/services/Combo4", label: "Combo 4 - Shaving and bathing" },
         ],
       },
       {
         path: "/services/PetHomeCare",
         label: "Pet Service at Home: 24/7 Convenient Solution for You",
         subMenu: [
-          { path: "/services/PetBathPage", label: "Tắm thú cưng tại nhà " },
+          { path: "/services/PetBathPage", label: "Bathe your pet at home" },
           {
             path: "/services/CutPetHairPage",
-            label: "Cắt Tỉa Lông Thú Cưng Tại Nhà",
+            label: "Pet Grooming At Home",
           },
         ],
       },

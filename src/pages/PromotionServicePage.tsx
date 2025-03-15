@@ -35,7 +35,7 @@ const PromotionServicePage = () => {
     try {
       const formattedAppointmentDate = new Date(
         formData.appointmentDate
-      ).toLocaleDateString("vi-VN", {
+      ).toLocaleDateString("en-GB", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
@@ -58,10 +58,10 @@ const PromotionServicePage = () => {
       );
 
       if (!response.ok) {
-        throw new Error(`Lỗi: ${response.status}`);
+        throw new Error(`Error: ${response.status}`);
       }
 
-      alert("Đã gửi yêu cầu thành công!");
+      alert("Request submitted successfully!");
       setFormData({
         name: "",
         phone: "",
@@ -78,13 +78,13 @@ const PromotionServicePage = () => {
         note: "",
       });
     } catch (error) {
-      console.error("Lỗi khi gửi yêu cầu:", error);
-      alert("Gửi yêu cầu thất bại! Vui lòng thử lại.");
+      console.error("Error submitting request:", error);
+      alert("Failed to submit request! Please try again.");
     }
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-md">
+    <div className="max-w-[66vw] w-2/3 mx-auto p-6 bg-white rounded-xl shadow-md">
       {/* Breadcrumb */}
       <nav className="text-sm mb-4 text-gray-500">
         <a
@@ -93,7 +93,7 @@ const PromotionServicePage = () => {
           rel="noopener noreferrer"
           className="text-blue-500 hover:underline"
         >
-          Trang chủ /
+          Home /
         </a>{" "}
         <a
           href="http://localhost:5173/services/PromotionServicePage"
@@ -101,128 +101,85 @@ const PromotionServicePage = () => {
           rel="noopener noreferrer"
           className="text-blue-500 hover:underline"
         >
-          Dịch vụ Spa Thú Cưng HCM – Chăm sóc toàn diện cho Boss yêu
+          Pet Spa Services HCM – Comprehensive Care for Your Pets
         </a>{" "}
-        / Ưu Đãi PAWLISH
+        / PAWLISH Promotion
       </nav>
 
       {/* Header */}
-      <h1 className="text-[35px] font-bold mb-2">Ưu Đãi PAWLISH</h1>
+      <h1 className="text-[35px] font-bold mb-2">PAWLISH Promotion</h1>
 
-      {/* Giới thiệu dịch vụ */}
-
+      {/* Service Introduction */}
       <h2 className="text-[35px] font-bold mb-2">
-        Giới thiệu dịch vụ – ưu đãi PAWLISH
+        Service Introduction – PAWLISH Promotion
       </h2>
 
       <div>
-        <p className="mb-2">
-          PAWLISH giới thiệu đến khách hàng các dịch vụ như:
-        </p>
+        <p className="mb-2">PAWLISH offers the following services:</p>
         <ul className="list-disc ml-5">
-          <li className="mb-2">Dịch vụ chăm sóc thú cưng tại spa và tại nhà</li>
-          <li className="mb-2">Khách sạn thú cưng</li>
-          <li className="mb-2">
-            Pet shop: Cung cấp các dòng sản phẩm thú cưng
-          </li>
-          <li className="mb-2">Tiêm vaccine tại spa và tại nhà</li>
-          <li className="mb-2">Dịch vụ dắt chó đi dạo</li>
+          <li className="mb-2">Pet grooming at spa and home</li>
+          <li className="mb-2">Pet hotel services</li>
+          <li className="mb-2">Pet shop: Providing pet products</li>
+          <li className="mb-2">Vaccination at spa and home</li>
+          <li className="mb-2">Dog walking service</li>
         </ul>
       </div>
 
       <img
         src="/public/service-info.png"
-        alt="Giới thiệu dịch vụ"
+        alt="Service Introduction"
         className="w-full rounded-lg mt-4"
       />
 
       <div>
-        <p className="mb-2">Với các ưu đãi PAWLISH hấp dẫn như:</p>
+        <p className="mb-2">With attractive PAWLISH promotions such as:</p>
         <ul className="list-disc ml-5">
           <li className="mb-2">
-            Chương trình tích điểm dành cho khách hàng sử dụng dịch vụ spa thú
-            cưng. Đủ 6 ticks tặng 1 combo tắm vệ sinh.
+            Loyalty program for spa services – get 1 free combo after 6 ticks.
           </li>
           <li className="mb-2">
-            Chương trình chiết khấu sản phẩm 3%, 5%, 10% dựa trên số điểm mà quý
-            khách đã mua hàng ở pet shop PAWLISH.
+            Product discounts of 3%, 5%, and 10% based on loyalty points at
+            PAWLISH shop.
           </li>
           <li className="mb-2">
-            Ưu đãi khi sử dụng dịch vụ pet hotel tại PAWLISH: gửi từ 5 ngày giảm
-            50% phí tắm vệ sinh, gửi từ 7 ngày tặng tắm vệ sinh, giảm 50.000đ
-            khi gửi bé thứ 2, chiết khấu lên đến 15% cho khách gửi dài hạn,…
+            Discounts for pet hotel services – up to 50% off for stays over 5
+            days, free bath after 7 days.
           </li>
-          <li className="mb-2">
-            Nhiều chương trình sale diễn ra hàng tháng tại PAWLISH.
-          </li>
-          <li className="mb-2">Đặc biệt PAWLISH đưa đón thú cưng miễn phí </li>
+          <li className="mb-2">Monthly sales at PAWLISH.</li>
+          <li className="mb-2">Free pet pickup and drop-off service.</li>
         </ul>
       </div>
 
       <h2 className="text-[35px] font-bold mb-2">
-        Ưu đãi đặc biệt của PAWLISH – Khách tháng
-      </h2>
-
-      <div>
-        <p className="mb-2">
-          PAWLISH cung cấp 3 gói tháng Mini Basic, Basic, Premium với các ưu đãi
-          đặc biệt cho khách tháng của PAWLISH:
-        </p>
-        <ul className="list-disc ml-5">
-          <li className="mb-2">Chiết khấu lên đến 10% giá dịch vụ.</li>
-          <li className="mb-2">Đưa đón thú cưng tận nhà</li>
-          <li className="mb-2">Tặng cắt tỉa lông.</li>
-          <li className="mb-2">
-            Nhiều chương trình sale diễn ra hàng tháng tại PAWLISH.
-          </li>
-          <li className="mb-2">
-            Sử dụng dịch vụ pet hotel với chiết khấu lên đến 50%.
-          </li>
-          <li className="mb-2">
-            Giảm lên đến 5% khi mua sản phẩm thú cưng tại pet shop.
-          </li>
-          <li className="mb-2">
-            Tặng xổ giun và vaccine, miễn phí tư vấn sức khỏe, theo dõi và báo
-            cáo tình trạng da/ bệnh của thú cưng.
-          </li>
-        </ul>
-      </div>
-      <img
-        src="/public/special-service.png"
-        alt="Ưu đãi chăm sóc thú cưng"
-        className="w-full rounded-lg mt-4"
-      />
-
-      <h2 className="text-[35px] font-bold mb-2">
-        Ưu đãi đặc biệt – Khách tháng
+        PAWLISH Monthly Client Benefits
       </h2>
       <ul className="list-disc ml-5 text-[20px] text-gray-700">
-        <li>Chiết khấu lên đến 10% giá dịch vụ</li>
-        <li>Đưa đón thú cưng miễn phí khu vực HCM</li>
-        <li>Tặng cắt tỉa lông</li>
-        <li>Chiết khấu 50% dịch vụ pet hotel</li>
-        <li>Giảm 5% khi mua sản phẩm tại pet shop</li>
-        <li>Miễn phí xổ giun, vaccine, tư vấn sức khỏe</li>
+        <li>Up to 10% discount on services</li>
+        <li>Free pet pickup and drop-off within HCM</li>
+        <li>Free grooming</li>
+        <li>50% off pet hotel services</li>
+        <li>5% off products at PAWLISH shop</li>
+        <li>Free deworming, vaccination, and health consultations</li>
       </ul>
 
       <section className="mb-6">
         <h2 className="text-[35px] font-bold mb-2">
-          PAWLISH – Thông tin liên hệ
+          PAWLISH – Contact Information
         </h2>
         <div className="text-[20px]">
-          Hãy liên hệ ngay vớiPAWLISH qua thông tin bên dưới:{" "}
+          Contact PAWLISH using the information below:
         </div>
-        <p className="text-[17px] text-gray-700">Hotline 24/7: 0898 520 760</p>
+        <p className="text-[17px] text-gray-700">24/7 Hotline: 0898 520 760</p>
         <p className="text-[17px] text-gray-700">Email: pawlish@gmail.com</p>
       </section>
       {/* Form đăng ký */}
       <form onSubmit={handleSubmit} className="space-y-4">
         <label htmlFor="name" className="block text-[35px] font-medium mb-2">
-          Yêu cầu dịch vụ <span className="text-red-500">*</span>
+          Service Request <span className="text-red-500">*</span>
         </label>
         <div>
-          Vui lòng chọn 1 dịch vụ bạn đang cần để PawLish có thể chuẩn bị, và
-          phục vụ các bé một cách chu đáo nhất nhé!
+          Please select 1 service you need so that PawLish can prepare and serve
+          the children in the most thoughtful way!
         </div>
         <select
           name="service"
@@ -231,31 +188,36 @@ const PromotionServicePage = () => {
           required
           className="w-full border p-2 rounded-md"
         >
-          <option value="Tắm vệ sinh tại nhà">Tắm vệ sinh tại nhà</option>
-          <option value="Cắt tỉa lông tại nhà">Cắt tỉa lông tại nhà </option>
-          <option value="Thú y tại nhà">Thú y tại nhà</option>
-          <option value="Khách sạn thú cưng">Khách sạn thú cưng</option>
-          <option value="Combo tắm tháng 4 lần">Combo tắm tháng 4 lần</option>
-          <option value="Combo tắm tháng 8 lần">Combo tắm tháng 8 lần</option>
-          <option value="Combo 1: Tắm  sấy + Vệ sinh">
-            Combo 1: Tắm sấy + vệ Sinh
+          <option value="Home grooming">Home grooming</option>
+          <option value="Home grooming">Home grooming</option>
+          <option value="Home veterinary">Home veterinary</option>
+          <option value="Pet hotel">Pet hotel</option>
+          <option value="4 times monthly bathing combo">
+            4 times monthly bathing combo
           </option>
-          <option value="Combo 2: Cắt tỉa + Vệ sinh">
-            Combo 2: Cắt tỉa + Vệ sinh
+          <option value="8 times monthly bathing combo">
+            8 times monthly bathing combo
+          </option>
+          <option value="Combo 1: Bathing + Drying + Cleaning">
+            Combo 1: Bathing + Drying + Cleaning
+          </option>
+          <option value="Combo 2: Trimming + Cleaning">
+            Combo 2: Trimming + Cleaning
           </option>
 
-          <option value="Combo 3: Tắm  sấy + Vệ sinh + Cắt tỉa lông">
-            Combo 3: Tắm sấy + Vệ sinh + Cắt tỉa lông
+          <option value="Combo 3: Bathing + Drying + Cleaning + Fur Trimming">
+            Combo 3: Bathing + Drying + Cleaning + Fur Trimming
           </option>
-          <option value="Combo 4: Tắm Sấy + Vệ Sinh + Cạo lông">
-            Combo 4: Tắm Sấy + Vệ Sinh + Cạo lông
+          <option value="Combo 4: Bathing + Drying + Cleaning + Fur Shaving">
+            Combo 4: Bathing + Drying + Cleaning + Fur Shaving
           </option>
         </select>
+
         <label htmlFor="name" className="block text-[20px] font-medium mb-2">
-          Họ Tên <span className="text-red-500">*</span>
+          Full Name <span className="text-red-500">*</span>
         </label>
         <input
-          type="text" // Đổi thành text cho họ tên
+          type="text"
           name="name"
           value={formData.name}
           onChange={handleChange}
@@ -263,8 +225,9 @@ const PromotionServicePage = () => {
           className="w-full border p-2 rounded-md"
           placeholder=""
         />
-        <label htmlFor="name" className="block text-[20px] font-medium mb-2">
-          Số điện thoại <span className="text-red-500">*</span>
+
+        <label htmlFor="phone" className="block text-[20px] font-medium mb-2">
+          Phone Number <span className="text-red-500">*</span>
         </label>
         <input
           type="tel"
@@ -275,14 +238,15 @@ const PromotionServicePage = () => {
           className="w-full border p-2 rounded-md"
           placeholder=""
         />
+
         <div className="flex gap-4">
-          {/* Địa chỉ */}
+          {/* Address */}
           <div className="w-1/2">
             <label
               htmlFor="address"
               className="block text-[20px] font-medium mb-2 whitespace-nowrap"
             >
-              Địa chỉ <span className="text-red-500">*</span>
+              Address <span className="text-red-500">*</span>
             </label>
             <input
               id="address"
@@ -292,7 +256,7 @@ const PromotionServicePage = () => {
               onChange={handleChange}
               required
               className="w-full border p-2 rounded-md"
-              placeholder="Nhập địa chỉ"
+              placeholder="Enter your address"
             />
           </div>
 
@@ -312,13 +276,16 @@ const PromotionServicePage = () => {
               onChange={handleChange}
               required
               className="w-full border p-2 rounded-md"
-              placeholder="Nhập email"
+              placeholder="Enter your email"
             />
           </div>
         </div>
 
-        <label htmlFor="name" className="block text-[20px] font-medium mb-2">
-          Ngày đặt lịch<span className="text-red-500">*</span>
+        <label
+          htmlFor="appointmentDate"
+          className="block text-[20px] font-medium mb-2"
+        >
+          Appointment Date<span className="text-red-500">*</span>
         </label>
         <input
           type="date"
@@ -329,8 +296,9 @@ const PromotionServicePage = () => {
           className="w-full border p-2 rounded-md"
           placeholder=""
         />
-        <label htmlFor="name" className="block text-[20px] font-medium mb-2">
-          Tên thú cưng<span className="text-red-500">*</span>
+
+        <label htmlFor="petName" className="block text-[20px] font-medium mb-2">
+          Pet Name<span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -341,8 +309,9 @@ const PromotionServicePage = () => {
           className="w-full border p-2 rounded-md"
           placeholder=""
         />
-        <label htmlFor="name" className="block text-[20px] font-medium mb-2">
-          Loài<span className="text-red-500">*</span>
+
+        <label htmlFor="petType" className="block text-[20px] font-medium mb-2">
+          Species<span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -353,8 +322,12 @@ const PromotionServicePage = () => {
           className="w-full border p-2 rounded-md"
           placeholder=""
         />
-        <label htmlFor="name" className="block text-[20px] font-medium mb-2">
-          Thuộc giống<span className="text-red-500">*</span>
+
+        <label
+          htmlFor="petBreed"
+          className="block text-[20px] font-medium mb-2"
+        >
+          Breed<span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -365,11 +338,12 @@ const PromotionServicePage = () => {
           className="w-full border p-2 rounded-md"
           placeholder=""
         />
+
         <div className="flex gap-4">
-          {/* Tuổi của thú cưng */}
+          {/* Pet Age */}
           <div className="w-1/2">
             <label htmlFor="age" className="block text-[20px] font-medium mb-2">
-              Tuổi của thú cưng<span className="text-red-500">*</span>
+              Pet Age<span className="text-red-500">*</span>
             </label>
             <input
               id="age"
@@ -383,13 +357,13 @@ const PromotionServicePage = () => {
             />
           </div>
 
-          {/* Trọng lượng */}
+          {/* Weight */}
           <div className="w-1/2">
             <label
               htmlFor="weight"
               className="block text-[20px] font-medium mb-2"
             >
-              Trọng lượng (kg)<span className="text-red-500">*</span>
+              Weight (kg)<span className="text-red-500">*</span>
             </label>
             <input
               id="weight"
@@ -404,8 +378,8 @@ const PromotionServicePage = () => {
           </div>
         </div>
 
-        <label htmlFor="name" className="block text-[20px] font-medium mb-2">
-          Ghi chú<span className="text-red-500">*</span>
+        <label htmlFor="note" className="block text-[20px] font-medium mb-2">
+          Notes<span className="text-red-500">*</span>
         </label>
         <textarea
           name="note"
@@ -413,14 +387,14 @@ const PromotionServicePage = () => {
           onChange={handleChange}
           rows={3}
           className="w-full border p-2 rounded-md"
-          placeholder="Nhập một vài mô tả về tình trạng của bé để các chuyên viên có thể hỗ trợ bạn tốt nhất."
+          placeholder="Enter a brief description of your pet's condition so the specialists can better assist you."
         />
 
         <button
           type="submit"
           className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
         >
-          Đăng Ký Dịch Vụ
+          Register Service
         </button>
       </form>
     </div>

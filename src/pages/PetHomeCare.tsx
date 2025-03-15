@@ -1,68 +1,65 @@
 const PetHomeCare = () => {
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-md">
+    <div className="max-w-[66vw] w-2/3 mx-auto p-6 bg-white rounded-xl shadow-md">
       <nav className="text-sm mb-4 text-gray-500">
         <a
           href="http://localhost:5173/"
           className="text-blue-500 hover:underline"
         >
-          Trang chủ
+          Home
         </a>{" "}
-        / Dịch vụ thú cưng tại nhà: Giải pháp tiện lợi 24/7 cho bạn
+        / Pet Services at Home: Convenient 24/7 Solution for You
       </nav>
 
       {/* Header */}
       <h1 className="text-[37px] font-bold mb-2">
-        <strong>
-          Dịch vụ thú cưng tại nhà: Giải pháp tiện lợi 24/7 cho bạn
-        </strong>
+        <strong>Pet Services at Home: Convenient 24/7 Solution for You</strong>
       </h1>
       <p className="text-[17px] mb-2">
-        Nuôi thú cưng đang dần trở thành một xu hướng phổ biến trong xã hội hiện
-        đại. Sở hữu một người bạn bốn chân mang đến niềm vui và sự kết nối đặc
-        biệt cho con người. Nhu cầu chăm sóc sức khỏe và sắc đẹp cho thú cưng
-        cũng theo đó tăng cao.
+        Having pets is gradually becoming a popular trend in modern society.
+        Owning a four-legged friend brings special joy and connection to people.
+        The need for health care and beauty services for pets has also increased
+        accordingly.
       </p>
       <p className="text-[17px] mb-2">
-        Nắm bắt được khó khăn đó, dịch vụ thú cưng tại nhà ra đời, mang đến sự
-        tiện lợi cho bạn và thú cưng. PAWLISH sẽ giúp bạn tìm hiểu chi tiết dịch
-        vụ, lợi ích vượt trội và lưu ý khi sử dụng.
+        Understanding these challenges, pet services at home were created,
+        bringing convenience to you and your pets. PAWLISH will help you
+        understand the service details, outstanding benefits, and considerations
+        when using our services.
       </p>
 
       <h1 className="text-[35px] font-bold mb-2">
-        <strong> Dịch vụ thú cưng tại nhà là gì?</strong>
+        <strong>What are Pet Services at Home?</strong>
       </h1>
       <p className="text-[17px] mb-2">
-        Trong xã hội hiện đại, thú cưng không chỉ đơn thuần là động vật, mà còn
-        là những người bạn, người thân yêu trong gia đình. Việc chăm sóc thú
-        cưng ngày càng được chú trọng, kéo theo sự ra đời của nhiều dịch vụ tiện
-        ích. Trong đó nổi bật là dịch vụ thú cưng tại nhà.
+        In modern society, pets are not simply animals, but friends and beloved
+        family members. Pet care is increasingly emphasized, leading to the
+        emergence of many convenient services. Among these, pet services at home
+        stand out.
       </p>
       <p className="text-[17px] mb-2">
-        Đây là hình thức cung cấp các dịch vụ chăm sóc thú cưng tại nhà khách
-        hàng. Thay vì mất thời gian đến spa, bạn chỉ cần liên hệ, nhân viên sẽ
-        đến tận nhà chăm sóc.
+        This is a form of providing pet care services at the customer's home.
+        Instead of spending time going to a spa, you just need to contact us,
+        and our staff will come to your home to care for your pet.
       </p>
       <p className="text-[17px] mb-2">
-        Dịch vụ này ra đời như giải pháp tối ưu, mang lại tiện lợi cho người
-        nuôi trong cuộc sống bận rộn.
+        This service emerged as an optimal solution, bringing convenience to pet
+        owners in their busy lives.
       </p>
 
       <img
         src="https://pawpurrfect.co/wp-content/uploads/2023/10/1-900x600.png"
-        alt="Giới thiệu dịch vụ"
+        alt="Service Introduction"
         className="w-full rounded-lg mt-4"
       />
 
       <header className="text-[35px] font-bold mb-4">
-        <strong>
-          Các loại hình dịch vụ thú cưng tại nhà được ưa chuộng ở PAWLISH
-        </strong>
+        <strong>Popular Types of Pet Services at Home at PAWLISH</strong>
       </header>
       <div className="mb-2">
         {" "}
-        PAWLISH cung cấp 5 combo spa để giúp bạn dễ dàng chọn dịch vụ phù hợp
-        cho thú cưng:
+        PAWLISH provides 5 spa combos to help you easily choose the right
+        service for your pet:
       </div>
       <ul className="list-disc ml-5">
         <li className="mb-2">
@@ -72,10 +69,10 @@ const PetHomeCare = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Combo 1: Tắm sấy – vệ sinh
+            Combo 1: Bath and blow-dry – cleaning
           </a>
         </li>
-        <li className="mb-2">Combo 2: Cắt tỉa vệ sinh</li>
+        <li className="mb-2">Combo 2: Trimming and cleaning</li>
         <li className="mb-2">
           <a
             href="http://localhost:5173/services/Combo3"
@@ -83,7 +80,7 @@ const PetHomeCare = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Combo 3: Tắm sấy – vệ sinh – cắt tỉa
+            Combo 3: Bath and blow-dry – cleaning – trimming
           </a>
         </li>
         <li className="mb-2">
@@ -93,10 +90,10 @@ const PetHomeCare = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Combo 4: Cạo – tắm sấy – vệ sinh
+            Combo 4: Shaving – bath and blow-dry – cleaning
           </a>
         </li>
-        <li className="mb-2">Combo 5: Cạo – vệ sinh</li>
+        <li className="mb-2">Combo 5: Shaving – cleaning</li>
       </ul>
 
       <img
@@ -108,32 +105,32 @@ const PetHomeCare = () => {
       <header className="text-[35px] font-bold mb-4">
         <strong>
           {" "}
-          Dịch vụ thú cưng tại nhà của PAWLISH: Lựa chọn thông minh cho bạn và
-          bé yêu
+          PAWLISH's Pet Services at Home: Smart Choice for You and Your Pet
         </strong>
       </header>
       <p className="text-[17px] mb-2">
-        Trong nhịp sống hiện đại, việc cân bằng giữa công việc, cuộc sống và
-        chăm sóc thú cưng đôi khi trở thành một bài toán khó. Thấu hiểu điều đó,
-        PAWLISH mang đến giải pháp tối ưu với dịch vụ thú cưng tại nhà. Ưu điểm
-        dịch vụ này của PAWLISH:
+        In the modern pace of life, balancing work, life, and pet care can
+        sometimes become a difficult equation. Understanding this, PAWLISH
+        brings an optimal solution with pet services at home. Advantages of this
+        service from PAWLISH:
       </p>
       <ul className="list-disc ml-5 text-[17px] text-gray-700">
         <li className="text-[17px] mb-2">
-          Tiết kiệm thời gian, công sức cho chủ nuôi.
+          Saves time and effort for pet owners.
         </li>
         <li className="text-[17px] mb-2">
-          Giúp thú cưng thoải mái, giảm stress, tránh lây nhiễm bệnh.
+          Helps pets feel comfortable, reduces stress, and prevents disease
+          transmission.
         </li>
         <li className="text-[17px] mb-2">
-          Dịch vụ chuyên nghiệp, tận tâm, đáp ứng nhu cầu đa dạng
+          Professional, dedicated service meeting diverse needs
         </li>
-        <li className="text-[17px] mb-2">Linh hoạt về thời gian</li>
+        <li className="text-[17px] mb-2">Flexible timing</li>
       </ul>
       <p className="text-[17px] mb-2">
-        Với mong muốn mang đến cho thú cưng của bạn sự chăm sóc tốt nhất, Pet
-        Service không ngừng nỗ lực nâng cao chất lượng dịch vụ, hoàn thiện quy
-        trình phục vụ và đào tạo đội ngũ nhân viên chuyên nghiệp, tận tâm.
+        With the desire to provide the best care for your pets, Pet Service
+        continuously strives to improve service quality, refine the service
+        process, and train a team of professional, dedicated staff.
       </p>
 
       <img
@@ -145,97 +142,99 @@ const PetHomeCare = () => {
       <header className="text-[35px] font-bold mb-4">
         <strong>
           {" "}
-          Giá dịch vụ tại nhà của PAWLISH: Niềm vui bé yêu – Nhẹ gánh cho bạn
+          PAWLISH's Home Service Prices: Joy for Your Pet – Light on Your Wallet
         </strong>
       </header>
       <p className="text-[17px] mb-2">
-        PAWLISH hiểu rằng mọi chủ nuôi đều muốn chăm sóc thú cưng chu đáo với
-        chi phí hợp lý. Vì vậy, chúng tôi mang đến bảng giá dịch vụ giúp bạn dễ
-        dàng lựa chọn dịch vụ phù hợp nhất cho bé cưng của mình.
+        PAWLISH understands that all pet owners want to care for their pets
+        thoroughly at a reasonable cost. Therefore, we provide a service price
+        list to help you easily choose the most suitable service for your
+        beloved pet.
       </p>
 
       <img
         src="/public/price-list.png"
-        alt="pet 5"
+        alt="price list"
         className="w-full rounded-lg mb-4"
       />
 
       <div>
-        <p className="text-[17px] mb-2">Lưu ý:</p>
+        <p className="text-[17px] mb-2">Note:</p>
         <ul className="list-disc ml-5">
           <li className="text-[17px] mb-2">
-            Bảng giá trên chưa bao gồm phí di chuyển tại nhà. Phí tại nhà dao
-            động từ 50.000 – 250.000đ.
+            The above prices do not include home visit fees. Home visit fees
+            range from 50,000 to 250,000 VND.
           </li>
           <li className="text-[17px] mb-2">
-            Bảng giá mang tính chất tham khảo. Giá chính xác sẽ được thông báo
-            sau khi nhân viên tư vấn và kiểm tra tình trạng thực tế của thú
-            cưng.
+            This price list is for reference only. The exact price will be
+            announced after our staff consults and checks the actual condition
+            of your pet.
           </li>
         </ul>
       </div>
       <div>
-        <h2 className="text-[27px] font-bold mb-4">Chi phí phát sinh</h2>
+        <h2 className="text-[27px] font-bold mb-4">Additional Costs</h2>
         <ul className="list-disc ml-5">
           <li className="text-[17px] mb-2">
-            Phụ phí gỡ rối lông: 100.000đ – 300.000đ (tùy mức độ)
+            Fur detangling surcharge: 100,000 - 300,000 VND (depending on
+            severity)
           </li>
           <li className="text-[17px] mb-2">
-            Phụ phí Tắm nấm, ve, rận: 50.000đ – 200.000đ (tùy mức độ)
+            Fungal, tick, flea bath surcharge: 50,000 - 200,000 VND (depending
+            on severity)
           </li>
           <li className="text-[17px] mb-2">
-            Phụ phí khó: 100.000đ – 200.000đ (tùy mức độ)
+            Difficulty surcharge: 100,000 - 200,000 VND (depending on severity)
           </li>
         </ul>
       </div>
       <div>
-        <h2 className="text-[27px] font-bold mb-4">Cam kết của PAWLISH</h2>
+        <h2 className="text-[27px] font-bold mb-4">PAWLISH's Commitment</h2>
         <ul className="list-disc ml-5">
           <p className="text-[17px] mb-2">
-            Đội ngũ nhân viên tư vấn nhiệt tình, chu đáo, sẵn sàng giải đáp mọi
-            thắc mắc của khách hàng.
+            Our team of consultants are enthusiastic, attentive, and ready to
+            answer all customer inquiries.
           </p>
           <p className="text-[17px] mb-2">
-            Đội ngũ nhân viên tư vấn nhiệt tình, chu đáo, sẵn sàng giải đáp mọi
-            thắc mắc của khách hàng.
+            Our team of consultants are enthusiastic, attentive, and ready to
+            answer all customer inquiries.
           </p>
           <p className="text-[17px] mb-2">
-            Sử dụng sản phẩm chăm sóc chất lượng cao, phù hợp với từng loại da
-            và lông của thú cưng.
+            We use high-quality care products suitable for each type of pet skin
+            and fur.
           </p>
         </ul>
 
         <img
           src="https://furryland.us/wp-content/uploads/2024/03/AdobeStock_305398567-scaled.jpeg"
-          alt="pet 5"
+          alt="pet care"
           className="w-full rounded-lg mb-4"
         />
       </div>
 
       <section className="mb-6">
         <header className="text-[35px] font-bold mb-4">
-          <strong>Kết luận</strong>
+          <strong>Conclusion</strong>
         </header>
         <p className="text-[17px] mb-2">
-          Dịch vụ thú cưng tại nhà của PAWLISH là giải pháp tối ưu cho người
-          nuôi thú cưng hiện đại. Mang đến sự tiện lợi, an toàn và chất lượng
-          dịch vụ tốt nhất. Tuy nhiên, để đảm bảo quyền lợi của mình và giúp bé
-          cưng được chăm sóc tốt nhất, bạn cần là người tiêu dùng thông thái,
-          lựa chọn đơn vị cung cấp dịch vụ tại nhà uy tín, chất lượng và sử dụng
-          một cách hiệu quả.
+          PAWLISH's pet services at home are the optimal solution for modern pet
+          owners. Bringing convenience, safety, and the best service quality.
+          However, to ensure your interests and help your pet receive the best
+          care, you need to be a wise consumer, choosing reputable, quality home
+          service providers and using them effectively.
         </p>
         <p className="text-[17px] mb-2">
-          PAWLISH – Luôn đồng hành cùng bạn trong hành trình chăm sóc và nuôi
-          dưỡng những người bạn bốn chân đáng yêu!
+          PAWLISH – Always accompanying you on the journey of caring for and
+          nurturing your adorable four-legged friends!
         </p>
         <p className="text-[17px] mb-2">
-          Để biết thêm thông tin chi tiết về các dịch vụ thú cưng khác của Pet
-          Service cũng như nhận được báo giá chính xác nhất, quý khách vui lòng
-          liên hệ trực tiếp với chúng tôi qua hotline hoặc website.
+          For more detailed information about other pet services from Pet
+          Service and to receive the most accurate quotes, please contact us
+          directly via hotline or website.
         </p>
 
         <p className="text-[17px] text-gray-700">
-          Hotline 24/7:<strong> 0898 520 760</strong>
+          24/7 Hotline:<strong> 0898 520 760</strong>
         </p>
 
         <p className="text-[17px] text-gray-700">

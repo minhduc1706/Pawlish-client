@@ -35,7 +35,7 @@ const GroomingCombo4 = () => {
     try {
       const formattedAppointmentDate = new Date(
         formData.appointmentDate
-      ).toLocaleDateString("vi-VN", {
+      ).toLocaleDateString("en-US", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
@@ -55,10 +55,10 @@ const GroomingCombo4 = () => {
       });
 
       if (!response.ok) {
-        throw new Error(`Lỗi: ${response.status}`);
+        throw new Error(`Error: ${response.status}`);
       }
 
-      alert("Đã gửi yêu cầu thành công!");
+      alert("Request sent successfully!");
       setFormData({
         name: "",
         phone: "",
@@ -75,13 +75,13 @@ const GroomingCombo4 = () => {
         note: "",
       });
     } catch (error) {
-      console.error("Lỗi khi gửi yêu cầu:", error);
-      alert("Gửi yêu cầu thất bại! Vui lòng thử lại.");
+      console.error("Error sending request:", error);
+      alert("Request failed! Please try again.");
     }
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-md">
+    <div className="max-w-[66vw] w-2/3 mx-auto p-6 bg-white rounded-xl shadow-md">
       <nav className="text-sm mb-4 text-gray-500">
         <a
           href="http://localhost:5173/"
@@ -89,7 +89,7 @@ const GroomingCombo4 = () => {
           rel="noopener noreferrer"
           className="text-blue-500 hover:underline"
         >
-          Trang chủ /
+          Home /
         </a>{" "}
         <a
           href="http://localhost:5173/services/PromotionServicePage"
@@ -97,17 +97,18 @@ const GroomingCombo4 = () => {
           rel="noopener noreferrer"
           className="text-blue-500 hover:underline"
         >
-          Dịch vụ Spa Thú Cưng HCM
+          Pet Spa Services HCM
         </a>{" "}
-        / Combo 4 – Cạo Tắm Vệ Sinh
+        / Combo 4 – Shaving, Bathing & Hygiene
       </nav>
 
-      <h1 className="text-[35px] font-bold mb-4">Combo 4 – Cạo Tắm Vệ Sinh</h1>
+      <h1 className="text-[35px] font-bold mb-4">
+        Combo 4 – Shaving, Bathing & Hygiene
+      </h1>
       <p className="text-[20px] mb-6">
-        PAWLISH sẽ giới thiệu đến các bạn trung tâm chăm sóc thú cưng chuyên
-        nghiệp với đội ngũ nhân viên dầy dặn kinh nghiêm, chúng tôi cung cấp
-        Combo cạo tắm vệ sinh để thú cưng của bạn được sạch sẽ thơm tho sau 8
-        bước.
+        PAWLISH introduces you to a professional pet care center with an
+        experienced staff team. We provide a Shaving, Bathing & Hygiene Combo to
+        keep your pet clean and fresh with our 8-step process.
       </p>
       <img
         src="https://images.contentstack.io/v3/assets/blt6f84e20c72a89efa/bltd622a4c1793a651e/6261d5aebbaf302a0a0d7199/img-professional-grooming-appointment-og.jpg"
@@ -116,7 +117,7 @@ const GroomingCombo4 = () => {
       />
 
       <h2 className="text-[33px] font-bold mt-4 mb-2">
-        COMBO 8 BƯỚC CẠO TẮM VỆ SINH
+        8-STEP SHAVING, BATHING & HYGIENE COMBO
       </h2>
       <img
         src="/public/combo-4.png"
@@ -125,36 +126,36 @@ const GroomingCombo4 = () => {
       />
 
       <h2 className="text-[35px] font-bold mt-4 mb-2">
-        Bảng giá cạo tắm vệ sinh tại PAWLISH
+        PAWLISH's Shaving, Bathing & Hygiene Price List
       </h2>
       <img
         src="/public/price-list.png"
-        alt="Bảng giá"
+        alt="Price List"
         className="w-full rounded-lg mb-4"
       />
 
       <h2 className="text-[35px] font-bold mt-4 mb-2">
-        Ưu đãi dành cho khách hàng thân thiết
+        Special Offers for Loyal Customers
       </h2>
       <img
         src="/public/service-info.png"
-        alt="Ưu đãi"
+        alt="Special Offers"
         className="w-full rounded-lg mb-4"
       />
 
       <h2 className="text-[35px] font-bold mt-4 mb-2">
-        Đưa đón khứ hồi về spa
+        Round-trip Pet Transportation to Spa
       </h2>
       <p className="text-[21px] mb-4">
-        Pet Pick Up – Dịch vụ đưa đón bé tận nơi mang tới những tiện ích siêu
-        thích, nhanh chóng, an toàn và tiết kiệm thời gian đưa Pet đến Spa.
+        Pet Pick Up – Our pet transportation service offers super convenient,
+        fast, safe, and time-saving services to bring your pet to the Spa.
       </p>
       <img
         src="https://clownvietnam.com/wp-content/uploads/2025/02/van-chuyen-thu-cung.jpg"
-        alt="Ưu đãi"
+        alt="Transportation Service"
         className="w-full rounded-lg mb-4"
       />
-      <p className="text-[35px] font-bold">Tìm hiểu thêm Combo:</p>
+      <p className="text-[35px] font-bold">Explore More Combos:</p>
       <ul className="list-disc ml-5">
         <li className="text-[21px]">
           Combo 1:{" "}
@@ -164,7 +165,7 @@ const GroomingCombo4 = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Tắm vệ sinh
+            Bath & Hygiene
           </a>
         </li>
         <li className="text-[21px]">
@@ -175,7 +176,7 @@ const GroomingCombo4 = () => {
           // target="_blank"
           // rel="noopener noreferrer"
           >
-            Cắt tỉa vệ sinh
+            Grooming & Hygiene
           </a>
         </li>
         <li className="text-[21px]">
@@ -186,7 +187,7 @@ const GroomingCombo4 = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Tắm vệ sinh cắt tỉa lông
+            Bath, Hygiene & Grooming
           </a>
         </li>
         <li className="text-[21px]">
@@ -197,19 +198,19 @@ const GroomingCombo4 = () => {
           // target="_blank"
           // rel="noopener noreferrer"
           >
-            Cạo vệ sinh
+            Shaving & Hygiene
           </a>
         </li>
       </ul>
 
-      {/* Form đăng ký */}
+      {/* Registration Form */}
       <form onSubmit={handleSubmit} className="space-y-4">
         <label htmlFor="name" className="block text-[35px] font-medium mb-2">
-          Yêu cầu dịch vụ <span className="text-red-500">*</span>
+          Service Request <span className="text-red-500">*</span>
         </label>
         <div>
-          Vui lòng chọn 1 dịch vụ bạn đang cần để PawLish có thể chuẩn bị, và
-          phục vụ các bé một cách chu đáo nhất nhé!
+          Please select a service you need so PawLish can prepare and provide
+          the most attentive care for your pets!
         </div>
         <select
           name="service"
@@ -218,31 +219,34 @@ const GroomingCombo4 = () => {
           required
           className="w-full border p-2 rounded-md"
         >
-          <option value="Tắm vệ sinh tại nhà">Tắm vệ sinh tại nhà</option>
-          <option value="Cắt tỉa lông tại nhà">Cắt tỉa lông tại nhà </option>
-          <option value="Thú y tại nhà">Thú y tại nhà</option>
-          <option value="Khách sạn thú cưng">Khách sạn thú cưng</option>
-          <option value="Combo tắm tháng 4 lần">Combo tắm tháng 4 lần</option>
-          <option value="Combo tắm tháng 8 lần">Combo tắm tháng 8 lần</option>
+          <option value="Tắm vệ sinh tại nhà">Home Bath & Hygiene</option>
+          <option value="Cắt tỉa lông tại nhà">Home Grooming</option>
+          <option value="Thú y tại nhà">Home Veterinary Services</option>
+          <option value="Khách sạn thú cưng">Pet Hotel</option>
+          <option value="Combo tắm tháng 4 lần">
+            Monthly Bath Combo (4 times)
+          </option>
+          <option value="Combo tắm tháng 8 lần">
+            Monthly Bath Combo (8 times)
+          </option>
           <option value="Combo 1: Tắm  sấy + Vệ sinh">
-            Combo 1: Tắm sấy + vệ Sinh
+            Combo 1: Bath & Dry + Hygiene
           </option>
           <option value="Combo 2: Cắt tỉa + Vệ sinh">
-            Combo 2: Cắt tỉa + Vệ sinh
+            Combo 2: Grooming + Hygiene
           </option>
-
           <option value="Combo 3: Tắm  sấy + Vệ sinh + Cắt tỉa lông">
-            Combo 3: Tắm sấy + Vệ sinh + Cắt tỉa lông
+            Combo 3: Bath & Dry + Hygiene + Grooming
           </option>
           <option value="Combo 4: Tắm Sấy + Vệ Sinh + Cạo lông">
-            Combo 4: Tắm Sấy + Vệ Sinh + Cạo lông
+            Combo 4: Bath & Dry + Hygiene + Shaving
           </option>
         </select>
         <label htmlFor="name" className="block text-[21px] font-medium mb-2">
-          Họ Tên <span className="text-red-500">*</span>
+          Full Name <span className="text-red-500">*</span>
         </label>
         <input
-          type="text" // Đổi thành text cho họ tên
+          type="text" // Changed to text for full name
           name="name"
           value={formData.name}
           onChange={handleChange}
@@ -251,7 +255,7 @@ const GroomingCombo4 = () => {
           placeholder=""
         />
         <label htmlFor="name" className="block text-[21px] font-medium mb-2">
-          Số điện thoại <span className="text-red-500">*</span>
+          Phone Number <span className="text-red-500">*</span>
         </label>
         <input
           type="tel"
@@ -263,13 +267,13 @@ const GroomingCombo4 = () => {
           placeholder=""
         />
         <div className="flex gap-4">
-          {/* Địa chỉ */}
+          {/* Address */}
           <div className="w-1/2">
             <label
               htmlFor="address"
               className="block text-[21px] font-medium mb-2 whitespace-nowrap"
             >
-              Địa chỉ <span className="text-red-500">*</span>
+              Address <span className="text-red-500">*</span>
             </label>
             <input
               id="address"
@@ -279,7 +283,7 @@ const GroomingCombo4 = () => {
               onChange={handleChange}
               required
               className="w-full border p-2 rounded-md"
-              placeholder="Nhập địa chỉ"
+              placeholder="Enter address"
             />
           </div>
 
@@ -299,13 +303,13 @@ const GroomingCombo4 = () => {
               onChange={handleChange}
               required
               className="w-full border p-2 rounded-md"
-              placeholder="Nhập email"
+              placeholder="Enter email"
             />
           </div>
         </div>
 
         <label htmlFor="name" className="block text-[21px] font-medium mb-2">
-          Ngày đặt lịch<span className="text-red-500">*</span>
+          Appointment Date<span className="text-red-500">*</span>
         </label>
         <input
           type="date"
@@ -317,7 +321,7 @@ const GroomingCombo4 = () => {
           placeholder=""
         />
         <label htmlFor="name" className="block text-[21px] font-medium mb-2">
-          Tên thú cưng<span className="text-red-500">*</span>
+          Pet Name<span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -329,7 +333,7 @@ const GroomingCombo4 = () => {
           placeholder=""
         />
         <label htmlFor="name" className="block text-[21px] font-medium mb-2">
-          Loài<span className="text-red-500">*</span>
+          Species<span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -341,7 +345,7 @@ const GroomingCombo4 = () => {
           placeholder=""
         />
         <label htmlFor="name" className="block text-[21px] font-medium mb-2">
-          Thuộc giống<span className="text-red-500">*</span>
+          Breed<span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -353,10 +357,10 @@ const GroomingCombo4 = () => {
           placeholder=""
         />
         <div className="flex gap-4">
-          {/* Tuổi của thú cưng */}
+          {/* Pet Age */}
           <div className="w-1/2">
             <label htmlFor="age" className="block text-[21px] font-medium mb-2">
-              Tuổi của thú cưng<span className="text-red-500">*</span>
+              Pet Age<span className="text-red-500">*</span>
             </label>
             <input
               id="age"
@@ -370,13 +374,13 @@ const GroomingCombo4 = () => {
             />
           </div>
 
-          {/* Trọng lượng */}
+          {/* Weight */}
           <div className="w-1/2">
             <label
               htmlFor="weight"
               className="block text-[21px] font-medium mb-2"
             >
-              Trọng lượng (kg)<span className="text-red-500">*</span>
+              Weight (kg)<span className="text-red-500">*</span>
             </label>
             <input
               id="weight"
@@ -392,7 +396,7 @@ const GroomingCombo4 = () => {
         </div>
 
         <label htmlFor="name" className="block text-[21px] font-medium mb-2">
-          Ghi chú<span className="text-red-500">*</span>
+          Notes<span className="text-red-500">*</span>
         </label>
         <textarea
           name="note"
@@ -400,14 +404,14 @@ const GroomingCombo4 = () => {
           onChange={handleChange}
           rows={3}
           className="w-full border p-2 rounded-md"
-          placeholder="Nhập một vài mô tả về tình trạng của bé để các chuyên viên có thể hỗ trợ bạn tốt nhất."
+          placeholder="Enter a description about your pet's condition so our specialists can provide the best support."
         />
 
         <button
           type="submit"
           className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
         >
-          Đăng Ký Dịch Vụ
+          Register Service
         </button>
       </form>
     </div>

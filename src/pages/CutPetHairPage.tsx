@@ -1,6 +1,6 @@
 const CutPetHairPage = () => {
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-md">
+    <div className="max-w-[66vw] w-2/3 mx-auto p-6 bg-white rounded-xl shadow-md">
       <nav className="text-sm mb-4 text-gray-500">
         <a
           href="http://localhost:5173/"
@@ -8,7 +8,7 @@ const CutPetHairPage = () => {
           rel="noopener noreferrer"
           className="text-blue-500 hover:underline"
         >
-          Trang chủ /
+          Home /
         </a>{" "}
         <a
           href="http://localhost:5174/services/PetHomeCare"
@@ -16,26 +16,27 @@ const CutPetHairPage = () => {
           rel="noopener noreferrer"
           className="text-blue-500 hover:underline"
         >
-          Dịch vụ
+          Services
         </a>{" "}
-        / Cắt Tỉa Lông Thú Cưng Tại Nhà
+        / Pet Grooming At Home
       </nav>
 
       {/* Header */}
       <header className="mb-6">
         <h1 className="text-[37px] font-bold mb-2">
-          <strong>Cắt Tỉa Lông Thú Cưng Tại Nhà</strong>
+          <strong>Pet Grooming At Home</strong>
         </h1>
         <p className="text-[21px] text-gray-700 mt-2">
-          Hãy liên hệ ngay để thú cưng của bạn thật chỉn chu ngay tại nhà của
-          mình với dịch vụ cắt tỉa lông tạo kiểu... tư vấn miễn phí 24h
+          Contact us now to have your pet looking neat and stylish right in your
+          own home with our grooming and styling service... free consultation
+          available 24 hours
         </p>
         <p className="text-[21px] text-gray-700 mt-2">
-          Bạn đang tìm <strong>cắt tỉa lông thú cưng tại nhà </strong> để làm
-          đẹp cho thú cưng mà không cần ra ngoài? <strong>PAWLISH</strong> là
-          lựa chọn hàng đầu. Chúng tôi mang đến dịch vụ cắt tỉa lông tại nhà
-          chuyên nghiệp. Với đội ngũ giàu kinh nghiệm PAWLISH đảm bảo “boss” của
-          bạn luôn sạch sẽ, gọn gàng. Khám phá dịch vụ tốt nhất ngay hôm nay!
+          Are you looking for <strong>pet grooming services at home </strong> to
+          beautify your pet without going out? <strong>PAWLISH</strong> is the
+          top choice. We bring professional grooming services to your home. With
+          our experienced team, PAWLISH ensures your "boss" is always clean and
+          tidy. Discover the best service today!
         </p>
         <img
           src="https://images.squarespace-cdn.com/content/v1/5a20427d90badee8e93f47e5/1585094959412-DFRQSA32PQ8ROOATBS99/IMG_1692.jpg"
@@ -44,117 +45,121 @@ const CutPetHairPage = () => {
         />
       </header>
 
-      {/* Giới thiệu dịch vụ */}
+      {/* Service Introduction */}
       <section className="mb-6">
         <h1 className="text-[35px] font-bold mb-2">
-          <strong>
-            Tại sao chọn PAWLISH cho dịch vụ cắt tỉa lông tại nhà?
-          </strong>
+          <strong>Why Choose PAWLISH for At-Home Pet Grooming Services?</strong>
         </h1>
         <p className="text-[21px] text-gray-700">
-          TP. HCM là thành phố đông đúc với hàng triệu người yêu thú cưng. Nhu
-          cầu <strong>cắt tỉa lông tại nhà </strong> ngày càng tăng cao, đặc
-          biệt với những người bận rộn hoặc muốn thú cưng được chăm sóc ngay tại
-          chỗ. PAWLISH nổi bật nhờ:
+          Ho Chi Minh City is a bustling city with millions of pet lovers. The
+          demand for <strong>at-home pet grooming </strong> is constantly
+          increasing, especially among busy people or those who want their pets
+          cared for at home. PAWLISH stands out because of:
         </p>
         <ul className="list-disc ml-5 text-[21px] text-gray-700 mt-2">
           <li>
-            Đội ngũ chuyên nghiệp: Nhân viên được đào tạo bài bản, hiểu rõ mọi
-            giống loài từ Poodle, Phóc Sóc, Corgi, Samoyed đến mèo Anh.
+            Professional team: Staff are well-trained, with expertise in all
+            breeds from Poodles, Pomeranians, Corgis, Samoyeds to British cats.
           </li>
           <li>
-            Tiện lợi tối đa: Cắt tỉa lông tại nhà giúp tiết kiệm thời gian, giảm
-            căng thẳng cho thú cưng.
+            Maximum convenience: At-home grooming saves time and reduces stress
+            for your pets.
           </li>
           <li>
-            Công nghệ hiện đại: Dụng cụ cắt tỉa, vệ sinh được khử trùng, đảm bảo
-            an toàn tuyệt đối.
+            Modern technology: Grooming and cleaning tools are sterilized,
+            ensuring absolute safety.
           </li>
         </ul>
         <p className="text-[21px] text-gray-700 mt-2">
-          PAWLISH cam kết mang đến dịch vụ chất lượng cao, giúp thú cưng của bạn
-          luôn trong trạng thái tốt nhất.
+          PAWLISH is committed to providing high-quality service, helping your
+          pet always stay in the best condition.
         </p>
-        {/* Chỗ để thêm ảnh */}
+        {/* Image placement */}
         <img
           src="https://kpethouse.com/wp-content/uploads/2021/07/7_orig.jpg"
-          alt="Giới thiệu dịch vụ cắt tỉa lông"
+          alt="Pet grooming service introduction"
           className="w-full rounded-lg mt-4"
         />
       </section>
 
-      {/* Dịch vụ đặc biệt */}
+      {/* Special Services */}
       <section className="mb-6">
         <h1 className="text-[35px] font-bold mb-2">
           <strong>
-            Dịch vụ cắt tỉa lông tại nhà từ PAWLISH có gì đặc biệt?
+            What's Special About PAWLISH's At-Home Pet Grooming Service?
           </strong>
         </h1>
         <p className="text-[21px] text-gray-700">
-          PAWLISH cung cấp dịch vụ <strong>cắt tỉa lông tại nhà </strong> toàn
-          diện, đáp ứng mọi nhu cầu làm đẹp và vệ sinh cho thú cưng:
+          PAWLISH provides comprehensive{" "}
+          <strong>at-home grooming services</strong>, meeting all beauty and
+          hygiene needs for your pets:
         </p>
 
-        {/* 1. Cắt tỉa lông */}
+        {/* 1. Pet Grooming */}
         <h3 className="text-[25px] font-semibold mt-4 mb-2">
-          <strong>1. Cắt tỉa lông tại nhà – Phong cách độc đáo</strong>
+          <strong>1. At-Home Pet Grooming – Unique Styles</strong>
         </h3>
         <p className="text-[21px] text-gray-700 mb-2">
-          Chúng tôi dẫn đầu trong grooming tại nhà với dịch vụ cắt tỉa:
+          We lead in at-home grooming with our styling services:
         </p>
         <ul className="list-disc ml-5 text-[21px] text-gray-700">
           <li>
-            Cắt tỉa lông tại nhà: Tạo kiểu đẹp mắt như Teddy Bear, Lion Cut,
-            hoặc theo yêu cầu cá nhân.
+            At-home pet grooming: Creating beautiful styles like Teddy Bear,
+            Lion Cut, or according to personal requests.
           </li>
           <li>
-            Kỹ thuật chuyên nghiệp: Nhân viên sử dụng kéo và tông đơ hiện đại,
-            đảm bảo lông được tỉa đều, không gây đau.
+            Professional techniques: Staff use modern scissors and clippers,
+            ensuring even trimming without causing pain.
           </li>
           <li>
-            Phù hợp mọi thú cưng: Từ chó Poodle, Alaska đến mèo Ba Tư, Pet
-            Service đều xử lý hoàn hảo.
+            Suitable for all pets: From Poodles, Alaskan Malamutes to Persian
+            cats, Pet Service handles them all perfectly.
           </li>
         </ul>
         <img
           src="https://www.petprofessional.com.au/wp-content/uploads/2019/11/dog-groomer-king-charles-cavalier-being-brushed.jpg"
-          alt="Cắt tỉa lông tạo kiểu"
+          alt="Stylish pet grooming"
           className="w-full rounded-lg mt-4"
         />
 
-        {/* 2. Tắm sạch */}
+        {/* 2. Bath Services */}
         <h3 className="text-[25px] font-semibold mt-4 mb-2">
-          <strong>2. Tắm sạch tại nhà – Sạch sẽ tận nơi</strong>
+          <strong>2. At-Home Bathing – Cleanliness at Your Doorstep</strong>
         </h3>
         <p className="text-[21px] text-gray-700 mb-2">
-          PAWLISH bổ sung tắm sạch trong dịch vụ cắt tỉa lông tại nhà :
+          PAWLISH includes bathing in our at-home grooming services:
         </p>
         <ul className="list-disc ml-5 text-[21px] text-gray-700">
           <li>
-            Sản phẩm organic: Sữa tắm an toàn, không gây kích ứng da thú cưng.
+            Organic products: Safe shampoos that don't irritate your pet's skin.
           </li>
-          <li>Loại bỏ lông rụng: Giảm lông rơi vãi trong nhà bạn.</li>
-          <li>Khử mùi hiệu quả: Làm sạch tuyến hôi, giữ thú cưng thơm tho.</li>
+          <li>Shed control: Reduces pet hair around your home.</li>
+          <li>
+            Effective odor elimination: Cleans scent glands, keeping your pet
+            smelling fresh.
+          </li>
         </ul>
         <img
           src="https://maxvets.com/wp-content/uploads/2019/07/ValeDogGrooming-DogBeingGroomed.gif"
-          alt="Tắm sạch tại nhà"
+          alt="At-home pet bathing"
           className="w-full rounded-lg mt-4"
         />
 
-        {/* 3. Vệ sinh toàn diện */}
+        {/* 3. Comprehensive Hygiene */}
         <h3 className="text-[25px] font-semibold mt-4 mb-2">
-          <strong>3. Vệ sinh toàn diện tại nhà</strong>
+          <strong>3. Comprehensive At-Home Hygiene</strong>
         </h3>
         <p className="text-[21px] text-gray-700 mb-2">
-          Ngoài cắt tỉa lông, PAWLISH còn:
+          In addition to grooming, PAWLISH also offers:
         </p>
         <ul className="list-disc ml-5 text-[21px] text-gray-700">
-          <li>Cắt móng: Thao tác nhẹ nhàng, không đau, giữ móng gọn gàng.</li>
-          <li>Vệ sinh tai: Loại bỏ bụi bẩn, giảm nguy cơ viêm tai.</li>
+          <li>Nail trimming: Gentle handling, painless, keeping nails neat.</li>
           <li>
-            Kiểm tra da lông: Phát hiện sớm vấn đề như viêm da, rụng lông bất
-            thường.
+            Ear cleaning: Removes dirt, reduces the risk of ear infections.
+          </li>
+          <li>
+            Skin and coat inspection: Early detection of issues such as
+            dermatitis or abnormal hair loss.
           </li>
         </ul>
         <img
@@ -164,202 +169,203 @@ const CutPetHairPage = () => {
         />
       </section>
 
-      {/* Lợi ích */}
+      {/* Benefits */}
       <section className="mb-6">
         <h1 className="text-[35px] font-bold mb-2">
-          <strong>Lợi ích khi chọn cắt tỉa lông tại nhà từ PAWLISH</strong>
+          <strong>Benefits of Choosing PAWLISH's At-Home Pet Grooming</strong>
         </h1>
         <p className="text-[21px] text-gray-700 mb-2">
-          Dịch vụ tại nhà của PAWLISH mang lại nhiều giá trị:
+          PAWLISH's at-home services provide many advantages:
         </p>
         <ul className="list-disc ml-5 text-[21px] text-gray-700">
           <li>
-            Tiện lợi: Không cần di chuyển, PAWLISH đến tận nơi từ Quận 1 đến Thủ
-            Đức.
+            Convenience: No need to travel, PAWLISH comes to you anywhere from
+            District 1 to Thu Duc.
           </li>
           <li>
-            Sức khỏe thú cưng: Chăm sóc thú cưng tại nhà giảm căng thẳng khi đi
-            xa.
+            Pet health: Caring for your pet at home reduces the stress of
+            traveling.
           </li>
           <li>
-            Tiết kiệm thời gian: Bạn có thể làm việc khác trong khi thú cưng
-            được chăm sóc.
+            Time-saving: You can do other things while your pet is being cared
+            for.
           </li>
           <li>
-            An toàn: Dụng cụ vệ sinh, nhân viên tận tâm đảm bảo chất lượng dịch
-            vụ.
+            Safety: Clean tools and dedicated staff ensure service quality.
           </li>
         </ul>
         <p className="text-[21px] text-gray-700 mt-2">
-          Khách hàng trên toàn tin tưởng PAWLISH vì sự chuyên nghiệp và tiện ích
-          vượt trội.
+          Customers throughout the area trust PAWLISH for our professionalism
+          and superior convenience.
         </p>
       </section>
 
-      {/* Uy tín */}
+      {/* Reputation */}
       <section className="mb-6">
         <h1 className="text-[35px] font-bold mb-2">
-          <strong>PAWLISH – Địa chỉ cắt tỉa lông tại nhà uy tín</strong>
+          <strong>PAWLISH – Your Trusted At-Home Pet Grooming Service</strong>
         </h1>
         <p className="text-[21px] text-gray-700 mb-2">
-          PAWLISH được yêu thích nhờ:
+          PAWLISH is beloved because of:
         </p>
         <ul className="list-disc ml-5 text-[21px] text-gray-700">
-          <li>Kinh nghiệm lâu năm: Hơn 4 năm phục vụ hàng ngàn thú cưng tại</li>
+          <li>Years of experience: Over 4 years serving thousands of pets</li>
           <li>
-            Phản hồi tích cực: Nhiều khách hàng, bao gồm KOLs như Dino Vũ, Minh
-            Dự, Quỳnh Anh Shyn, Huy Trần chọn PAWLISH.
+            Positive feedback: Many customers, including influencers like Dino
+            Vu, Minh Du, Quynh Anh Shyn, and Huy Tran choose PAWLISH.
           </li>
           <li>
-            Đội ngũ chuyên môn: Nhân viên được đào tạo để cắt tỉa lông chính
-            xác, an toàn.
+            Expert staff: Employees are trained to groom pets accurately and
+            safely.
           </li>
           <li>
-            Giá cả hợp lý: Cắt tỉa lông tại nhà từ 200.000 VND, minh bạch.
+            Reasonable pricing: At-home grooming from 200,000 VND, with
+            transparent pricing.
           </li>
         </ul>
         <img
           src="https://th.bing.com/th/id/OIP.gUrNl8Ws9f5_l5iLLmn9PQHaE7?w=800&h=533&rs=1&pid=ImgDetMain"
-          alt="Uy tín PAWLISH"
+          alt="PAWLISH reputation"
           className="w-full rounded-lg mt-4"
         />
       </section>
 
-      {/* Quy trình */}
+      {/* Process */}
       <section className="mb-6">
         <h1 className="text-[35px] font-bold mb-2">
-          <strong>Quy trình cắt tỉa lông tại nhà từ PAWLISH</strong>
+          <strong>Home Pet Grooming Process from PAWLISH</strong>
         </h1>
         <p className="text-[21px] text-gray-700 mb-2">
-          PAWLISH áp dụng quy trình chuyên nghiệp để đảm bảo chất lượng:
+          PAWLISH applies a professional process to ensure quality:
         </p>
         <ul className="list-disc ml-5 text-[21px] text-gray-700">
           <li>
-            Liên hệ đặt lịch: Gọi <strong>0898 520 760</strong> hoặc đặt qua
-            Page PAWLISH.
+            Contact for appointment: Call <strong>0898 520 760</strong> or book
+            through PAWLISH Page.
           </li>
           <li>
-            Khảo sát yêu cầu: Xác định kiểu lông, giống loài, và địa điểm tại
+            Requirement survey: Identify fur style, pet breed, and location at
           </li>
 
           <li>
-            Thực hiện dịch vụ: Tắm sạch, cắt tỉa lông, vệ sinh theo yêu cầu.
+            Service execution: Bathing, fur trimming, cleaning as required.
           </li>
-          <li>Gửi kết quả: Cung cấp hình ảnh trước/sau để bạn kiểm tra.</li>
+          <li>Result delivery: Provide before/after images for your review.</li>
         </ul>
         <p className="text-[21px] text-gray-700 mt-2">
-          Quy trình này giúp PAWLISH phục vụ hiệu quả trên toàn
+          This process helps PAWLISH serve effectively throughout the
         </p>
       </section>
 
-      {/* Mẹo cắt tỉa */}
+      {/* Grooming Tips */}
       <section className="mb-6">
         <h1 className="text-[35px] font-bold mb-2">
-          <strong>Mẹo cắt tỉa lông tại nhà từ PAWLISH</strong>
+          <strong>Home Pet Grooming Tips from PAWLISH</strong>
         </h1>
         <p className="text-[21px] text-gray-700 mb-2">
-          PAWLISH chia sẻ mẹo để hỗ trợ bạn:
+          PAWLISH shares tips to support you:
         </p>
         <ul className="list-disc ml-5 text-[21px] text-gray-700">
+          <li>Prepare tools: Combs, specialized scissors from our pet shop.</li>
           <li>
-            Chuẩn bị dụng cụ: Lược, kéo chuyên dụng từ pet shop của chúng tôi.
+            Brush fur beforehand: Reduce tangles before our staff arrives for
+            grooming.
           </li>
-          <li>Chải lông trước: Giảm rối trước khi nhân viên đến cắt tỉa.</li>
           <li>
-            Giữ thú cưng thoải mái: Tạo không gian yên tĩnh để quá trình diễn ra
-            suôn sẻ.
+            Keep your pet comfortable: Create a quiet space for a smooth
+            process.
           </li>
         </ul>
         <p className="text-[21px] text-gray-700 mt-2">
-          Những mẹo này giúp tăng hiệu quả khi sử dụng dịch vụ cắt tỉa lông tại
-          nhà
+          These tips help increase efficiency when using our home grooming
+          service
         </p>
         <p className="text-[21px] text-gray-700 mt-2">
-          Khám phá:{" "}
+          Discover:{" "}
           <a
             href=""
             className="text-blue-500 underline hover:text-blue-700"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Dịch Vụ Thú Cưng Tại Nhà
+            Pet Services At Home
           </a>{" "}
-          để biết thêm từ PAWLISH!
+          to learn more from PAWLISH!
         </p>
       </section>
 
-      {/* Xu hướng 2035 */}
+      {/* 2035 Trends */}
       <section className="mb-6">
         <h1 className="text-[35px] font-bold mb-2">
-          <strong>Xu hướng cắt tỉa lông tại nhà 2035</strong>
+          <strong>Home Pet Grooming Trends 2035</strong>
         </h1>
         <p className="text-[21px] text-gray-700 mb-2">
-          PAWLISH tiên phong trong cắt tỉa lông tại nhà năm 2035:
+          PAWLISH pioneers in home pet grooming in 2035:
         </p>
         <ul className="list-disc ml-5 text-[21px] text-gray-700">
-          <li>Kiểu lông hot: Teddy Bear, Summer Trim dẫn đầu xu hướng.</li>
+          <li>Hot fur styles: Teddy Bear, Summer Trim lead the trends.</li>
           <li>
-            Công nghệ hỗ trợ: Ứng dụng AI tư vấn kiểu lông phù hợp qua Zalo.
+            Supporting technology: AI application providing fur style
+            consultation via Zalo.
           </li>
           <li>
-            Dịch vụ trọn gói: Kết hợp tắm, cắt tỉa, vệ sinh trong một lần tại
-            nhà.
+            All-inclusive service: Combining bathing, trimming, and cleaning in
+            one home visit.
           </li>
           <li>
-            Phủ sóng rộng: Từ Quận 1, Quận 2 đến Bình Thạnh, Thủ Đức, chúng tôi
-            đáp ứng mọi nhu cầu.
+            Wide coverage: From District 1, District 2 to Binh Thanh, Thu Duc,
+            we meet all needs.
           </li>
         </ul>
         <p className="text-[21px] text-gray-700 mt-2">
-          PAWLISH không ngừng đổi mới để phục vụ thú cưng trên toàn khu vực.
+          PAWLISH continuously innovates to serve pets throughout the region.
         </p>
       </section>
 
-      {/* Lý do chọn */}
+      {/* Reasons to Choose */}
       <section className="mb-6">
         <h1 className="text-[35px] font-bold mb-2">
-          <strong>Lý do chọn cắt tỉa lông tại nhà từ PAWLISH</strong>
+          <strong>Reasons to Choose Home Pet Grooming from PAWLISH</strong>
         </h1>
         <ul className="list-disc ml-5 text-[21px] text-gray-700">
-          <li>Uy tín hàng đầu: PAWLISH là địa chỉ quen thuộc tại.</li>
+          <li>Top reputation: PAWLISH is a familiar address in.</li>
           <li>
-            Dịch vụ đa dạng: Từ grooming tại nhà đến trông giữ, chúng tôi làm
-            tất cả.
+            Diverse services: From home grooming to pet sitting, we do it all.
           </li>
           <li>
-            Ưu đãi hấp dẫn: Chương trình chiết khấu tặng tắm vệ sinh, ưu đãi đặc
-            biệt cho khách hàng sử dụng gói tháng.
+            Attractive offers: Discount programs including free cleaning baths,
+            special offers for customers using monthly packages.
           </li>
-          <li>Hỗ trợ toàn: Đội ngũ sẵn sàng đến mọi khu vực.</li>
+          <li>Support throughout: Our team is ready to reach all areas.</li>
         </ul>
         <img
           src="https://petwow.com/wp-content/uploads/2019/07/Bath.jpg"
-          alt="Đội ngũ PAWLISH"
+          alt="PAWLISH Team"
           className="w-full rounded-lg mt-4"
         />
         <p className="text-[21px] text-gray-700 mt-2">
-          Được đào tạo bằng giảng viên chuyên nghiệp
+          Trained by professional instructors
         </p>
         <p className="text-[21px] text-gray-700 mt-2">
-          PAWLISH giúp bạn chăm sóc thú cưng dễ dàng và hiệu quả hơn bao giờ
-          hết.
+          PAWLISH helps you care for your pets more easily and effectively than
+          ever before.
         </p>
       </section>
 
-      {/* Trọn vẹn trải nghiệm */}
+      {/* Complete Experience */}
       <section className="mb-6">
         <h1 className="text-[35px] font-bold mb-2">
-          <strong>PAWLISH – Trọn Vẹn Trải Nghiệm</strong>
+          <strong>PAWLISH – Complete Experience</strong>
         </h1>
         <p className="text-[21px] text-gray-700">
-          PAWLISH là địa chỉ <strong>cắt tỉa lông tại nhà </strong> tốt nhất
-          2035. Với dịch vụ cắt tỉa lông tại nhà chuyên nghiệp, chúng tôi mang
-          đến vẻ đẹp và sức khỏe cho “boss” của bạn trên toàn TP. Gọi ngay{" "}
-          <strong>0898 520 760</strong> để đặt lịch. PAWLISH – nơi thú cưng của
-          bạn được yêu thương như tại nhà!
+          PAWLISH is the best <strong>home pet grooming</strong> address in
+          2035. With professional home grooming services, we bring beauty and
+          health to your "boss" throughout the city. Call now at{" "}
+          <strong>0898 520 760</strong> to make an appointment. PAWLISH – where
+          your pets are loved like at home!
         </p>
         <p className="text-[21px] text-gray-700 mt-2">
-          Liên hệ <strong>0898 520 760</strong> để nhận ưu đãi từ PAWLISH!
+          Contact <strong>0898 520 760</strong> to receive offers from PAWLISH!
         </p>
       </section>
     </div>

@@ -35,7 +35,7 @@ const PetSpaServices = () => {
     try {
       const formattedAppointmentDate = new Date(
         formData.appointmentDate
-      ).toLocaleDateString("vi-VN", {
+      ).toLocaleDateString("en-US", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
@@ -55,10 +55,10 @@ const PetSpaServices = () => {
       });
 
       if (!response.ok) {
-        throw new Error(`Lỗi: ${response.status}`);
+        throw new Error(`Error: ${response.status}`);
       }
 
-      alert("Đã gửi yêu cầu thành công!");
+      alert("Request sent successfully!");
       setFormData({
         name: "",
         phone: "",
@@ -75,27 +75,27 @@ const PetSpaServices = () => {
         note: "",
       });
     } catch (error) {
-      console.error("Lỗi khi gửi yêu cầu:", error);
-      alert("Gửi yêu cầu thất bại! Vui lòng thử lại.");
+      console.error("Error sending request:", error);
+      alert("Failed to send request! Please try again.");
     }
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-md">
+    <div className="max-w-[66vw] w-2/3 mx-auto p-6 bg-white rounded-xl shadow-md">
       <nav className="text-sm mb-4 text-gray-500">
-        Trang chủ / Dịch vụ Spa Thú Cưng HCM – Chăm sóc toàn diện cho Boss yêu
+        Home / Pet Spa Services HCM – Comprehensive care for your beloved pet
       </nav>
       <header className="text-[35px] font-bold mb-4">
-        Dịch vụ Spa Thú Cưng HCM – Chăm sóc toàn diện cho Boss yêu
+        Pet Spa Services HCM – Comprehensive care for your beloved pet
       </header>
 
       <p className="text-[21px] mb-6">
-        Spa thú cưng ngày càng trở nên phổ biến, thể hiện sự quan tâm của chủ
-        nuôi cho “boss” yêu. Giữa cuộc sống hiện đại bận rộn, việc chăm sóc toàn
-        diện cho thú cưng gặp nhiều khó khăn. Thấu hiểu điều đó, các spa thú
-        cưng ra đời, mang đến giải pháp chăm sóc sức khỏe và làm đẹp toàn diện
-        cho thú cưng. PAWLISH tự hào là địa chỉ tin cậy, đồng hành cùng bạn
-        trong hành trình chăm sóc thú cưng.
+        Pet spa services are becoming increasingly popular, showing pet owners'
+        care for their beloved pets. In today's busy modern life, providing
+        comprehensive care for pets faces many challenges. Understanding this,
+        pet spas have emerged, offering comprehensive health and beauty care
+        solutions for pets. PAWLISH is proud to be a trusted destination,
+        accompanying you on your pet care journey.
       </p>
 
       <img
@@ -105,11 +105,11 @@ const PetSpaServices = () => {
       />
 
       <header className="text-[35px] font-bold mb-4">
-        Các dịch vụ spa thú cưng phổ biến tại PAWLISH
+        Popular pet spa services at PAWLISH
       </header>
       <div>
-        Pet Service cung cấp 5 combo spa để giúp bạn dễ dàng chọn dịch vụ phù
-        hợp cho thú cưng:
+        Pet Service offers 5 spa packages to help you easily choose the right
+        service for your pet:
         <li>
           <a
             href="http://localhost:5173/services/Combo1"
@@ -117,10 +117,10 @@ const PetSpaServices = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Combo 1: Tắm sấy – vệ sinh
+            Package 1: Bath & dry – hygiene
           </a>
         </li>
-        <li>Combo 2: Cắt tỉa vệ sinh</li>
+        <li>Package 2: Grooming and hygiene</li>
         <li>
           <a
             href="http://localhost:5173/services/Combo3"
@@ -128,7 +128,7 @@ const PetSpaServices = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Combo 3: Tắm sấy – vệ sinh – cắt tỉa
+            Package 3: Bath & dry – hygiene – grooming
           </a>
         </li>
         <li>
@@ -138,10 +138,10 @@ const PetSpaServices = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Combo 4: Cạo – tắm sấy – vệ sinh
+            Package 4: Shaving – bath & dry – hygiene
           </a>
         </li>
-        <li>Combo 5: Cạo – vệ sinh</li>
+        <li>Package 5: Shaving – hygiene</li>
       </div>
       <img
         src="https://www.petangel.com.au/wp-content/uploads/2022/06/Pet-Angel-Blog-2022-14-1080x648.png"
@@ -149,235 +149,232 @@ const PetSpaServices = () => {
         className="w-full rounded-lg mb-4"
       />
       <div>
-        Mỗi combo dịch vụ đều được thiết kế bài bản, sử dụng sản phẩm chuyên
-        dụng, an toàn. Pet Service mong muốn mang đến cho thú cưng sự chăm sóc
-        tốt nhất.
+        Each service package is meticulously designed using specialized, safe
+        products. Pet Service aims to provide the best care for your pets.
       </div>
 
       <header className="text-[35px] font-bold mb-4">
-        Các dịch vụ spa cao cấp khác
+        Other premium spa services
       </header>
       <img
         src="/public/service-info.png"
-        alt="Ưu đãi"
+        alt="Promotions"
         className="w-full rounded-lg mb-4"
       />
 
       <div>
         <p className="mb-2">
-          Bên cạnh các dịch vụ spa cơ bản, Pet Service còn mang đến những trải
-          nghiệm spa cao cấp như:
+          In addition to basic spa services, Pet Service also offers premium spa
+          experiences such as:
         </p>
         <ul className="list-disc ml-5">
-          <li className="mb-2">Dịch vụ thú cưng tại nhà hàng đầu tại TPHCM.</li>
+          <li className="mb-2">Leading at-home pet services in HCMC.</li>
           <li className="mb-2">
-            Điều trị ve rận: Sử dụng thuốc đặc trị ve rận an toàn, hiệu quả,
-            giúp thú cưng của bạn luôn khỏe mạnh.
+            Tick and flea treatment: Using safe, effective specialized
+            medications to keep your pet healthy.
           </li>
-          <li className="mb-2">Tiêm vaccine cho thú cưng.</li>
-          <li className="mb-2">Pet Hotel – Khách sạn thú cưng.</li>
+          <li className="mb-2">Pet vaccination.</li>
+          <li className="mb-2">Pet Hotel – Accommodation for pets.</li>
           <li className="mb-2">
-            Pet Shop – Cung cấp sản phẩm, phụ kiện dành cho thú cưng.
+            Pet Shop – Providing products and accessories for pets.
           </li>
           <li className="mb-2">
-            Pet Service cam kết mang đến dịch vụ spa chuyên nghiệp, tận tâm cho
-            thú cưng. Chúng tôi đảm bảo sự an toàn tuyệt đối trong từng dịch vụ.
+            Pet Service is committed to providing professional, dedicated spa
+            services for pets. We ensure absolute safety in every service.
           </li>
         </ul>
         <p className="mt-4">
-          Pet Service cam kết mang đến dịch vụ spa chuyên nghiệp, tận tâm cho
-          thú cưng. Chúng tôi đảm bảo sự an toàn tuyệt đối trong từng dịch vụ.
+          Pet Service is committed to providing professional, dedicated spa
+          services for pets. We ensure absolute safety in every service.
         </p>
       </div>
 
       <header className="text-[35px] font-bold mb-4">
-        Lợi ích khi sử dụng dịch vụ spa thú cưng tại PAWLISH
+        Benefits of using pet spa services at PAWLISH
       </header>
 
       <div>
         <p className="mb-2">
-          Sử dụng dịch vụ spa thú cưng chuyên nghiệp tại Pet Service mang đến
-          rất nhiều lợi ích thiết thực cho cả bạn và thú cưng:
+          Using professional pet spa services at Pet Service brings many
+          practical benefits for both you and your pet:
         </p>
         <ul className="list-disc ml-5">
-          <li className="mb-2">Đảm bảo vệ sinh, sức khỏe cho thú cưng</li>
+          <li className="mb-2">Ensuring hygiene and health for pets</li>
           <li className="mb-2">
-            Nâng cao tính thẩm mỹ, giúp thú cưng tự tin, thu hút
+            Enhancing aesthetics, helping pets feel confident and attractive
           </li>
-          <li className="mb-2">Tiết kiệm thời gian, công sức cho chủ nuôi</li>
+          <li className="mb-2">Saving time and effort for pet owners</li>
+          <li className="mb-2">Professional environment, modern equipment</li>
+          <li className="mb-2">Experienced staff who love animals</li>
           <li className="mb-2">
-            Môi trường chuyên nghiệp, trang thiết bị hiện đại
-          </li>
-          <li className="mb-2">
-            Đội ngũ nhân viên giàu kinh nghiệm, yêu thương động vật
-          </li>
-          <li className="mb-2">
-            Chế độ chăm sóc đặc biệt, cam kết an toàn cho thú cưng
+            Special care regimen, commitment to pet safety
           </li>
         </ul>
       </div>
 
       <header className="text-[35px] font-bold mb-4">
-        Bảng giá dịch vụ spa thú cưng tại PAWLISH
+        Price list for pet spa services at PAWLISH
       </header>
       <img
         src="/public/price-list.png"
-        alt="Ưu đãi"
+        alt="Promotions"
         className="w-full rounded-lg mb-4"
       />
 
       <div>
-        <p className="mb-2">Lưu ý:</p>
+        <p className="mb-2">Note:</p>
         <ul className="list-disc ml-5">
           <li className="mb-2">
-            Bảng giá mang tính chất tham khảo. Giá chính xác sẽ được thông báo
-            sau khi nhân viên tư vấn và kiểm tra tình trạng thực tế của thú
-            cưng.
+            The price list is for reference only. The exact price will be
+            advised after staff consultation and assessment of the pet's actual
+            condition.
           </li>
           <li className="mb-2">
-            Giá dịch vụ có thể thay đổi tùy thuộc vào kích thước, giống loài và
-            tình trạng lông của thú cưng.
+            Service prices may vary depending on the size, breed, and fur
+            condition of the pet.
           </li>
         </ul>
       </div>
 
-      <h2 className="text-[25px] font-bold mt-4 mb-2">Chi Phí Phát Sinh:</h2>
+      <h2 className="text-[25px] font-bold mt-4 mb-2">Additional Costs:</h2>
       <ul className="list-disc ml-5">
         <li className="mb-2">
-          Phụ phí gỡ rối lông: 100.000đ – 300.000đ (tùy mức độ)
+          Fur detangling surcharge: 100,000đ – 300,000đ (depending on severity)
         </li>
         <li className="mb-2">
-          Phụ phí Tắm nấm, ve, rận: 50.000đ – 200.000đ (tùy mức độ)
+          Fungal, tick, flea bath surcharge: 50,000đ – 200,000đ (depending on
+          severity)
         </li>
       </ul>
 
       <header className="text-[35px] font-bold mb-4">
-        Giải đáp các câu hỏi thường gặp về dịch vụ spa thú cưng tại PAWLISH
+        Answering frequently asked questions about pet spa services at PAWLISH
       </header>
       <div>
-        Pet Service hiểu rằng bạn luôn có nhiều băn khoăn khi lựa chọn dịch vụ
-        spa cho thú cưng. Dưới đây là giải đáp cho các câu hỏi thường gặp, giúp
-        bạn an tâm hơn khi sử dụng dịch vụ:
+        Pet Service understands that you may have many concerns when choosing
+        spa services for your pet. Below are answers to frequently asked
+        questions to help you feel more confident when using our services:
       </div>
       <h2 className="text-[25px] font-bold mt-4 mb-2">
-        1. Spa cho chó mèo có tốt không?
+        1. Are spas good for dogs and cats?
       </h2>
       <div>
-        Chắc chắn là có! Dịch vụ spa không chỉ giúp thú cưng sạch sẽ, thơm tho
-        mà còn mang lại nhiều lợi ích cho sức khỏe như:
+        Absolutely! Spa services not only keep pets clean and fragrant but also
+        offer many health benefits such as:
       </div>
       <ul className="list-disc ml-5">
         <li className="mb-2">
-          Loại bỏ bụi bẩn, ký sinh trùng: Giúp ngăn ngừa các bệnh về da, lông,
-          ve rận.
+          Removing dirt and parasites: Helps prevent skin and fur diseases,
+          ticks, and fleas.
         </li>
         <li className="mb-2">
-          Chăm sóc da, lông khỏe mạnh: Massage với sữa tắm chuyên dụng, tinh dầu
-          dưỡng giúp lông bóng mượt, giảm rụng lông, kích thích mọc lông mới.
+          Maintaining healthy skin and fur: Massage with specialized shampoos
+          and nourishing oils helps keep fur shiny, reduces shedding, and
+          stimulates new fur growth.
         </li>
         <li className="mb-2">
-          Phát hiện sớm các vấn đề sức khỏe: Trong quá trình spa, kỹ thuật viên
-          có thể phát hiện sớm các vấn đề về da, lông, tai, móng để có biện pháp
-          xử lý kịp thời.
+          Early detection of health issues: During the spa process, technicians
+          can detect early problems with skin, fur, ears, and nails for timely
+          treatment.
         </li>
         <li className="mb-2">
-          Giúp thú cưng thư giãn, thoải mái: Âm thanh, mùi hương và sự chăm sóc
-          nhẹ nhàng trong quá trình spa giúp thú cưng giảm stress, thoải mái
-          hơn.
+          Helping pets relax and feel comfortable: Sounds, scents, and gentle
+          care during the spa process help reduce stress and make pets more
+          comfortable.
         </li>
         <img
           src="https://luckydawgsalongrooming.com/wp-content/uploads/2018/04/cat-grooming-services.jpeg"
-          alt="Ưu đãi"
+          alt="Promotions"
           className="w-full rounded-lg mb-4"
         />
       </ul>
 
       <h2 className="text-[25px] font-bold mt-4 mb-2">
-        2. Nên chọn dịch vụ spa thú cưng như thế nào?
+        2. How should I choose pet spa services?
       </h2>
       <div>
-        Để lựa chọn dịch vụ spa phù hợp, bạn nên cân nhắc các yếu tố sau:
+        To choose suitable spa services, you should consider the following
+        factors:
       </div>
       <ul className="list-disc ml-5">
         <li className="mb-2">
-          Nhu cầu của thú cưng: Loại lông, tình trạng da, sức khỏe, tính cách
-          của thú cưng.
+          Pet needs: Fur type, skin condition, health, pet's temperament.
         </li>
         <li className="mb-2">
-          Uy tín cơ sở spa: Chọn cơ sở spa uy tín, có đội ngũ kỹ thuật viên giàu
-          kinh nghiệm, sử dụng sản phẩm chất lượng, an toàn.
+          Spa reputation: Choose reputable spas with experienced technicians
+          using quality, safe products.
         </li>
         <li className="mb-2">
-          Chính sách giá cả, dịch vụ: So sánh bảng giá, ưu đãi, chính sách chăm
-          sóc khách hàng của các cơ sở spa khác nhau.
+          Pricing and service policies: Compare price lists, promotions, and
+          customer care policies at different spa facilities.
         </li>
       </ul>
 
       <h2 className="text-[25px] font-bold mt-4 mb-2">
-        3. Làm sao để đặt dịch vụ spa thú cưng tại PAWLISH?
+        3. How do I book pet spa services at PAWLISH?
       </h2>
       <ul className="list-disc ml-5">
         <li className="mb-2">
-          Liên hệ trực tiếp: Gọi điện thoại đến số hotline 0898 520 760 để được
-          tư vấn và đặt lịch nhanh nhất.
+          Direct contact: Call the hotline at 0898 520 760 for consultation and
+          quick booking.
         </li>
         <li className="mb-2">
-          Đặt lịch qua website: Truy cập website pawlish.com và điền đầy đủ
-          thông tin vào form đăng ký.
+          Book via website: Visit pawlish.com and fill out the registration
+          form.
         </li>
       </ul>
 
       <h2 className="text-[25px] font-bold mt-4 mb-2">
-        4. PAWLISH có cung cấp dịch vụ lấy và trả thú cưng tận nhà không?
+        4. Does PAWLISH provide pet pick-up and drop-off services?
       </h2>
       <div>
-        Có, PAWLISH cung cấp dịch vụ đưa đón tận nhà với mức phí hợp lý. Bạn có
-        thể liên hệ trực tiếp để biết thêm chi tiết về khu vực áp dụng và chi
-        phí dịch vụ.
+        Yes, PAWLISH provides home pick-up and drop-off services at reasonable
+        rates. You can contact us directly for more details about service areas
+        and costs.
       </div>
 
       <h2 className="text-[25px] font-bold mt-4 mb-2">
-        5. Thú cưng của tôi rất sợ hãi khi đi spa, Pet Service có giải pháp nào
-        cho vấn đề này?
+        5. My pet is very afraid of going to the spa. Does Pet Service have any
+        solutions for this issue?
       </h2>
       <div>
-        PAWLISH hiểu tâm lý của thú cưng và luôn cố gắng tạo môi trường thoải
-        mái nhất cho chúng. Đội ngũ kỹ thuật viên của chúng tôi được đào tạo bài
-        bản, giàu kinh nghiệm trong việc tiếp xúc thú cưng. Ngoài ra, chúng tôi
-        còn sử dụng các biện pháp hỗ trợ như âm nhạc, tinh dầu thư giãn để giúp
-        thú cưng thoải mái hơn.
+        PAWLISH understands pet psychology and always tries to create the most
+        comfortable environment for them. Our team of technicians is
+        well-trained and experienced in handling pets. Additionally, we use
+        support methods such as music and relaxing essential oils to help pets
+        feel more comfortable.
       </div>
       <img
         src="https://pawspace.in/wp-content/uploads/2023/12/Pawspace-why-choose-cat-grooming.png"
-        alt="Ưu đãi"
+        alt="Promotions"
         className="w-full rounded-lg mb-4"
       />
 
       <header className="text-[35px] font-bold mb-4">
-        Tổng kết PAWLISH – Nâng niu Thú Cưng Bằng Tình Yêu Thương!
+        Summary: PAWLISH – Caring for Your Pet with Love!
       </header>
       <div className="mb-3">
-        Với đội ngũ kỹ thuật viên giàu kinh nghiệm, quy trình chuyên nghiệp, sản
-        phẩm an toàn. Pet Service tự hào mang đến dịch vụ spa chất lượng, giúp
-        thú cưng luôn sạch sẽ, khỏe mạnh và rạng rỡ.
+        With experienced technicians, professional procedures, and safe
+        products, Pet Service proudly offers quality spa services to keep your
+        pet clean, healthy, and radiant.
       </div>
       <div className="mb-3">
-        Hãy để PAWLISH đồng hành cùng bạn trong hành trình chăm sóc thú cưng!
+        Let PAWLISH accompany you on your pet care journey!
       </div>
-      <div className="mb-3">Liên hệ ngay:</div>
+      <div className="mb-3">Contact us now:</div>
       <ul className="list-disc ml-5">
-        <li className="mb-2">Hotline 24/7: 0898 520 760</li>
+        <li className="mb-2">24/7 Hotline: 0898 520 760</li>
         <li className="mb-2">Email: pawlish@gmail.com</li>
       </ul>
 
-      {/* Form đăng ký */}
+      {/* Registration Form */}
       <form onSubmit={handleSubmit} className="space-y-4">
         <label htmlFor="name" className="block text-[25px] font-medium mb-2">
-          Yêu cầu dịch vụ <span className="text-red-500">*</span>
+          Service Request <span className="text-red-500">*</span>
         </label>
         <div>
-          Vui lòng chọn 1 dịch vụ bạn đang cần để PawLish có thể chuẩn bị, và
-          phục vụ các bé một cách chu đáo nhất nhé!
+          Please select the service you need so PawLish can prepare and serve
+          your pets in the most thorough way!
         </div>
         <select
           name="service"
@@ -386,31 +383,34 @@ const PetSpaServices = () => {
           required
           className="w-full border p-2 rounded-md"
         >
-          <option value="Tắm vệ sinh tại nhà">Tắm vệ sinh tại nhà</option>
-          <option value="Cắt tỉa lông tại nhà">Cắt tỉa lông tại nhà </option>
-          <option value="Thú y tại nhà">Thú y tại nhà</option>
-          <option value="Khách sạn thú cưng">Khách sạn thú cưng</option>
-          <option value="Combo tắm tháng 4 lần">Combo tắm tháng 4 lần</option>
-          <option value="Combo tắm tháng 8 lần">Combo tắm tháng 8 lần</option>
+          <option value="Tắm vệ sinh tại nhà">Home Bath and Hygiene</option>
+          <option value="Cắt tỉa lông tại nhà">Home Grooming</option>
+          <option value="Thú y tại nhà">Home Veterinary</option>
+          <option value="Khách sạn thú cưng">Pet Hotel</option>
+          <option value="Combo tắm tháng 4 lần">
+            Monthly Package: 4 Baths
+          </option>
+          <option value="Combo tắm tháng 8 lần">
+            Monthly Package: 8 Baths
+          </option>
           <option value="Combo 1: Tắm  sấy + Vệ sinh">
-            Combo 1: Tắm sấy + vệ Sinh
+            Package 1: Bath & Dry + Hygiene
           </option>
           <option value="Combo 2: Cắt tỉa + Vệ sinh">
-            Combo 2: Cắt tỉa + Vệ sinh
+            Package 2: Grooming + Hygiene
           </option>
-
           <option value="Combo 3: Tắm  sấy + Vệ sinh + Cắt tỉa lông">
-            Combo 3: Tắm sấy + Vệ sinh + Cắt tỉa lông
+            Package 3: Bath & Dry + Hygiene + Grooming
           </option>
           <option value="Combo 4: Tắm Sấy + Vệ Sinh + Cạo lông">
-            Combo 4: Tắm Sấy + Vệ Sinh + Cạo lông
+            Package 4: Bath & Dry + Hygiene + Shaving
           </option>
         </select>
         <label htmlFor="name" className="block text-[21px] font-medium mb-2">
-          Họ Tên <span className="text-red-500">*</span>
+          Full Name <span className="text-red-500">*</span>
         </label>
         <input
-          type="text" // Đổi thành text cho họ tên
+          type="text" // Changed to text for full name
           name="name"
           value={formData.name}
           onChange={handleChange}
@@ -419,7 +419,7 @@ const PetSpaServices = () => {
           placeholder=""
         />
         <label htmlFor="name" className="block text-[21px] font-medium mb-2">
-          Số điện thoại <span className="text-red-500">*</span>
+          Phone Number <span className="text-red-500">*</span>
         </label>
         <input
           type="tel"
@@ -431,13 +431,13 @@ const PetSpaServices = () => {
           placeholder=""
         />
         <div className="flex gap-4">
-          {/* Địa chỉ */}
+          {/* Address */}
           <div className="w-1/2">
             <label
               htmlFor="address"
               className="block text-[21px] font-medium mb-2 whitespace-nowrap"
             >
-              Địa chỉ <span className="text-red-500">*</span>
+              Address <span className="text-red-500">*</span>
             </label>
             <input
               id="address"
@@ -447,7 +447,7 @@ const PetSpaServices = () => {
               onChange={handleChange}
               required
               className="w-full border p-2 rounded-md"
-              placeholder="Nhập địa chỉ"
+              placeholder="Enter address"
             />
           </div>
 
@@ -467,13 +467,13 @@ const PetSpaServices = () => {
               onChange={handleChange}
               required
               className="w-full border p-2 rounded-md"
-              placeholder="Nhập email"
+              placeholder="Enter email"
             />
           </div>
         </div>
 
         <label htmlFor="name" className="block text-[21px] font-medium mb-2">
-          Ngày đặt lịch<span className="text-red-500">*</span>
+          Appointment Date<span className="text-red-500">*</span>
         </label>
         <input
           type="date"
@@ -485,7 +485,7 @@ const PetSpaServices = () => {
           placeholder=""
         />
         <label htmlFor="name" className="block text-[21px] font-medium mb-2">
-          Tên thú cưng<span className="text-red-500">*</span>
+          Pet Name<span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -497,7 +497,7 @@ const PetSpaServices = () => {
           placeholder=""
         />
         <label htmlFor="name" className="block text-[21px] font-medium mb-2">
-          Loài<span className="text-red-500">*</span>
+          Species<span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -509,7 +509,7 @@ const PetSpaServices = () => {
           placeholder=""
         />
         <label htmlFor="name" className="block text-[21px] font-medium mb-2">
-          Thuộc giống<span className="text-red-500">*</span>
+          Breed<span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -521,10 +521,10 @@ const PetSpaServices = () => {
           placeholder=""
         />
         <div className="flex gap-4">
-          {/* Tuổi của thú cưng */}
+          {/* Pet Age */}
           <div className="w-1/2">
             <label htmlFor="age" className="block text-[21px] font-medium mb-2">
-              Tuổi của thú cưng<span className="text-red-500">*</span>
+              Pet Age<span className="text-red-500">*</span>
             </label>
             <input
               id="age"
@@ -538,13 +538,13 @@ const PetSpaServices = () => {
             />
           </div>
 
-          {/* Trọng lượng */}
+          {/* Weight */}
           <div className="w-1/2">
             <label
               htmlFor="weight"
               className="block text-[21px] font-medium mb-2"
             >
-              Trọng lượng (kg)<span className="text-red-500">*</span>
+              Weight (kg)<span className="text-red-500">*</span>
             </label>
             <input
               id="weight"
@@ -560,7 +560,7 @@ const PetSpaServices = () => {
         </div>
 
         <label htmlFor="name" className="block text-[21px] font-medium mb-2">
-          Ghi chú<span className="text-red-500">*</span>
+          Notes<span className="text-red-500">*</span>
         </label>
         <textarea
           name="note"
@@ -568,14 +568,14 @@ const PetSpaServices = () => {
           onChange={handleChange}
           rows={3}
           className="w-full border p-2 rounded-md"
-          placeholder="Nhập một vài mô tả về tình trạng của bé để các chuyên viên có thể hỗ trợ bạn tốt nhất."
+          placeholder="Enter a description of your pet's condition so our specialists can help you best."
         />
 
         <button
           type="submit"
           className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
         >
-          Đăng Ký Dịch Vụ
+          Register for Service
         </button>
       </form>
     </div>
