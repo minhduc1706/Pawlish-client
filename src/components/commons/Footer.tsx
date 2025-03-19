@@ -8,12 +8,12 @@ const Footer = () => {
         <div>
           <h2 className="text-2xl font-bold mb-4">Pawlish</h2>
           <p className="text-gray-400 mb-6">
-            Pawlish ra đời với mong muốn mang lại cho khách hàng sự chuyên nghiệp, uy tín mang nét đẹp hoa mỹ mà chúng tôi đem lại sự trải nghiệm tốt nhất cho thú cưng của chúng ta.
+            Pawlish was founded with the desire to bring customers professionalism, reliability, and elegance while providing the best experience for our pets.
           </p>
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-gray-400">
               <MapPin size={18} />
-              <span>Thu duc Quan 9, TP HCM</span>
+              <span>Thu Duc District 9, Ho Chi Minh City</span>
             </div>
             <div className="flex items-center gap-2 text-gray-400">
               <Phone size={18} />
@@ -32,26 +32,26 @@ const Footer = () => {
 
         {/* Services Section */}
         <div>
-          <h2 className="text-xl font-bold mb-4">DỊCH VỤ</h2>
+          <h2 className="text-xl font-bold mb-4">SERVICES</h2>
           <ul className="space-y-2 text-gray-400">
-            <li>Spa Thú Cưng Chuẩn 5 Sao</li>
-            <li>Dịch Vụ Tắm Thú Cưng Tại Nhà</li>
-            <li>Dịch Vụ Cắt Tỉa Lông Và Tạo Kiểu Tại Nhà</li>
-            <li>Khách Sạn Thú Cưng Chuẩn 5 Sao</li>
-            <li>Cung Cấp Sản Phẩm, Phụ Kiện</li>
+            <li>5-Star Pet Spa</li>
+            <li>In-Home Pet Bathing Service</li>
+            <li>In-Home Pet Grooming and Styling</li>
+            <li>5-Star Pet Hotel</li>
+            <li>Pet Products and Accessories</li>
           </ul>
         </div>
 
         {/* Home Services Section */}
         <div>
-          <h2 className="text-xl font-bold mb-4">DỊCH VỤ THÚ CƯNG TẠI NHÀ</h2>
+          <h2 className="text-xl font-bold mb-4">IN-HOME PET SERVICES</h2>
           <ul className="space-y-2 text-gray-400">
-            <li>Dịch Vụ Thú Cưng Tại Nhà Quận 1</li>
-            <li>Dịch Vụ Thú Cưng Tại Nhà Quận 2</li>
-            <li>Dịch Vụ Thú Cưng Tại Nhà Quận 3</li>
-            <li>Dịch Vụ Thú Cưng Tại Nhà Quận 4</li>
-            <li>Dịch Vụ Thú Cưng Tại Nhà Quận 7</li>
-            <li>Dịch Vụ Thú Cưng Tại Nhà Quận Thủ Đức</li>
+            <li>Pet Services in District 1</li>
+            <li>Pet Services in District 2</li>
+            <li>Pet Services in District 3</li>
+            <li>Pet Services in District 4</li>
+            <li>Pet Services in District 7</li>
+            <li>Pet Services in Thu Duc District</li>
           </ul>
         </div>
       </div>

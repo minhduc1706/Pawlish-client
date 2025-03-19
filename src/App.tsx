@@ -14,7 +14,13 @@ import PetHomeCare from "./pages/PetHomeCare";
 import PetBathPage from "./pages/PetBathPage";
 import CutPetHairPage from "./pages/CutPetHairPage";
 
-import BlogExp from "./components/blog/BlogExp";
+import BlogExp from "./pages/BlogExp";
+import BlogSer from "./pages/BlogSer";
+import BlogEnt from "./pages/BlogEnt";
+import BlogDetailSer from "./pages/BlogDetailSer";
+import BlogDetailExp from "@/pages/BlogDetailExp";
+import BlogDetailEnt from "@/pages/BlogDetailEnt";
+
 function App() {
   return (
     <BrowserRouter>
@@ -42,13 +48,17 @@ function App() {
             path="/services/TakeDogWalkPage"
             element={<TakeDogWalkPage />}
           />
+          <Route path="blog/experience" element={<BlogExp />}/>
+          <Route path="blog/service" element={<BlogSer />}/>
+          <Route path="blog/entertainment" element={<BlogEnt />}/>
+          <Route path="blog/service/post/:id" element={<BlogDetailSer />}/>
+          <Route path="blog/experience/post/:id" element={<BlogDetailExp />} />
+          <Route path="blog/entertainment/post/:id" element={<BlogDetailEnt />} />
         </Route>
 
         {/* Route cho phần Auth */}
         <Route path="auth" element={<AuthLayout />} />
 
-        {/* Các route khác (nếu có) */}
-        <Route path="blog/experience" element={<BlogExp />}/>
         
         {/* <Route path="/login" element={<LoginPage />} />
         <Route path="/unauthorized" element={<Unauthorized />} /> */}
