@@ -8,6 +8,7 @@ import {
 } from "@/api/productApi";
 import { Product } from "@/interfaces/Product";
 
+
 export const useProducts = () =>
   useQuery<Product[]>({
     queryKey: ["products"],
@@ -52,3 +53,4 @@ export const useDeleteProduct = () => {
     },
   });
 };
+
