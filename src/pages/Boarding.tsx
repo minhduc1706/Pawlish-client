@@ -1,11 +1,26 @@
+import { User } from "@/interfaces/User";
 import React, { useState } from "react";
 
-const PetHotelPage = () => {
-  const [formData, setFormData] = useState({
-    name: "",
+const Boarding = () => {
+  const [formData, setFormData] = useState<
+    Pick<User, "full_name" | "email" | "phone" | "address"> & {
+      petName: string;
+      petType: string;
+      petBreed: string;
+      age: string;
+      weight: string;
+      date: string;
+      appointmentDate: string;
+      service: string;
+      staff: string;
+      gender: string;
+      note: string;
+    }
+  >({
+    full_name: "",
+    email: "",
     phone: "",
     address: "",
-    email: "",
     petName: "",
     petType: "",
     petBreed: "",
@@ -14,28 +29,37 @@ const PetHotelPage = () => {
     date: "",
     appointmentDate: "",
     service: "",
+    staff: "",
+    gender: "",
     note: "",
   });
-
+  const [errors, setErrors] = useState<Partial<typeof formData>>({});
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const newErrors: Partial<typeof formData> = {};
+    if (!formData.phone) newErrors.phone = "Phone number is required";
+    if (!formData.email) newErrors.email = "Email address is required";
+    if (!formData.full_name) newErrors.full_name = "Full name is required";
+    if (!formData.address) newErrors.address = "Detailed address is required";
+    if (!formData.petName) newErrors.petName = "Pet name is required";
+    if (!formData.service) newErrors.service = "Service selection is required";
+
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) return;
+
     try {
       const formattedAppointmentDate = new Date(
         formData.appointmentDate
-      ).toLocaleDateString("en-GB", {
+      ).toLocaleDateString("en-US", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
@@ -46,27 +70,27 @@ const PetHotelPage = () => {
         appointmentDate: formattedAppointmentDate,
       };
 
-      const response = await fetch(
-        "http://localhost:3000/promotionServiceRequests",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataToSend),
-        }
-      );
+      //  Comment lại API để tránh lỗi khi chưa có backend
+      // const response = await fetch("http://localhost:3000/groomingRequests", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(dataToSend),
+      // });
 
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
+      // if (!response.ok) {
+      //   throw new Error(`Error: ${response.status}`);
+      // }
 
-      alert("Request submitted successfully!");
+      // ✅ Hiển thị dữ liệu nhập vào thay vì gửi API
+      console.log("Mock API Data:", dataToSend);
+      alert("Request sent successfully!");
+
+      // Reset form
       setFormData({
-        name: "",
+        full_name: "",
+        email: "",
         phone: "",
         address: "",
-        email: "",
         petName: "",
         petType: "",
         petBreed: "",
@@ -74,26 +98,22 @@ const PetHotelPage = () => {
         weight: "",
         date: "",
         appointmentDate: "",
+        staff: "",
         service: "",
+        gender: "",
         note: "",
       });
+      setErrors({});
     } catch (error) {
-      console.error("Error submitting request:", error);
-      alert("Failed to submit request! Please try again.");
+      console.error("Error when sending request:", error);
+      alert("Failed to send request! Please try again.");
     }
   };
 
   return (
     <div className="max-w-[66vw] w-2/3 mx-auto p-6 bg-white rounded-xl shadow-md">
-      <h2 className="text-[20px] mb-2">
-        Up to 20% discount for long-term stays. Pets are allowed to play 1-2
-        times per day (30-60 minutes). Stays over 5 days get a 50% discount on
-        bathing fees; stays over 7 days get a free bath and grooming session. If
-        you board two pets at once, the second pet gets a 50,000 VND discount.
-      </h2>
-
       <h1 className="text-[35px] font-bold mb-4">
-        Why is PAWLISH the most trusted Pet Hotel?
+        Why is PAWLISH the most trusted Boarding?
       </h1>
       <div>
         <p className="text-[17px] mb-4">
@@ -124,7 +144,7 @@ const PetHotelPage = () => {
       />
 
       <h1 className="text-[35px] font-bold mb-4">
-        What makes PAWLISH's Pet Hotel services special?
+        What makes PAWLISH's Boarding services special?
       </h1>
       <div>
         <p className="text-[33px] font-bold mb-2">1. Comfortable Rooms</p>
@@ -188,7 +208,7 @@ const PetHotelPage = () => {
       </div>
 
       <h1 className="text-[35px] font-bold mb-4">
-        Benefits of Choosing PAWLISH’s Pet Hotel
+        Benefits of Choosing PAWLISH’s Boarding
       </h1>
       <div>
         <ul className="list-disc ml-5">
@@ -211,7 +231,7 @@ const PetHotelPage = () => {
       </div>
 
       <h1 className="text-[35px] font-bold mb-4">
-        PAWLISH – The Most Trusted and High-Quality Pet Hotel Address
+        PAWLISH – The Most Trusted and High-Quality Boarding Address
       </h1>
       <div>
         <p className="text-[19px] mb-2">
@@ -228,7 +248,7 @@ const PetHotelPage = () => {
           </li>
           <li className="text-[18px] mb-2">
             <strong>Reasonable Prices: </strong>
-            Pet hotel from 150,000-300,000 VND/day, completely transparent.
+            Boarding from 300,000-700,000 VND/day, completely transparent.
           </li>
           <li className="text-[18px] mb-2">
             Discount program offering up to 25% off for customers boarding for
@@ -244,7 +264,7 @@ const PetHotelPage = () => {
       </div>
 
       <h1 className="text-[35px] font-bold mb-4">
-        Tips for Choosing a Pet Hotel from PAWLISH
+        Tips for Choosing a Boarding from PAWLISH
       </h1>
       <div>
         <p className="text-[19px] mb-2">
@@ -267,7 +287,7 @@ const PetHotelPage = () => {
       </div>
 
       <h1 className="text-[35px] font-bold mb-4">
-        Tips for Choosing a Pet Hotel from PAWLISH
+        Tips for Choosing a Boarding from PAWLISH
       </h1>
       <div>
         <p className="text-[19px] mb-2">
@@ -290,7 +310,7 @@ const PetHotelPage = () => {
       </div>
 
       <h1 className="text-[35px] font-bold mb-4">
-        Pet Care Process at PAWLISH's Pet Hotel
+        Pet Care Process at PAWLISH's Boarding
       </h1>
       <div>
         <p className="text-[19px] mb-2">
@@ -320,7 +340,7 @@ const PetHotelPage = () => {
       </div>
 
       <h1 className="text-[35px] font-bold mb-4">
-        Pet Hotel Trends 2025 at PAWLISH
+        Boarding Trends 2025 at PAWLISH
       </h1>
       <div>
         <p className="text-[19px] mb-2">
@@ -350,7 +370,7 @@ const PetHotelPage = () => {
       </div>
 
       <h1 className="text-[35px] font-bold mb-4">
-        Reasons to Choose Pet Hotel at PAWLISH Today
+        Reasons to Choose Boarding at PAWLISH Today
       </h1>
       <div>
         <ul className="list-disc ml-5">
@@ -385,213 +405,252 @@ const PetHotelPage = () => {
         <p className="text-[17px] text-gray-700">Email: pawlish@gmail.com</p>
       </section>
       {/* Form đăng ký */}
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-6 bg-white p-6 rounded-lg shadow-md"
+      >
         <label htmlFor="name" className="block text-[35px] font-medium mb-2">
           Service Request <span className="text-red-500">*</span>
         </label>
-        <div>
-          Please select a service you need so PawLish can prepare and serve your
-          pets in the most attentive way!
-        </div>
-        <select
-          name="service"
-          value={formData.service}
-          onChange={handleChange}
-          required
-          className="w-full border p-2 rounded-md"
-        >
-          <option value="Home Pet Grooming">Home Pet Grooming</option>
-          <option value="Home Pet Trimming">Home Pet Trimming</option>
-          <option value="Home Vet Service">Home Vet Service</option>
-          <option value="Pet Hotel">Pet Hotel</option>
-          <option value="Bath Combo 4 times/month">
-            Bath Combo 4 times/month
-          </option>
-          <option value="Bath Combo 8 times/month">
-            Bath Combo 8 times/month
-          </option>
-          <option value="Combo 1: Bath + Dry + Hygiene">
-            Combo 1: Bath + Dry + Hygiene
-          </option>
-          <option value="Combo 2: Trimming + Hygiene">
-            Combo 2: Trimming + Hygiene
-          </option>
-          <option value="Combo 3: Bath + Dry + Hygiene + Trimming">
-            Combo 3: Bath + Dry + Hygiene + Trimming
-          </option>
-          <option value="Combo 4: Bath + Dry + Hygiene + Shaving">
-            Combo 4: Bath + Dry + Hygiene + Shaving
-          </option>
-        </select>
+        <p className="text-gray-600 mb-6">
+          Please select a service you need so PawLish can provide the most
+          attentive care for your pets!
+        </p>
 
-        <label htmlFor="name" className="block text-[20px] font-medium mb-2">
-          Full Name <span className="text-red-500">*</span>
-        </label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          className="w-full border p-2 rounded-md"
-          placeholder=""
-        />
-        <label htmlFor="name" className="block text-[20px] font-medium mb-2">
-          Phone Number <span className="text-red-500">*</span>
-        </label>
-        <input
-          type="tel"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          required
-          className="w-full border p-2 rounded-md"
-          placeholder=""
-        />
-        <div className="flex gap-4">
-          {/* Address */}
-          <div className="w-1/2">
-            <label
-              htmlFor="address"
-              className="block text-[20px] font-medium mb-2 whitespace-nowrap"
+        {/* Service & Staff Selection */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block font-medium mb-1">
+              Select a Service <span className="text-red-500">*</span>
+            </label>
+            <select
+              name="service"
+              value={formData.service}
+              onChange={handleChange}
+              required
+              className="w-full border p-2 rounded-md"
             >
+              <option value="">Choose Service</option>
+              <option value="Bathing">Bathing</option>
+              <option value="Nail Trimming">Nail Trimming</option>
+              <option value="Massage">Massage</option>
+              <option value="Teeth Cleaning">Teeth Cleaning</option>
+              <option value="Ear Cleaning">Ear Cleaning</option>
+              <option value="Basic Training">Basic Training</option>
+              <option value="Health Checkup">Health Checkup</option>
+              <option value="Overnight Boarding">Overnight Boarding</option>
+              <option value="Flea Treatment">Flea Treatment</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block font-medium mb-1">
+              Select Staff (Optional)
+            </label>
+            <select
+              name="staff"
+              value={formData.staff}
+              onChange={handleChange}
+              className="w-full border p-2 rounded-md"
+            >
+              <option value="">Choose Staff</option>
+              {[42, 43, 44, 45, 46, 47, 48, 49, 50].map((num) => (
+                <option key={num} value={`Staff ${num}`}>
+                  Staff {num}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Customer Information */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block font-medium mb-1">
+              Full Name <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              name="full_name"
+              value={formData.full_name}
+              onChange={handleChange}
+              required
+              className="w-full border p-2 rounded-md"
+            />
+            {errors.full_name && (
+              <p className="text-red-500">{errors.full_name}</p>
+            )}
+          </div>
+          <div>
+            <label className="block font-medium mb-1">
+              Phone Number <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+              className="w-full border p-2 rounded-md"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block font-medium mb-1">
               Address <span className="text-red-500">*</span>
             </label>
             <input
-              id="address"
               type="text"
               name="address"
               value={formData.address}
               onChange={handleChange}
               required
               className="w-full border p-2 rounded-md"
-              placeholder="Enter address"
             />
           </div>
-
-          {/* Email */}
-          <div className="w-1/2">
-            <label
-              htmlFor="email"
-              className="block text-[20px] font-medium mb-2 whitespace-nowrap"
-            >
+          <div>
+            <label className="block font-medium mb-1">
               Email <span className="text-red-500">*</span>
             </label>
             <input
-              id="email"
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
               required
               className="w-full border p-2 rounded-md"
-              placeholder="Enter email"
             />
           </div>
         </div>
 
-        <label htmlFor="name" className="block text-[20px] font-medium mb-2">
-          Appointment Date<span className="text-red-500">*</span>
-        </label>
-        <input
-          type="date"
-          name="appointmentDate"
-          value={formData.appointmentDate}
-          onChange={handleChange}
-          required
-          className="w-full border p-2 rounded-md"
-          placeholder=""
-        />
-        <label htmlFor="name" className="block text-[20px] font-medium mb-2">
-          Pet Name<span className="text-red-500">*</span>
-        </label>
-        <input
-          type="text"
-          name="petName"
-          value={formData.petName}
-          onChange={handleChange}
-          required
-          className="w-full border p-2 rounded-md"
-          placeholder=""
-        />
-        <label htmlFor="name" className="block text-[20px] font-medium mb-2">
-          Species<span className="text-red-500">*</span>
-        </label>
-        <input
-          type="text"
-          name="petType"
-          value={formData.petType}
-          onChange={handleChange}
-          required
-          className="w-full border p-2 rounded-md"
-          placeholder=""
-        />
-        <label htmlFor="name" className="block text-[20px] font-medium mb-2">
-          Breed<span className="text-red-500">*</span>
-        </label>
-        <input
-          type="text"
-          name="petBreed"
-          value={formData.petBreed}
-          onChange={handleChange}
-          required
-          className="w-full border p-2 rounded-md"
-          placeholder=""
-        />
-        <div className="flex gap-4">
-          {/* Pet Age */}
-          <div className="w-1/2">
-            <label htmlFor="age" className="block text-[20px] font-medium mb-2">
-              Pet Age<span className="text-red-500">*</span>
+        {/* Appointment & Pet Details */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block font-medium mb-1">
+              Appointment Date <span className="text-red-500">*</span>
             </label>
             <input
-              id="age"
+              type="date"
+              name="appointmentDate"
+              value={formData.appointmentDate}
+              onChange={handleChange}
+              required
+              className="w-full border p-2 rounded-md"
+            />
+          </div>
+          <div>
+            <label className="block font-medium mb-1">
+              Pet Name <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              name="petName"
+              value={formData.petName}
+              onChange={handleChange}
+              required
+              className="w-full border p-2 rounded-md"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block font-medium mb-1">
+              Species <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              name="petType"
+              value={formData.petType}
+              onChange={handleChange}
+              required
+              className="w-full border p-2 rounded-md"
+            />
+          </div>
+          <div>
+            <label className="block font-medium mb-1">
+              Breed <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              name="petBreed"
+              value={formData.petBreed}
+              onChange={handleChange}
+              required
+              className="w-full border p-2 rounded-md"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block font-medium mb-1">
+              Gender <span className="text-red-500">*</span>
+            </label>
+            <select
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
+              required
+              className="w-full border p-2 rounded-md"
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+          <div>
+            <label className="block font-medium mb-1">
+              Age (Years) <span className="text-red-500">*</span>
+            </label>
+            <input
               type="number"
               name="age"
               value={formData.age}
               onChange={handleChange}
               required
               className="w-full border p-2 rounded-md"
-              placeholder=""
             />
           </div>
+        </div>
 
-          {/* Weight */}
-          <div className="w-1/2">
-            <label
-              htmlFor="weight"
-              className="block text-[20px] font-medium mb-2"
-            >
-              Weight (kg)<span className="text-red-500">*</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block font-medium mb-1">
+              Weight (kg) <span className="text-red-500">*</span>
             </label>
             <input
-              id="weight"
               type="number"
               name="weight"
               value={formData.weight}
               onChange={handleChange}
               required
               className="w-full border p-2 rounded-md"
-              placeholder=""
             />
           </div>
         </div>
 
-        <label htmlFor="name" className="block text-[20px] font-medium mb-2">
-          Notes<span className="text-red-500">*</span>
-        </label>
-        <textarea
-          name="note"
-          value={formData.note}
-          onChange={handleChange}
-          rows={3}
-          className="w-full border p-2 rounded-md"
-          placeholder="Enter a description of your pet's condition so our specialists can assist you better."
-        />
+        {/* Notes */}
+        <div>
+          <label className="block font-medium mb-1">
+            Notes <span className="text-red-500">*</span>
+          </label>
+          <textarea
+            name="note"
+            value={formData.note}
+            onChange={handleChange}
+            rows={3}
+            className="w-full border p-2 rounded-md"
+            placeholder="Describe your pet's condition so our specialists can provide the best support."
+          />
+        </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
+          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md"
         >
           Register Service
         </button>
@@ -600,4 +659,4 @@ const PetHotelPage = () => {
   );
 };
 
-export default PetHotelPage;
+export default Boarding;

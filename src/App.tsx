@@ -2,19 +2,20 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import UserLayout from "./components/layouts/UserLayout";
 import Home from "./pages/Home";
 import AuthLayout from "./components/auth/AuthLayout";
-import GroomingCombo1 from "./pages/GroomingCombo1"; // Import Combo1
-import GroomingCombo4 from "./pages/GroomingCombo4";
-import GroomingCombo3 from "./pages/GroomingCombo3";
+import Haircut from "./pages/Haircut";
 
-import PromotionServicePage from "./pages/PromotionServicePage";
-import PetHotelPage from "./pages/PetHotelPage";
-import TakeDogWalkPage from "./pages/TakeDogWalkPage";
-import PetSpaServices from "./pages/PetSpaServices";
-import PetHomeCare from "./pages/PetHomeCare";
-import PetBathPage from "./pages/PetBathPage";
-import CutPetHairPage from "./pages/CutPetHairPage";
+import Bathing from "./pages/Bathing";
+
+import HealthCheck from "./pages/HealthCheck";
+import Boarding from "./pages/Boarding";
+import Training from "./pages/Training";
+import PetCare from "./pages/PetCare";
+import Grooming from "./pages/Grooming";
+import Massage from "./pages/Massage";
+import FleaTreatment from "./pages/FleaTreatment";
 
 import BlogExp from "./components/blog/BlogExp";
+import Payment from "./pages/Payment";
 function App() {
   return (
     <BrowserRouter>
@@ -22,34 +23,27 @@ function App() {
         {/* Các route trong UserLayout */}
         <Route element={<UserLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/services/PetSpaServices" element={<PetSpaServices />} />
-          <Route path="/services/Combo1" element={<GroomingCombo1 />} />
-          <Route path="/services/Combo3" element={<GroomingCombo3 />} />
-          <Route path="/services/Combo4" element={<GroomingCombo4 />} />
-          <Route path="/services/PetHomeCare" element={<PetHomeCare />} />
-          <Route path="/services/PetBathPage" element={<PetBathPage />}></Route>
-          <Route
-            path="/services/CutPetHairPage"
-            element={<CutPetHairPage />}
-          ></Route>
+          <Route path="/services/Grooming" element={<Grooming />} />
 
-          <Route
-            path="/services/PromotionServicePage"
-            element={<PromotionServicePage />}
-          />
-          <Route path="/services/PetHotelPage" element={<PetHotelPage />} />
-          <Route
-            path="/services/TakeDogWalkPage"
-            element={<TakeDogWalkPage />}
-          />
+          <Route path="/services/Haircut" element={<Haircut />} />
+          <Route path="/services/Bathing" element={<Bathing />} />
+
+          <Route path="/services/PetCare" element={<PetCare />} />
+          <Route path="/services/Massage" element={<Massage />} />
+          <Route path="/services/FleaTreatment" element={<FleaTreatment />} />
+
+          <Route path="/services/HealthCheck" element={<HealthCheck />} />
+          <Route path="/services/Boarding" element={<Boarding />} />
+          <Route path="/services/Training" element={<Training />} />
+          <Route path="/payment" element={<Payment />} />
         </Route>
 
         {/* Route cho phần Auth */}
         <Route path="auth" element={<AuthLayout />} />
 
         {/* Các route khác (nếu có) */}
-        <Route path="blog/experience" element={<BlogExp />}/>
-        
+        <Route path="blog/experience" element={<BlogExp />} />
+
         {/* <Route path="/login" element={<LoginPage />} />
         <Route path="/unauthorized" element={<Unauthorized />} /> */}
 
