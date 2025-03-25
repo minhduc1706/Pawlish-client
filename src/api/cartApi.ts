@@ -41,7 +41,7 @@ export const syncCartAfterLogin = async (
 
     const serverCart = await getCart();
 
-    if (!serverCart) {
+    if (!serverCart || !Array.isArray(serverCart.items)) {
       dispatch(
         setCart({
           user_id: "",
@@ -86,6 +86,6 @@ export const syncCartAfterLogin = async (
     return finalItemsToSync;
   } catch (error) {
     console.error("Error syncing cart after login", error);
-    throw error;
+    return [];
   }
 };
