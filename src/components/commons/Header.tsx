@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronDown, Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
+import { MobileSidebar } from "./MobileSidebar";
 
 type MenuItem = {
   title?: string;
@@ -23,45 +24,26 @@ const menuItems: MenuItem[] = [
         label: "Grooming",
         subMenu: [
           { path: "/services/Haircut", label: "Haircut" },
-          {
-            path: "/services/Bathing",
-            label: "Bathing",
-          },
+          { path: "/services/Bathing", label: "Bathing" },
         ],
       },
-
       {
         path: "/services/PetCare",
         label: "Pet Care",
         subMenu: [
           { path: "/services/Massage", label: "Massage" },
-          {
-            path: "/services/FleaTreatment",
-            label: "Flea Treatment",
-          },
+          { path: "/services/FleaTreatment", label: "Flea Treatment" },
         ],
       },
-
-      {
-        path: "/services/HealthCheck",
-        label: "Health Check",
-      },
-      {
-        path: "/services/Boarding",
-        label: "Boarding",
-      },
-      {
-        path: "/services/Training",
-        label: "Training",
-      },
+      { path: "/services/HealthCheck", label: "Health Check" },
+      { path: "/services/Boarding", label: "Boarding" },
+      { path: "/services/Training", label: "Training" },
     ],
   },
   {
     title: "Shop",
     path: "/shop",
-    subMenu: [
-      { path: "/shop/products", label: "All Products" },
-    ],
+    subMenu: [{ path: "/shop/products", label: "All Products" }],
   },
   {
     title: "Blog",
@@ -111,15 +93,12 @@ export function Header() {
             onMouseEnter={() => handleSubMenuEnter(item.path)}
             onMouseLeave={handleSubMenuLeave}
           >
-            {/* Submenu cấp 1 */}
             <Link
               to={item.path}
               className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
             >
               {item.label}
             </Link>
-
-            {/* Submenu cấp 2 */}
             {item.subMenu && activeSubMenu === item.path && (
               <ul className="absolute left-full top-0 ml-2 bg-white shadow-lg rounded-md border border-gray-200 z-20">
                 {item.subMenu.map((subItem) => (
@@ -176,8 +155,6 @@ export function Header() {
                     <ChevronDown className="ml-2 size-4 transition-transform group-hover:rotate-180" />
                   )}
                 </NavigationMenu.Trigger>
-
-                {/* Submenu cấp 1 */}
                 {item.subMenu && hoveredItem === item.path && (
                   <NavigationMenu.Content className="absolute left-0 top-full bg-white shadow-lg rounded-md w-56 border border-gray-200 opacity-100 transition-opacity duration-300 z-10">
                     {renderSubMenu(item.subMenu)}
@@ -188,8 +165,12 @@ export function Header() {
           </NavigationMenu.List>
         </NavigationMenu.Root>
       </div>
-          
-      {/* <Separator className="my-2 h-0.5 bg-gray-300" /> */}
+
+      <MobileSidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        menuItems={menuItems}
+      />
     </header>
   );
 }
