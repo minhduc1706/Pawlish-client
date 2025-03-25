@@ -1,5 +1,3 @@
-"use client"
-
 import { useProducts } from "@/queries/useProduct"
 import type React from "react"
 import { useNavigate } from "react-router-dom"
@@ -243,10 +241,12 @@ const Home: React.FC = () => {
               tắm và cắt tỉa lông nữa. Sẽ tiếp tục sử dụng dịch vụ trong tương lai!"
             </p>
           </div>
+
         </div>
       </main>
 
       {/* Chat Button */}
+
       <button
         onClick={() => navigate("#chat")}
         className="fixed bottom-6 right-6 bg-blue-600 text-white px-6 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1 z-50"
@@ -255,9 +255,12 @@ const Home: React.FC = () => {
         <span className="font-medium">Chat với mình nhé</span>
         <span className="ml-2 text-xl">😊</span>
       </button>
+
     </div>
   )
 }
 
+
 export default Home
+
 

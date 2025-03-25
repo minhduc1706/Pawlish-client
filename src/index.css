@@ -38,6 +38,7 @@
   scrollbar-color: gray white;
 }
 
+
 /* Tùy chỉnh giao diện của react-datepicker */
 .custom-calendar {
   @apply border border-gray-300 rounded-md font-sans w-full;

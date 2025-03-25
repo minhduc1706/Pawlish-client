@@ -24,7 +24,9 @@ import BlogDetailSer from "./pages/BlogDetailSer";
 import BlogDetailExp from "@/pages/BlogDetailExp";
 import BlogDetailEnt from "@/pages/BlogDetailEnt";
 import BookingPage from "./pages/Booking";
+
 import ProductDetail from "./pages/shop/product/ProductDetail";
+
 function App() {
   return (
     <BrowserRouter>
