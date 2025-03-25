@@ -4,7 +4,6 @@ import { Product } from "../interfaces/Product";
 export const getProducts = async (): Promise<Product[]> => {
   try {
     const { data } = await apiClient.get("/product");
-    console.log(data)
     return data;
   } catch (error) {
     console.error("Error fetching products:", error);

@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react"
-
 import { Link, useLocation } from "react-router-dom"
 import { CalendarIcon, Check, ChevronLeft, CreditCard, Dog, Info, Loader2, Mail, MapPin, Phone } from "lucide-react"
 import { format } from "date-fns"
-
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
@@ -47,8 +45,6 @@ const timeSlots = ["9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:
 type BookingStep = "service" | "datetime" | "pet" | "contact" | "payment" | "confirmation"
 
 export default function BookingPage() {
-
-
   const location = useLocation()
 
   const [currentStep, setCurrentStep] = useState<BookingStep>("service")
