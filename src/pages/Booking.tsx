@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect, useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { CalendarIcon, Check, ChevronLeft, CreditCard, Dog, Info, Loader2, Mail, MapPin, Phone } from "lucide-react"
