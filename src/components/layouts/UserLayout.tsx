@@ -43,7 +43,7 @@ const UserLayout = () => {
       {showScrollTopButton && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-3 bg-[#4CAF50] text-white rounded-full shadow-lg hover:bg-[#45a049] cursor-pointer z-[9999] transition-all duration-300 ease-in-out"
+          className="fixed bottom-8 right-8 p-3 bg-[#222a63] text-white rounded-full shadow-lg hover:bg-[#222a63] cursor-pointer z-[9999] transition-all duration-300 ease-in-out"
         >
           <ChevronsUp />
         </button>
