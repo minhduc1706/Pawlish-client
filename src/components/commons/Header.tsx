@@ -19,40 +19,40 @@ const menuItems: MenuItem[] = [
     path: "/services",
     subMenu: [
       {
-        path: "/services/PetSpaServices",
-        label: "Pet Spa Services",
+        path: "/services/Grooming",
+        label: "Grooming",
         subMenu: [
-          { path: "/services/Combo1", label: "Combo 1 – Hygiene bath" },
+          { path: "/services/Haircut", label: "Haircut" },
           {
-            path: "/services/Combo3",
-            label: "Combo 3 - Bath, grooming and hair trimming",
-          },
-          { path: "/services/Combo4", label: "Combo 4 - Shaving and bathing" },
-        ],
-      },
-      {
-        path: "/services/PetHomeCare",
-        label: "Pet Service at Home: 24/7 Convenient Solution for You",
-        subMenu: [
-          { path: "/services/PetBathPage", label: "Bathe your pet at home" },
-          {
-            path: "/services/CutPetHairPage",
-            label: "Pet Grooming At Home",
+            path: "/services/Bathing",
+            label: "Bathing",
           },
         ],
       },
 
       {
-        path: "/services/PromotionServicePage",
-        label: "Promotion Pet Service",
+        path: "/services/PetCare",
+        label: "Pet Care",
+        subMenu: [
+          { path: "/services/Massage", label: "Massage" },
+          {
+            path: "/services/FleaTreatment",
+            label: "Flea Treatment",
+          },
+        ],
+      },
+
+      {
+        path: "/services/HealthCheck",
+        label: "Health Check",
       },
       {
-        path: "/services/PetHotelPage",
-        label: "Pet Hotel",
+        path: "/services/Boarding",
+        label: "Boarding",
       },
       {
-        path: "/services/TakeDogWalkPage",
-        label: "Dog Walkers",
+        path: "/services/Training",
+        label: "Training",
       },
     ],
   },
