@@ -33,15 +33,13 @@ const Product = () => {
         console.log("Products fetched:", data);
         setProducts(data);
         
-        // Find the highest price for the slider max value
         if (data && data.length > 0) {
           const highestPrice = Math.max(...data.map((product: ProductType) => Number(product.price)));
-          const roundedMaxPrice = Math.ceil(highestPrice / 100) * 100; // Round up to nearest 100
+          const roundedMaxPrice = Math.ceil(highestPrice / 100) * 100;
           setMaxPrice(roundedMaxPrice);
           setPriceRange(roundedMaxPrice);
         }
         
-        // Extract unique categories from products
         const uniqueCategories = extractUniqueCategories(data);
         setCategories(uniqueCategories);
         
@@ -57,7 +55,6 @@ const Product = () => {
     fetchProducts();
   }, []);
 
-  // Extract unique categories from products
   const extractUniqueCategories = (products: ProductType[]) => {
     const categoriesMap = new Map();
     
