@@ -14,8 +14,14 @@ import Grooming from "./pages/Grooming";
 import Massage from "./pages/Massage";
 import FleaTreatment from "./pages/FleaTreatment";
 
-import BlogExp from "./components/blog/BlogExp";
 import Payment from "./pages/Payment";
+
+import BlogExp from "./pages/BlogExp";
+import BlogSer from "./pages/BlogSer";
+import BlogEnt from "./pages/BlogEnt";
+import BlogDetailSer from "./pages/BlogDetailSer";
+import BlogDetailExp from "@/pages/BlogDetailExp";
+import BlogDetailEnt from "@/pages/BlogDetailEnt";
 function App() {
   return (
     <BrowserRouter>
@@ -43,6 +49,11 @@ function App() {
 
         {/* Các route khác (nếu có) */}
         <Route path="blog/experience" element={<BlogExp />} />
+        <Route path="blog/service" element={<BlogSer />} />
+        <Route path="blog/entertainment" element={<BlogEnt />} />
+        <Route path="blog/service/post/:id" element={<BlogDetailSer />} />
+        <Route path="blog/experience/post/:id" element={<BlogDetailExp />} />
+        <Route path="blog/entertainment/post/:id" element={<BlogDetailEnt />} />
 
         {/* <Route path="/login" element={<LoginPage />} />
         <Route path="/unauthorized" element={<Unauthorized />} /> */}
