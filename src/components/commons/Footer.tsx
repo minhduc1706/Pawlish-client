@@ -2,8 +2,8 @@ import { Mail, Phone, MapPin, Facebook, Instagram } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white p-12">
-      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="bg-black text-white p-16 ">
+      <div className="container ml-16 px-4 grid grid-cols-1 md:grid-cols-3 gap-8 flex justify-center">
         {/* Pawlish Section */}
         <div>
           <h2 className="text-2xl font-bold mb-4">Pawlish</h2>
@@ -13,15 +13,15 @@ const Footer = () => {
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-gray-400">
               <MapPin size={18} />
-              <span>Thu Duc District 9, Ho Chi Minh City</span>
+              <span>Address: Long Thanh My, Thu Duc, Ho Chi Minh City</span>
             </div>
             <div className="flex items-center gap-2 text-gray-400">
               <Phone size={18} />
-              <span>Hotline: 0898 520 760</span>
+              <span>Hotline: 0987 654 321</span>
             </div>
             <div className="flex items-center gap-2 text-gray-400">
               <Mail size={18} />
-              <span>Hi.pawlish@gmail.com</span>
+              <span>Email: hi.pawlish@gmail.com</span>
             </div>
           </div>
           <div className="flex gap-4 mt-4">

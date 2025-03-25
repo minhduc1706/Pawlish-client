@@ -38,9 +38,6 @@
   scrollbar-color: gray white;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 /* Tùy chỉnh giao diện của react-datepicker */
 .custom-calendar {
