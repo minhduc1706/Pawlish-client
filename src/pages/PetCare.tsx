@@ -1,4 +1,4 @@
-const PetHomeCare = () => {
+const PetCare = () => {
   return (
     <div className="max-w-[66vw] w-2/3 mx-auto p-6 bg-white rounded-xl shadow-md">
       <nav className="text-sm mb-4 text-gray-500">
@@ -8,12 +8,12 @@ const PetHomeCare = () => {
         >
           Home
         </a>{" "}
-        / Pet Services at Home: Convenient 24/7 Solution for You
+        / Pet Care: Convenient Solution for You
       </nav>
 
       {/* Header */}
       <h1 className="text-[37px] font-bold mb-2">
-        <strong>Pet Services at Home: Convenient 24/7 Solution for You</strong>
+        <strong>Pet Cares: Convenient Solution for You</strong>
       </h1>
       <p className="text-[17px] mb-2">
         Having pets is gradually becoming a popular trend in modern society.
@@ -22,29 +22,24 @@ const PetHomeCare = () => {
         accordingly.
       </p>
       <p className="text-[17px] mb-2">
-        Understanding these challenges, pet services at home were created,
-        bringing convenience to you and your pets. PAWLISH will help you
-        understand the service details, outstanding benefits, and considerations
-        when using our services.
+        PAWLISH provides high-quality pet care services, bringing professional
+        and personalized care directly to your home. Discover our wide range of
+        services, outstanding benefits, and essential considerations for
+        ensuring your pet’s well-being.
       </p>
 
       <h1 className="text-[35px] font-bold mb-2">
-        <strong>What are Pet Services at Home?</strong>
+        <strong>What are Pet Care ?</strong>
       </h1>
       <p className="text-[17px] mb-2">
-        In modern society, pets are not simply animals, but friends and beloved
-        family members. Pet care is increasingly emphasized, leading to the
-        emergence of many convenient services. Among these, pet services at home
-        stand out.
+        Pets are more than just animals; they are companions and beloved family
+        members. Proper pet care is essential for their health and happiness,
+        and PAWLISH ensures that your pet receives the best treatment.
       </p>
       <p className="text-[17px] mb-2">
-        This is a form of providing pet care services at the customer's home.
-        Instead of spending time going to a spa, you just need to contact us,
-        and our staff will come to your home to care for your pet.
-      </p>
-      <p className="text-[17px] mb-2">
-        This service emerged as an optimal solution, bringing convenience to pet
-        owners in their busy lives.
+        Our services provide personalized care for pets, allowing them to be
+        comfortable in their own home while receiving professional grooming,
+        hygiene care, and health monitoring.
       </p>
 
       <img
@@ -54,46 +49,18 @@ const PetHomeCare = () => {
       />
 
       <header className="text-[35px] font-bold mb-4">
-        <strong>Popular Types of Pet Services at Home at PAWLISH</strong>
+        <strong>Popular Types of Pet Care at PAWLISH</strong>
       </header>
       <div className="mb-2">
         {" "}
-        PAWLISH provides 5 spa combos to help you easily choose the right
-        service for your pet:
+        PAWLISH offers a variety of professional pet care services, including:
       </div>
       <ul className="list-disc ml-5">
-        <li className="mb-2">
-          <a
-            href="http://localhost:5173/services/Combo1"
-            className="text-blue-500 underline hover:text-blue-700"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Combo 1: Bath and blow-dry – cleaning
-          </a>
-        </li>
-        <li className="mb-2">Combo 2: Trimming and cleaning</li>
-        <li className="mb-2">
-          <a
-            href="http://localhost:5173/services/Combo3"
-            className="text-blue-500 underline hover:text-blue-700"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Combo 3: Bath and blow-dry – cleaning – trimming
-          </a>
-        </li>
-        <li className="mb-2">
-          <a
-            href="http://localhost:5173/services/Combo4"
-            className="text-blue-500 underline hover:text-blue-700"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Combo 4: Shaving – bath and blow-dry – cleaning
-          </a>
-        </li>
-        <li className="mb-2">Combo 5: Shaving – cleaning</li>
+        <li className="mb-2">Bathing and grooming services</li>
+        <li className="mb-2">Hygiene and health monitoring</li>
+        <li className="mb-2">Home-based pet care</li>
+        <li className="mb-2">Specialized pet spa treatments</li>
+        <li className="mb-2">Pet boarding and daycare services</li>
       </ul>
 
       <img
@@ -103,30 +70,28 @@ const PetHomeCare = () => {
       />
 
       <header className="text-[35px] font-bold mb-4">
-        <strong>
-          {" "}
-          PAWLISH's Pet Services at Home: Smart Choice for You and Your Pet
-        </strong>
+        <strong> Why Choose PAWLISH for Pet Care?</strong>
       </header>
       <p className="text-[17px] mb-2">
         In the modern pace of life, balancing work, life, and pet care can
         sometimes become a difficult equation. Understanding this, PAWLISH
-        brings an optimal solution with pet services at home. Advantages of this
+        brings an optimal solution with pet services . Advantages of this
         service from PAWLISH:
       </p>
       <ul className="list-disc ml-5 text-[17px] text-gray-700">
         <li className="text-[17px] mb-2">
-          Saves time and effort for pet owners.
+          Highly trained and experienced pet care professionals
         </li>
         <li className="text-[17px] mb-2">
-          Helps pets feel comfortable, reduces stress, and prevents disease
-          transmission.
+          Safe, clean, and comfortable environment for pets
         </li>
+        <li className="text-[17px] mb-2">Customized care plans for each pet</li>
+        <li className="text-[17px] mb-2">Flexible scheduling options</li>
         <li className="text-[17px] mb-2">
-          Professional, dedicated service meeting diverse needs
+          Affordable pricing with special discounts
         </li>
-        <li className="text-[17px] mb-2">Flexible timing</li>
       </ul>
+
       <p className="text-[17px] mb-2">
         With the desire to provide the best care for your pets, Pet Service
         continuously strives to improve service quality, refine the service
@@ -142,7 +107,7 @@ const PetHomeCare = () => {
       <header className="text-[35px] font-bold mb-4">
         <strong>
           {" "}
-          PAWLISH's Home Service Prices: Joy for Your Pet – Light on Your Wallet
+          PAWLISH Pet Care: Joy for Your Pet – Light on Your Wallet
         </strong>
       </header>
       <p className="text-[17px] mb-2">
@@ -151,12 +116,6 @@ const PetHomeCare = () => {
         list to help you easily choose the most suitable service for your
         beloved pet.
       </p>
-
-      <img
-        src="/public/price-list.png"
-        alt="price list"
-        className="w-full rounded-lg mb-4"
-      />
 
       <div>
         <p className="text-[17px] mb-2">Note:</p>
@@ -173,18 +132,25 @@ const PetHomeCare = () => {
         </ul>
       </div>
       <div>
-        <h2 className="text-[27px] font-bold mb-4">Additional Costs</h2>
+        <h2 className="text-[27px] font-bold mb-4">
+          In addition, we also have some popular services such as:
+        </h2>
         <ul className="list-disc ml-5">
           <li className="text-[17px] mb-2">
-            Fur detangling surcharge: 100,000 - 300,000 VND (depending on
+            Ear Cleaning: 70,000 - 150,000 VND (30-45 minutes)
+          </li>
+          <li className="text-[17px] mb-2">
+            Basic Training: 500,000 - 600,000 VND (60-90 minutes)
+          </li>
+          <li className="text-[17px] mb-2">
+            Health Checkup: 350,000 - 500,000 VND (45-60 minutes, depending on
             severity)
           </li>
           <li className="text-[17px] mb-2">
-            Fungal, tick, flea bath surcharge: 50,000 - 200,000 VND (depending
-            on severity)
+            Overnight Boarding: 700,000 VND (depending on days)
           </li>
           <li className="text-[17px] mb-2">
-            Difficulty surcharge: 100,000 - 200,000 VND (depending on severity)
+            Flea Treatment: 250,000 VND (30-60 minutes)
           </li>
         </ul>
       </div>
@@ -217,11 +183,10 @@ const PetHomeCare = () => {
           <strong>Conclusion</strong>
         </header>
         <p className="text-[17px] mb-2">
-          PAWLISH's pet services at home are the optimal solution for modern pet
-          owners. Bringing convenience, safety, and the best service quality.
-          However, to ensure your interests and help your pet receive the best
-          care, you need to be a wise consumer, choosing reputable, quality home
-          service providers and using them effectively.
+          PAWLISH’s pet care services offer the perfect solution for modern pet
+          owners, ensuring convenience, safety, and top-quality care. We are
+          committed to providing professional and compassionate services
+          tailored to your pet’s needs.
         </p>
         <p className="text-[17px] mb-2">
           PAWLISH – Always accompanying you on the journey of caring for and
@@ -245,4 +210,4 @@ const PetHomeCare = () => {
   );
 };
 
-export default PetHomeCare;
+export default PetCare;
