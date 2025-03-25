@@ -61,8 +61,7 @@ const menuItems: MenuItem[] = [
     title: "Shop",
     path: "/shop",
     subMenu: [
-      { path: "/shop/men", label: "Men's Fashion" },
-      { path: "/shop/women", label: "Women's Fashion" },
+      { path: "/shop/products", label: "All Products" },
     ],
   },
   {

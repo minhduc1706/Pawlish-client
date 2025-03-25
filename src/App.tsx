@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import UserLayout from "./components/layouts/UserLayout";
 import Home from "./pages/Home";
 import AuthLayout from "./components/auth/AuthLayout";
+import Product from "./pages/shop/product/Product";
+import ProductDetail from "./pages/shop/product/ProductDetail";
 import Haircut from "./pages/Haircut";
 
 import Bathing from "./pages/Bathing";
@@ -44,6 +46,8 @@ function App() {
           <Route path="/services/Boarding" element={<Boarding />} />
           <Route path="/services/Training" element={<Training />} />
           <Route path="/payment" element={<Payment />} />
+           <Route path="/shop/products" element={<Product />} />
+            <Route path="/san-pham/:id" element={<ProductDetail />} />
         </Route>
 
         {/* Route cho phần Auth */}
