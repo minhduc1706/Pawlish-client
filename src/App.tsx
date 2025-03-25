@@ -24,6 +24,7 @@ import BlogEnt from "./pages/BlogEnt";
 import BlogDetailSer from "./pages/BlogDetailSer";
 import BlogDetailExp from "@/pages/BlogDetailExp";
 import BlogDetailEnt from "@/pages/BlogDetailEnt";
+import BookingPage from "./pages/Booking";
 function App() {
   return (
     <BrowserRouter>
@@ -32,7 +33,8 @@ function App() {
         <Route element={<UserLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/services/Grooming" element={<Grooming />} />
-
+          <Route path="/booking" element={<BookingPage/>} />
+          <Route path="/services/Bathing" element={<Bathing />} />
           <Route path="/services/Haircut" element={<Haircut />} />
           <Route path="/services/Bathing" element={<Bathing />} />
 
