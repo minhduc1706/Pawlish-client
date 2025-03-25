@@ -60,8 +60,7 @@ const menuItems: MenuItem[] = [
     title: "Shop",
     path: "/shop",
     subMenu: [
-      { path: "/shop/men", label: "Men's Fashion" },
-      { path: "/shop/women", label: "Women's Fashion" },
+      { path: "/shop/products", label: "All Products" },
     ],
   },
   {
@@ -189,6 +188,8 @@ export function Header() {
           </NavigationMenu.List>
         </NavigationMenu.Root>
       </div>
+          
+      {/* <Separator className="my-2 h-0.5 bg-gray-300" /> */}
     </header>
   );
 }

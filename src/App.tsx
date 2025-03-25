@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import UserLayout from "./components/layouts/UserLayout";
 import Home from "./pages/Home";
 import AuthLayout from "./components/auth/AuthLayout";
+import Product from "./pages/shop/product/Product";
 import Haircut from "./pages/Haircut";
 
 import Bathing from "./pages/Bathing";
@@ -22,6 +23,8 @@ import BlogEnt from "./pages/BlogEnt";
 import BlogDetailSer from "./pages/BlogDetailSer";
 import BlogDetailExp from "@/pages/BlogDetailExp";
 import BlogDetailEnt from "@/pages/BlogDetailEnt";
+import BookingPage from "./pages/Booking";
+import ProductDetail from "./pages/shop/product/ProductDetail";
 function App() {
   return (
     <BrowserRouter>
@@ -30,7 +33,8 @@ function App() {
         <Route element={<UserLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/services/Grooming" element={<Grooming />} />
-
+          <Route path="/booking" element={<BookingPage/>} />
+          <Route path="/services/Bathing" element={<Bathing />} />
           <Route path="/services/Haircut" element={<Haircut />} />
           <Route path="/services/Bathing" element={<Bathing />} />
 
@@ -42,6 +46,8 @@ function App() {
           <Route path="/services/Boarding" element={<Boarding />} />
           <Route path="/services/Training" element={<Training />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/shop/products" element={<Product />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
         </Route>
 
         {/* Route cho phần Auth */}

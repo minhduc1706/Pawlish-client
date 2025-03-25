@@ -37,3 +37,42 @@
   scrollbar-width: thin;
   scrollbar-color: gray white;
 }
+
+/* Tùy chỉnh giao diện của react-datepicker */
+.custom-calendar {
+  @apply border border-gray-300 rounded-md font-sans w-full;
+}
+
+.custom-calendar .react-datepicker__header {
+  @apply bg-blue-600 text-white border-b-0 p-4;
+}
+
+.custom-calendar .react-datepicker__current-month {
+  @apply text-xl font-semibold;
+}
+
+.custom-calendar .react-datepicker__navigation--previous,
+.custom-calendar .react-datepicker__navigation--next {
+  @apply top-4;
+}
+
+.custom-calendar .react-datepicker__day-name {
+  @apply text-blue-900 font-medium w-10 h-10 leading-10 text-base;
+}
+
+.custom-calendar .react-datepicker__day {
+  @apply text-gray-700 w-10 h-10 leading-10 text-base;
+}
+
+.custom-calendar .react-datepicker__day:hover {
+  @apply bg-blue-100 rounded-md;
+}
+
+.custom-calendar .react-datepicker__day--selected,
+.custom-calendar .react-datepicker__day--keyboard-selected {
+  @apply bg-blue-600 text-white rounded-md;
+}
+
+.custom-calendar .react-datepicker__day--outside-month {
+  @apply text-gray-400;
+}
