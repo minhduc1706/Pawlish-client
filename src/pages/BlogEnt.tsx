@@ -1,3 +1,6 @@
+import Footer from '@/components/commons/Footer';
+import { Header } from '@/components/commons/Header';
+import TopBar from '@/components/commons/TopBar';
 import { Link } from 'react-router-dom';
 export default function BlogEnt() {
   const posts = [
@@ -45,7 +48,8 @@ export default function BlogEnt() {
 
   return (
     <div>
-
+      <TopBar />
+      <Header />
       {/* Banner */}
       <div className="relative w-full h-48">
         <img
@@ -79,7 +83,7 @@ export default function BlogEnt() {
               <div className="p-8">
                 <h2 className="text-lg font-bold text-gray-800">{post.title}</h2>
                 <p className="text-sm text-gray-600 mt-2">{post.description}</p>
-                <Link 
+                <Link
                   to={`/blog/entertainment/post/${post.id}`}
                   className="text-blue-600 hover:text-blue-800 font-medium"
                 >
@@ -118,9 +122,9 @@ export default function BlogEnt() {
               >
                 <circle cx="12" cy="12" r="10" />
               </svg>
-              <a>
+              <Link to="/blog/experience">
                 Share Experience
-              </a>
+              </Link>
             </li>
             <li className="flex items-center gap-2 mb-4">
               <svg
@@ -137,43 +141,43 @@ export default function BlogEnt() {
               >
                 <circle cx="12" cy="12" r="10" />
               </svg>
-              <a>
-                Entertainment Corner
-              </a>
-
-            </li>
-            <li className="flex items-center gap-2 mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-circle"
-              >
-                <circle cx="12" cy="12" r="10" />
-              </svg>
-              <a>
+              <Link to="/blog/service">
                 Home Service
-              </a>
+              </Link>
             </li>
+            <li className="flex items-center gap-2 mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-circle"
+              >
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+              <Link to="/blog/entertainment">
+                Entertainment Corner
+              </Link>
 
+            </li>
           </ul>
           <h2 className="font-bold text-lg mb-2">NEW ARTICLES</h2>
           <ul>
-            <li className="mb-8"><a href="#" className="text-blue-600 font-semibold">Pawlish - Dog Walking Service in District 7</a><br /><span className="text-gray-400 text-sm">📅 11 March 2025</span></li>
-            <li className="mb-8"><a href="#" className="text-blue-600 font-semibold">Top Tips for Choosing a Pet Spa in District 7 - Pawlish</a><br /><span className="text-gray-400 text-sm">📅 10 March 2025</span></li>
-            <li className="mb-8"><a href="#" className="text-blue-600 font-semibold">Pet Spa - Pawlish: The Most Reliable Service 2025</a><br /><span className="text-gray-400 text-sm">📅 19 March 2025</span></li>
-            <li className="mb-8"><a href="#" className="text-blue-600 font-semibold">Grooming at District 7 - Pawlish: Pet Care</a><br /><span className="text-gray-400 text-sm">📅 15 March 2025</span></li>
-            <li className="mb-8"><a href="#" className="text-blue-600 font-semibold">District 7 pet spa - pawlish: the pinnacle of boss care</a><br /><span className="text-gray-400 text-sm">📅 15 March 2025</span></li>
+            <li className="mb-8">Pawlish - Dog Walking Service in District 7<br /><span className="text-gray-400 text-sm">📅 11 March 2025</span></li>
+            <li className="mb-8">Top Tips for Choosing a Pet Spa in District 7 - Pawlish<br /><span className="text-gray-400 text-sm">📅 10 March 2025</span></li>
+            <li className="mb-8">Pet Spa - Pawlish: The Most Reliable Service 2025<br /><span className="text-gray-400 text-sm">📅 19 March 2025</span></li>
+            <li className="mb-8">Grooming at District 7 - Pawlish: Pet Care<br /><span className="text-gray-400 text-sm">📅 15 March 2025</span></li>
+            <li className="mb-8">District 7 pet spa - pawlish: the pinnacle of boss care<br /><span className="text-gray-400 text-sm">📅 15 March 2025</span></li>
           </ul>
         </div>
 
       </div>
+      <Footer />
     </div>
   );
 }
