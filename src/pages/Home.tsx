@@ -186,7 +186,7 @@ const Home: React.FC = () => {
 
           {products && (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {products.slice(0, 3).map((product: Product) => (
+              {Array.isArray(products) && products.slice(0, 3).map((product: Product) => (
                 <div
                   key={product._id}
                   className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group"

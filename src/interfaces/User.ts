@@ -5,7 +5,6 @@ export interface User {
   phone?: string;
   address?: string;
   role: "admin" | "customer";
-  status: "active" | "block";
 }
 
 export interface UpdateUserData {
@@ -13,7 +12,6 @@ export interface UpdateUserData {
   email?: string;
   phone?: string;
   address?: string;
-  status?: "active" | "block";
 }
 
 export interface LoginResponse {

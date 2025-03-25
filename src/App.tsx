@@ -21,12 +21,14 @@ import BlogDetailEnt from "@/pages/BlogDetailEnt";
 import BookingPage from "./pages/Booking";
 import ProductDetail from "./pages/shop/product/ProductDetail";
 import PaymentResult from "./pages/PaymentResult";
+import Profile from "./pages/Profile";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<UserLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile/>} />
           <Route path="/services/Grooming" element={<Grooming />} />
           <Route path="/booking" element={<BookingPage/>} />
           <Route path="/services/Bathing" element={<Bathing />} />

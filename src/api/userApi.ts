@@ -3,7 +3,7 @@ import type { UpdateUserData } from "../interfaces/User";
 
 export const fetchUsersApi = async () => {
   try {
-    const response = await apiClient.get("/admin/users");
+    const response = await apiClient.get("/users");
     return response.data;
   } catch (error) {
     console.error("Error fetching users:", error);
@@ -13,7 +13,7 @@ export const fetchUsersApi = async () => {
 
 export const fetchUserByIdApi = async (userId: string) => {
   try {
-    const response = await apiClient.get(`/admin/users/${userId}`);
+    const response = await apiClient.get(`/users/${userId}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching user by ID:", error);
@@ -29,7 +29,7 @@ export const updateUserApi = async ({
   data: UpdateUserData;
 }) => {
   try {
-    const response = await apiClient.put(`/admin/users/${userId}`, data);
+    const response = await apiClient.put(`/users/${userId}`, data);
     return response.data;
   } catch (error) {
     console.error("Error updating user:", error);
@@ -39,7 +39,7 @@ export const updateUserApi = async ({
 
 export const blockUserApi = async (userId: string) => {
   try {
-    const response = await apiClient.put(`/admin/users/${userId}`, {
+    const response = await apiClient.put(`/users/${userId}`, {
       status: "block",
     });
     return response.data;
@@ -51,7 +51,7 @@ export const blockUserApi = async (userId: string) => {
 
 export const deleteUserApi = async (userId: string) => {
   try {
-    await apiClient.delete(`/admin/users/${userId}`);
+    await apiClient.delete(`/users/${userId}`);
     return userId;
   } catch (error) {
     console.error("Error deleting user:", error);
