@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronDown, Menu, X, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
 
 type MenuItem = {
   title?: string;
@@ -177,6 +178,8 @@ export function Header() {
           ></div>
         )}
       </div>
+          
+      <Separator className="my-2 h-0.5 bg-gray-300" />
     </header>
   );
 }

@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import UserLayout from "./components/layouts/UserLayout";
 import Home from "./pages/Home";
 import AuthLayout from "./components/auth/AuthLayout";
+import Booking from "./pages/Booking";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Routes>
         <Route element={<UserLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/booking" element={<Booking />} />
         </Route>
         <Route path="auth" element={<AuthLayout />} />
 
