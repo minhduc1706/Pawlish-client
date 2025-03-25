@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { MobileSidebar } from "./MobileSidebar";
 
-
 type MenuItem = {
   title?: string;
   path: string;
@@ -167,13 +166,11 @@ export function Header() {
         </NavigationMenu.Root>
       </div>
 
-
       <MobileSidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
         menuItems={menuItems}
       />
-
     </header>
   );
 }
