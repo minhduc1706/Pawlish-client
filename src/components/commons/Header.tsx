@@ -85,27 +85,22 @@ export function Header() {
     document.body.classList.toggle("overflow-hidden", sidebarOpen);
   }, [sidebarOpen]);
 
-  // ✅ Hiển thị submenu cấp 1 khi hover
   const handleMouseEnter = (path: string) => {
     setHoveredItem(path);
   };
 
-  // ✅ Đóng submenu cấp 1 khi rời chuột
   const handleMouseLeave = () => {
     setHoveredItem(null);
   };
 
-  // ✅ Hiển thị submenu cấp 2 khi hover
   const handleSubMenuEnter = (path: string) => {
     setActiveSubMenu(path);
   };
 
-  // ✅ Đóng submenu cấp 2 khi rời chuột
   const handleSubMenuLeave = () => {
     setActiveSubMenu(null);
   };
 
-  // ✅ Render submenu cấp 2
   const renderSubMenu = (subMenu?: MenuItem[]) => {
     if (!subMenu) return null;
     return (
@@ -147,7 +142,7 @@ export function Header() {
   };
 
   return (
-    <header className="bg-white shadow-md top-0 w-full z-50">
+    <header className="bg-white shadow-md top-0 w-full z-20">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="text-xl font-bold text-gray-800">
