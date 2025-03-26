@@ -45,7 +45,6 @@ function App() {
           <Route path="/product/:id" element={<ProductDetail />} />
         </Route>
 
-        <Route path="/services/PaymentResult" element={<PaymentResult />} />
         <Route path="auth" element={<AuthLayout />} />
         <Route path="blog/experience" element={<BlogExp />} />
         <Route path="blog/service" element={<BlogSer />} />
