@@ -315,7 +315,7 @@ const Product = () => {
             currentProducts.map((product) => (
               <div key={product._id} className="product-card">
                 <div className="product-image">
-                  <Link to={`/san-pham/${product._id}`}>
+                  <Link to={`/product/${product._id}`}>
                     <img 
                       src={product.imgUrl} 
                       alt={product.name} 

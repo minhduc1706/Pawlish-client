@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
+
 import { CheckCircle, XCircle, AlertCircle, Home, Loader2 } from "lucide-react"
 import { motion } from "framer-motion"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -66,6 +67,7 @@ const PaymentResult = () => {
   }
 
   return (
+
     <div className=" flex items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100 p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -110,11 +112,14 @@ const PaymentResult = () => {
 
           <CardFooter className="flex flex-col gap-3 pt-4">
             <Link to="/" className="w-full">
+
               <Button className="w-full gap-2 bg-gray-200 hover:bg-gray-300 cursor-pointer">
+
                 <Home className="h-4 w-4" />
                 Quay về trang chủ
               </Button>
             </Link>
+
           </CardFooter>
         </Card>
       </motion.div>
