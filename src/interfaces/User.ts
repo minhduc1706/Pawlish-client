@@ -4,7 +4,7 @@ export interface User {
   email: string;
   phone?: string;
   address?: string;
-  role: "admin" | "customer";
+  role: "admin" | "customer" | "staff";
 }
 
 export interface UpdateUserData {
