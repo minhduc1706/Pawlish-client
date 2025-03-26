@@ -21,6 +21,7 @@ import BlogDetailEnt from "@/pages/BlogDetailEnt";
 import BookingPage from "./pages/Booking";
 import ProductDetail from "./pages/shop/product/ProductDetail";
 import PaymentResult from "./pages/PaymentResult";
+import Profile from "./pages/Profile";
 import OrderHistory from "./pages/OrderHistory";
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       <Routes>
         <Route element={<UserLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile/>} />
           <Route path="/services/Grooming" element={<Grooming />} />
           <Route path="/booking" element={<BookingPage/>} />
           <Route path="/services/Bathing" element={<Bathing />} />
@@ -36,6 +38,7 @@ function App() {
           <Route path="/payment-result" element={<PaymentResult />} />
           <Route path="/services/PetCare" element={<PetCare />} />
           <Route path="/services/Massage" element={<Massage />} />
+
           <Route path="/services/HealthCheck" element={<HealthCheck />} />
           <Route path="/services/Boarding" element={<Boarding />} />
           <Route path="/services/Training" element={<Training />} />
