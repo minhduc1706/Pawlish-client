@@ -167,7 +167,7 @@ const Home: React.FC = () => {
               Sản Phẩm Nổi Bật
             </h2>
             <button
-              onClick={() => navigate("/products")}
+              onClick={() => navigate("shop/products")}
               className="text-blue-600 font-medium flex items-center hover:text-blue-800"
             >
               Xem tất cả
