@@ -412,27 +412,21 @@ export default function BookingPage() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        <Card className="overflow-hidden">
-          <CardHeader>
-            <CardTitle className="text-center">Chọn ngày</CardTitle>
-          </CardHeader>
-          <CardContent className="p-0">
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={setDate}
-              initialFocus
-              disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0)) || date.getDay() === 0}
-              className="rounded-md border border-gray-200 bg-white p-3"
-              modifiers={{
-                today: new Date(),
-              }}
-              modifiersClassNames={{
-                today: "today-bold",
-              }}
-            />
-          </CardContent>
-        </Card>
+      <Card className="overflow-hidden">
+  <CardHeader>
+    <CardTitle className="text-center">Chọn ngày</CardTitle>
+  </CardHeader>
+  <CardContent className="p-0">
+    <Calendar
+      mode="single"
+      selected={date}
+      onSelect={setDate}
+      initialFocus
+      disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0)) || date.getDay() === 0}
+      className="custom-calendar"
+    />
+  </CardContent>
+</Card>
         <Card>
           <CardHeader>
             <CardTitle className="text-center">Chọn giờ</CardTitle>

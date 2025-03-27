@@ -4,7 +4,11 @@ export interface User {
   email: string;
   phone?: string;
   address?: string;
+<<<<<<< HEAD
   role?: "admin" | "customer";
+=======
+  role: "admin" | "customer" | "staff";
+>>>>>>> 6decd84f9330c3fcef6ecd4c10c2c458cdb16c25
 }
 
 export interface UpdateUserData {

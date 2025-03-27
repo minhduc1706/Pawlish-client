@@ -10,35 +10,32 @@
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  background: white; /* Màu nền xanh đậm giống topbar */
+  background: white;
 }
 
-/* Thanh cuộn cho Webkit (Chrome, Safari) */
 .CommandList::-webkit-scrollbar {
   width: 8px;
 }
 
 .CommandList::-webkit-scrollbar-track {
-  background: #3B4371; /* Xanh đậm nhạt hơn */
+  background: #3b4371;
   border-radius: 4px;
 }
 
 .CommandList::-webkit-scrollbar-thumb {
-  background: #64748B; /* Xám xanh nhẹ */
+  background: #64748b;
   border-radius: 4px;
 }
 
 .CommandList::-webkit-scrollbar-thumb:hover {
-  background: #9CA3AF; /* Sáng hơn khi hover */
+  background: #9ca3af;
 }
 
-/* Thanh cuộn cho Firefox */
 .CommandList {
   scrollbar-width: thin;
   scrollbar-color: gray white;
 }
 
-/* Tùy chỉnh giao diện của react-datepicker */
 .custom-calendar {
   @apply border border-gray-300 rounded-md font-sans w-full;
 }
@@ -76,3 +73,49 @@
 .custom-calendar .react-datepicker__day--outside-month {
   @apply text-gray-400;
 }
+
+[data-radix-select-viewport] [data-radix-collection-item]:hover {
+  background-color: #e5e7eb;
+  cursor: pointer;
+}
+
+.rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #3b82f6;
+  --rdp-background-color: #e5e7eb;
+}
+
+.rdp-day {
+  border-radius: 4px;
+}
+
+.rdp-day:hover:not(.rdp-day_selected) {
+  background-color: #e5e7eb;
+}
+
+.rdp-day_selected {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.today-bold:not(.rdp-day_selected) {
+  font-weight: bold;
+  color: #111827;
+  background-color: #e5e7eb;
+}
+
+.rdp-head_cell {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.rdp-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.rdp-button:hover {
+  background-color: #f3f4f6;
+}
+
