@@ -1,176 +1,210 @@
+"use client"
+
 import { useEffect, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { CalendarIcon, Check, ChevronLeft, CreditCard, Dog, Info, Loader2, Mail, MapPin, Phone } from "lucide-react"
+import { Check, ChevronLeft, Dog, Info, Loader2, Mail, MapPin, Phone, CreditCard, Clock, User } from "lucide-react"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { Textarea } from "@/components/ui/textarea"
-
-const services = [
-  {
-    id: "basic",
-    name: "Basic Grooming",
-    description: "Bath, blow dry, brush out, nail trimming, ear cleaning",
-    price: 50,
-    duration: 60, // minutes
-  },
-  {
-    id: "full",
-    name: "Full Grooming",
-    description: "Basic grooming plus haircut, styling, teeth brushing, paw pad trimming",
-    price: 80,
-    duration: 90, // minutes
-  },
-  {
-    id: "spa",
-    name: "Spa Package",
-    description: "Full grooming plus aromatherapy massage, paw moisturizing, facial scrub",
-    price: 120,
-    duration: 120, // minutes
-  },
-]
+import { Badge } from "@/components/ui/badge"
+import { useService } from "@/queries/useService"
+import { useStaff } from "@/queries/useStaff"
+import { useServiceCategory } from "@/queries/useServiceCategory"
+import type { Appointment, Pet, Staff } from "@/interfaces/Appointment"
+import type { User as UserType } from "@/interfaces/User"
+import type { Service } from "@/interfaces/service"
+import { createVNPayPayment } from "@/api/payment"
 
 const petTypes = ["Dog", "Cat", "Rabbit", "Other"]
-
 const timeSlots = ["9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM"]
 
-type BookingStep = "service" | "datetime" | "pet" | "contact" | "payment" | "confirmation"
+type BookingStep = "service" | "staff" | "datetime" | "pet" | "contact" | "payment" | "confirmation"
 
 export default function BookingPage() {
+  const { data: services, isLoading: isServicesLoading, error: servicesError } = useService()
+  const { data: staffs, isLoading: isStaffLoading, error: staffError } = useStaff()
+  const { data: serviceCategories, isLoading: isServiceCategoryLoading } = useServiceCategory()
   const location = useLocation()
 
   const [currentStep, setCurrentStep] = useState<BookingStep>("service")
   const [isLoading, setIsLoading] = useState(false)
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>("all")
+  const [paymentStatus, setPaymentStatus] = useState<string | null>(null)
 
   // Form state
-  const [selectedService, setSelectedService] = useState<string>("")
-  const [date, setDate] = useState<Date>()
+  const [selectedService, setSelectedService] = useState<Service | null>(null)
+  const [selectedStaff, setSelectedStaff] = useState<Staff | null>(null)
+  const [date, setDate] = useState<Date | undefined>(undefined)
   const [timeSlot, setTimeSlot] = useState<string>("")
-  const [petInfo, setPetInfo] = useState({
+  const [petInfo, setPetInfo] = useState<Pet>({
     name: "",
-    type: "",
+    species: "",
     breed: "",
-    age: "",
-    specialNeeds: "",
+    age: 0,
+    weight: 0,
+    gender: "",
+    user_id: { full_name: "", email: "", phone: "", address: "" },
   })
-  const [contactInfo, setContactInfo] = useState({
-    firstName: "",
-    lastName: "",
+  const [contactInfo, setContactInfo] = useState<UserType>({
+    full_name: "",
     email: "",
     phone: "",
     address: "",
   })
-  const [paymentMethod, setPaymentMethod] = useState<string>("card")
-  const [cardInfo, setCardInfo] = useState({
-    number: "",
-    name: "",
-    expiry: "",
-    cvc: "",
-  })
+  const [notes, setNotes] = useState<string>("")
 
   // Initialize selected service from URL parameter
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search)
     const serviceParam = searchParams.get("service")
-    if (serviceParam && services.some((s) => s.id === serviceParam)) {
-      setSelectedService(serviceParam)
+    if (serviceParam && services) {
+      const service = services.find((s) => s._id === serviceParam)
+      if (service) setSelectedService(service)
+    }
+  }, [location.search, services])
+
+  // Handle VNPay response
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search)
+    const responseCode = queryParams.get("vnp_ResponseCode")
+    const orderId = queryParams.get("vnp_TxnRef")
+
+    if (responseCode) {
+      if (responseCode === "00") {
+        setPaymentStatus(`Thanh toán thành công cho đơn hàng ${orderId}`)
+        setCurrentStep("confirmation")
+      } else {
+        setPaymentStatus("Thanh toán thất bại. Vui lòng thử lại.")
+      }
     }
   }, [location.search])
 
   const handleServiceSelect = (serviceId: string) => {
-    setSelectedService(serviceId)
+    const service = services?.find((s) => s._id === serviceId)
+    if (service) {
+      setSelectedService(service)
+      setSelectedStaff(null)
+    }
   }
 
-  const handlePetInfoChange = (field: string, value: string) => {
+  const handleStaffSelect = (staffId: string) => {
+    const staff = Array.isArray(staffs) ? staffs.find((s) => s._id === staffId) : null
+    if (staff) setSelectedStaff(staff)
+  }
+
+  const handlePetInfoChange = (field: keyof Pet, value: string | number) => {
     setPetInfo((prev) => ({ ...prev, [field]: value }))
   }
 
-  const handleContactInfoChange = (field: string, value: string) => {
+  const handleContactInfoChange = (field: keyof UserType, value: string) => {
     setContactInfo((prev) => ({ ...prev, [field]: value }))
-  }
-
-  const handleCardInfoChange = (field: string, value: string) => {
-    setCardInfo((prev) => ({ ...prev, [field]: value }))
+    setPetInfo((prev) => ({ ...prev, user_id: { ...prev.user_id, [field]: value } }))
   }
 
   const handleNextStep = () => {
-    const steps: BookingStep[] = ["service", "datetime", "pet", "contact", "payment", "confirmation"]
+    const steps: BookingStep[] = ["service", "staff", "datetime", "pet", "contact", "payment", "confirmation"]
     const currentIndex = steps.indexOf(currentStep)
-
     if (currentIndex < steps.length - 1) {
       setCurrentStep(steps[currentIndex + 1])
-      window.scrollTo(0, 0)
+      window.scrollTo({ top: 0, behavior: "smooth" })
     }
   }
 
   const handlePreviousStep = () => {
-    const steps: BookingStep[] = ["service", "datetime", "pet", "contact", "payment", "confirmation"]
+    const steps: BookingStep[] = ["service", "staff", "datetime", "pet", "contact", "payment", "confirmation"]
     const currentIndex = steps.indexOf(currentStep)
-
     if (currentIndex > 0) {
       setCurrentStep(steps[currentIndex - 1])
-      window.scrollTo(0, 0)
+      window.scrollTo({ top: 0, behavior: "smooth" })
     }
   }
 
-  const handleSubmitPayment = () => {
+  const handlePayment = async () => {
+    if (!selectedService || !selectedStaff || !date || !timeSlot) {
+      alert("Vui lòng hoàn thành tất cả các bước trước khi thanh toán!")
+      return
+    }
+
     setIsLoading(true)
+    try {
+      const appointment: Appointment = {
+        user_id: contactInfo,
+        pet_id: petInfo,
+        service_id: selectedService,
+        date: date!,
+        time: timeSlot,
+        status: "pending",
+        staff_id: selectedStaff,
+        notes: notes || undefined,
+        category_id: selectedService.category_id,
+      }
 
-    // Simulate payment processing
-    setTimeout(() => {
+      // Call VNPay API
+      const paymentUrl = await createVNPayPayment({
+        amount: selectedService.price,
+        products: [{ product_id: selectedService._id, quantity: 1 }],
+      })
+      window.location.href = paymentUrl
+    } catch (error) {
+      console.error("Error initiating VNPay payment:", error)
+      alert("Có lỗi xảy ra khi khởi tạo thanh toán VNPay!")
       setIsLoading(false)
-      setCurrentStep("confirmation")
-      window.scrollTo(0, 0)
-    }, 2000)
-  }
-
-  const getSelectedServiceDetails = () => {
-    return services.find((service) => service.id === selectedService)
+    }
   }
 
   const renderStepIndicator = () => {
     const steps = [
-      { id: "service", label: "Service" },
-      { id: "datetime", label: "Date & Time" },
-      { id: "pet", label: "Pet Info" },
-      { id: "contact", label: "Contact" },
-      { id: "payment", label: "Payment" },
+      { id: "service", label: "Dịch vụ", icon: <Dog className="h-4 w-4" /> },
+      { id: "staff", label: "Nhân viên", icon: <User className="h-4 w-4" /> },
+      { id: "datetime", label: "Ngày & Giờ", icon: <Clock className="h-4 w-4" /> },
+      { id: "pet", label: "Thú cưng", icon: <Dog className="h-4 w-4" /> },
+      { id: "contact", label: "Liên hệ", icon: <Phone className="h-4 w-4" /> },
+      { id: "payment", label: "Thanh toán", icon: <CreditCard className="h-4 w-4" /> },
     ]
 
     return (
-      <div className="flex justify-center mb-8">
-        <div className="flex items-center space-x-2">
+      <div className="mb-8 overflow-x-auto">
+        <div className="flex justify-between min-w-max">
           {steps.map((step, index) => (
             <div key={step.id} className="flex items-center">
-              <div
-                className={cn(
-                  "flex items-center justify-center w-8 h-8 rounded-full text-xs font-medium",
-                  currentStep === step.id
-                    ? "bg-blue-500 text-white"
-                    : steps.indexOf(steps.find((s) => s.id === currentStep)!) > index
-                      ? "bg-blue-100 text-blue-500"
-                      : "bg-gray-100 text-gray-500",
-                )}
-              >
-                {steps.indexOf(steps.find((s) => s.id === currentStep)!) > index ? (
-                  <Check className="h-4 w-4" />
-                ) : (
-                  index + 1
-                )}
+              <div className="flex flex-col items-center">
+                <div
+                  className={cn(
+                    "flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200",
+                    currentStep === step.id
+                      ? "bg-primary text-primary-foreground shadow-lg scale-110"
+                      : steps.indexOf(steps.find((s) => s.id === currentStep)!) > index
+                        ? "bg-primary/20 text-primary"
+                        : "bg-muted text-muted-foreground",
+                  )}
+                >
+                  {steps.indexOf(steps.find((s) => s.id === currentStep)!) > index ? (
+                    <Check className="h-5 w-5" />
+                  ) : (
+                    step.icon
+                  )}
+                </div>
+                <span
+                  className={cn(
+                    "mt-2 text-xs font-medium hidden md:block",
+                    currentStep === step.id ? "text-primary" : "text-muted-foreground",
+                  )}
+                >
+                  {step.label}
+                </span>
               </div>
               {index < steps.length - 1 && (
                 <div
                   className={cn(
-                    "w-8 h-0.5",
-                    steps.indexOf(steps.find((s) => s.id === currentStep)!) > index ? "bg-blue-100" : "bg-gray-100",
+                    "w-12 h-0.5 mx-1",
+                    steps.indexOf(steps.find((s) => s.id === currentStep)!) > index ? "bg-primary/20" : "bg-muted",
                   )}
                 />
               )}
@@ -182,583 +216,696 @@ export default function BookingPage() {
   }
 
   const renderServiceSelection = () => {
+    if (isServicesLoading || isServiceCategoryLoading) {
+      return (
+        <div className="flex justify-center items-center py-12">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          <span className="ml-2 text-lg">Đang tải dịch vụ...</span>
+        </div>
+      )
+    }
+
+    if (servicesError) {
+      return (
+        <div className="flex flex-col items-center justify-center py-12">
+          <p className="text-red-500 mb-4">Không thể tải dịch vụ. Vui lòng thử lại sau.</p>
+          <Button onClick={() => window.location.reload()}>Tải lại trang</Button>
+        </div>
+      )
+    }
+
+    const filteredServices =
+      selectedCategoryId && selectedCategoryId !== "all"
+        ? services?.filter((service) => service.category_id._id === selectedCategoryId)
+        : services
+
     return (
       <div className="space-y-6">
         <div className="space-y-2">
-          <h2 className="text-2xl font-bold">Select a Service</h2>
-          <p className="text-gray-500">Choose the grooming service that best fits your pet's needs.</p>
+          <h2 className="text-2xl font-bold text-center md:text-left">Chọn dịch vụ</h2>
+          <p className="text-muted-foreground text-center md:text-left">
+            Chọn dịch vụ chăm sóc phù hợp nhất với thú cưng của bạn.
+          </p>
         </div>
 
-        <div className="grid gap-4">
-          {services.map((service) => (
+        <div className="flex flex-col md:flex-row md:items-center gap-4">
+          <Label htmlFor="category-filter" className="md:whitespace-nowrap">
+            Lọc theo danh mục:
+          </Label>
+          <Select value={selectedCategoryId || "all"} onValueChange={setSelectedCategoryId}>
+            <SelectTrigger id="category-filter" className="w-full md:w-[250px]">
+              <SelectValue placeholder="Tất cả danh mục" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Tất cả danh mục</SelectItem>
+              {serviceCategories?.map((category) => (
+                <SelectItem key={category._id} value={category._id!}>
+                  {category.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredServices?.map((service) => (
             <Card
-              key={service.id}
+              key={service._id}
               className={cn(
-                "cursor-pointer transition-colors hover:bg-gray-50",
-                selectedService === service.id && "border-blue-500",
+                "cursor-pointer transition-all hover:shadow-md",
+                selectedService?._id === service._id
+                  ? "border-primary shadow-md ring-2 ring-primary/20"
+                  : "hover:border-primary/20",
               )}
-              onClick={() => handleServiceSelect(service.id)}
+              onClick={() => handleServiceSelect(service._id)}
             >
-              <CardHeader className="pb-2">
+              <CardHeader className="p-4 pb-2">
                 <div className="flex justify-between items-center">
-                  <CardTitle>{service.name}</CardTitle>
-                  <div className="text-xl font-bold">${service.price}</div>
+                  <div>
+                    <Badge variant="outline" className="mb-2">
+                      {service.category_id.name}
+                    </Badge>
+                    <CardTitle className="text-lg">{service.name}</CardTitle>
+                  </div>
                 </div>
-                <CardDescription>{service.description}</CardDescription>
               </CardHeader>
-              <CardFooter className="pt-2 text-sm text-gray-500">Duration: {service.duration} minutes</CardFooter>
+              <CardContent className="p-4">
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center text-muted-foreground">
+                    <Clock className="h-4 w-4 mr-1" />
+                    <span className="text-sm">{service.duration} phút</span>
+                  </div>
+                  <div className="text-lg font-bold text-primary">${service.price.toLocaleString()}</div>
+                </div>
+              </CardContent>
             </Card>
           ))}
         </div>
 
-        <div className="flex justify-end">
-          <Button onClick={handleNextStep} disabled={!selectedService}>
-            Continue
-          </Button>
-        </div>
-      </div>
-    )
-  }
-
-  const renderDateTimeSelection = () => {
-    return (
-      <div className="space-y-6">
-        <div className="space-y-2">
-          <h2 className="text-2xl font-bold">Select Date & Time</h2>
-          <p className="text-gray-500">Choose when you'd like to bring your pet in for grooming.</p>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="space-y-2">
-            <Label>Select Date</Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className={cn("w-full justify-start text-left font-normal", !date && "text-gray-500")}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {date ? format(date, "PPP") : "Select a date"}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <Calendar
-                  mode="single"
-                  selected={date}
-                  onSelect={setDate}
-                  initialFocus
-                  disabled={
-                    (date) => date < new Date(new Date().setHours(0, 0, 0, 0)) || date.getDay() === 0 // Disable Sundays
-                  }
-                />
-              </PopoverContent>
-            </Popover>
-          </div>
-
-          <div className="space-y-2">
-            <Label>Select Time</Label>
-            <Select onValueChange={setTimeSlot} value={timeSlot}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select a time slot" />
-              </SelectTrigger>
-              <SelectContent>
-                {timeSlots.map((slot) => (
-                  <SelectItem key={slot} value={slot}>
-                    {slot}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-
-        <div className="flex justify-between">
-          <Button variant="outline" onClick={handlePreviousStep}>
-            <ChevronLeft className="mr-2 h-4 w-4" /> Back
-          </Button>
-          <Button onClick={handleNextStep} disabled={!date || !timeSlot}>
-            Continue
-          </Button>
-        </div>
-      </div>
-    )
-  }
-
-  const renderPetInfoForm = () => {
-    return (
-      <div className="space-y-6">
-        <div className="space-y-2">
-          <h2 className="text-2xl font-bold">Pet Information</h2>
-          <p className="text-gray-500">Tell us about your pet so we can provide the best care.</p>
-        </div>
-
-        <div className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="pet-name">Pet Name</Label>
-            <Input
-              id="pet-name"
-              value={petInfo.name}
-              onChange={(e) => handlePetInfoChange("name", e.target.value)}
-              placeholder="e.g., Buddy"
-            />
-          </div>
-
-          <div className="grid gap-2">
-            <Label htmlFor="pet-type">Pet Type</Label>
-            <Select onValueChange={(value) => handlePetInfoChange("type", value)} value={petInfo.type}>
-              <SelectTrigger id="pet-type">
-                <SelectValue placeholder="Select pet type" />
-              </SelectTrigger>
-              <SelectContent>
-                {petTypes.map((type) => (
-                  <SelectItem key={type} value={type.toLowerCase()}>
-                    {type}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="grid gap-2">
-            <Label htmlFor="pet-breed">Breed</Label>
-            <Input
-              id="pet-breed"
-              value={petInfo.breed}
-              onChange={(e) => handlePetInfoChange("breed", e.target.value)}
-              placeholder="e.g., Golden Retriever"
-            />
-          </div>
-
-          <div className="grid gap-2">
-            <Label htmlFor="pet-age">Age (years)</Label>
-            <Input
-              id="pet-age"
-              value={petInfo.age}
-              onChange={(e) => handlePetInfoChange("age", e.target.value)}
-              placeholder="e.g., 3"
-              type="number"
-            />
-          </div>
-
-          <div className="grid gap-2">
-            <Label htmlFor="special-needs">Special Needs or Instructions</Label>
-            <Textarea
-              id="special-needs"
-              value={petInfo.specialNeeds}
-              onChange={(e) => handlePetInfoChange("specialNeeds", e.target.value)}
-              placeholder="Any allergies, sensitivities, or special handling instructions..."
-              rows={3}
-            />
-          </div>
-        </div>
-
-        <div className="flex justify-between">
-          <Button variant="outline" onClick={handlePreviousStep}>
-            <ChevronLeft className="mr-2 h-4 w-4" /> Back
-          </Button>
-          <Button onClick={handleNextStep} disabled={!petInfo.name || !petInfo.type}>
-            Continue
-          </Button>
-        </div>
-      </div>
-    )
-  }
-
-  const renderContactInfoForm = () => {
-    return (
-      <div className="space-y-6">
-        <div className="space-y-2">
-          <h2 className="text-2xl font-bold">Contact Information</h2>
-          <p className="text-gray-500">Please provide your contact details for booking confirmation.</p>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="grid gap-2">
-            <Label htmlFor="first-name">First Name</Label>
-            <Input
-              id="first-name"
-              value={contactInfo.firstName}
-              onChange={(e) => handleContactInfoChange("firstName", e.target.value)}
-              placeholder="e.g., John"
-            />
-          </div>
-
-          <div className="grid gap-2">
-            <Label htmlFor="last-name">Last Name</Label>
-            <Input
-              id="last-name"
-              value={contactInfo.lastName}
-              onChange={(e) => handleContactInfoChange("lastName", e.target.value)}
-              placeholder="e.g., Smith"
-            />
-          </div>
-        </div>
-
-        <div className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <div className="flex">
-              <Mail className="mr-2 h-4 w-4 mt-3 text-gray-500" />
-              <Input
-                id="email"
-                type="email"
-                value={contactInfo.email}
-                onChange={(e) => handleContactInfoChange("email", e.target.value)}
-                placeholder="e.g., john.smith@example.com"
-              />
-            </div>
-          </div>
-
-          <div className="grid gap-2">
-            <Label htmlFor="phone">Phone Number</Label>
-            <div className="flex">
-              <Phone className="mr-2 h-4 w-4 mt-3 text-gray-500" />
-              <Input
-                id="phone"
-                value={contactInfo.phone}
-                onChange={(e) => handleContactInfoChange("phone", e.target.value)}
-                placeholder="e.g., (555) 123-4567"
-              />
-            </div>
-          </div>
-
-          <div className="grid gap-2">
-            <Label htmlFor="address">Address</Label>
-            <div className="flex">
-              <MapPin className="mr-2 h-4 w-4 mt-3 text-gray-500" />
-              <Input
-                id="address"
-                value={contactInfo.address}
-                onChange={(e) => handleContactInfoChange("address", e.target.value)}
-                placeholder="e.g., 123 Main St, City, State, ZIP"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-between">
-          <Button variant="outline" onClick={handlePreviousStep}>
-            <ChevronLeft className="mr-2 h-4 w-4" /> Back
-          </Button>
+        <div className="flex justify-end pt-4">
           <Button
             onClick={handleNextStep}
-            disabled={!contactInfo.firstName || !contactInfo.email || !contactInfo.phone}
+            disabled={!selectedService}
+            className="transition-all duration-200 hover:scale-105"
+            size="lg"
           >
-            Continue
+            Tiếp tục
           </Button>
         </div>
       </div>
     )
   }
 
-  const renderPaymentForm = () => {
-    const selectedServiceDetails = getSelectedServiceDetails()
+  const renderStaffSelection = () => {
+    if (isStaffLoading) {
+      return (
+        <div className="flex justify-center items-center py-12">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          <span className="ml-2 text-lg">Đang tải thông tin nhân viên...</span>
+        </div>
+      )
+    }
+
+    if (staffError) {
+      return (
+        <div className="flex flex-col items-center justify-center py-12">
+          <p className="text-red-500 mb-4">Không thể tải thông tin nhân viên. Vui lòng thử lại sau.</p>
+          <Button onClick={() => window.location.reload()}>Tải lại trang</Button>
+        </div>
+      )
+    }
+
+    const availableStaff =
+      Array.isArray(staffs) &&
+      staffs?.filter((staff) => staff.service_id?.some((service: Service) => service._id === selectedService?._id))
+
+    if (!availableStaff || availableStaff.length === 0) {
+      return (
+        <div className="space-y-6">
+          <div className="space-y-2 text-center">
+            <h2 className="text-2xl font-bold">Chọn nhân viên</h2>
+            <p className="text-muted-foreground">Không có nhân viên nào cho dịch vụ {selectedService?.name}.</p>
+          </div>
+          <div className="flex justify-center pt-4">
+            <Button variant="outline" onClick={handlePreviousStep} size="lg">
+              <ChevronLeft className="mr-2 h-4 w-4" /> Quay lại
+            </Button>
+          </div>
+        </div>
+      )
+    }
 
     return (
       <div className="space-y-6">
-        <div className="space-y-2">
-          <h2 className="text-2xl font-bold">Payment</h2>
-          <p className="text-gray-500">Complete your booking by providing payment details.</p>
-        </div>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Booking Summary</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex justify-between">
-              <span>Service:</span>
-              <span className="font-medium">{selectedServiceDetails?.name}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Date:</span>
-              <span className="font-medium">{date ? format(date, "PPP") : ""}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Time:</span>
-              <span className="font-medium">{timeSlot}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Pet:</span>
-              <span className="font-medium">
-                {petInfo.name} ({petInfo.type})
-              </span>
-            </div>
-            <Separator />
-            <div className="flex justify-between text-lg font-bold">
-              <span>Total:</span>
-              <span>${selectedServiceDetails?.price.toFixed(2)}</span>
-            </div>
-          </CardContent>
-        </Card>
-
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <Label>Payment Method</Label>
-            <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="grid grid-cols-3 gap-4">
-              <div>
-                <RadioGroupItem value="card" id="card" className="peer sr-only" />
-                <Label
-                  htmlFor="card"
-                  className="flex flex-col items-center justify-between rounded-md border-2 border-gray-200 bg-white p-4 hover:bg-gray-50 hover:text-gray-900 peer-data-[state=checked]:border-blue-500 [&:has([data-state=checked])]:border-blue-500"
-                >
-                  <CreditCard className="mb-3 h-6 w-6" />
-                  Credit Card
-                </Label>
-              </div>
-              <div>
-                <RadioGroupItem value="paypal" id="paypal" className="peer sr-only" />
-                <Label
-                  htmlFor="paypal"
-                  className="flex flex-col items-center justify-between rounded-md border-2 border-gray-200 bg-white p-4 hover:bg-gray-50 hover:text-gray-900 peer-data-[state=checked]:border-blue-500 [&:has([data-state=checked])]:border-blue-500"
-                >
-                  <svg className="mb-3 h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M19.5 8.5H4.5C3.4 8.5 2.5 9.4 2.5 10.5V17.5C2.5 18.6 3.4 19.5 4.5 19.5H19.5C20.6 19.5 21.5 18.6 21.5 17.5V10.5C21.5 9.4 20.6 8.5 19.5 8.5Z"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M7 15.5H7.01"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M3.5 11.5H20.5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  PayPal
-                </Label>
-              </div>
-              <div>
-                <RadioGroupItem value="applepay" id="applepay" className="peer sr-only" />
-                <Label
-                  htmlFor="applepay"
-                  className="flex flex-col items-center justify-between rounded-md border-2 border-gray-200 bg-white p-4 hover:bg-gray-50 hover:text-gray-900 peer-data-[state=checked]:border-blue-500 [&:has([data-state=checked])]:border-blue-500"
-                >
-                  <svg className="mb-3 h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M8 14C8 14 9 16 12 16C15 16 16 14 16 14"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M9 9H9.01"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M15 9H15.01"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  Apple Pay
-                </Label>
-              </div>
-            </RadioGroup>
-          </div>
-
-          {paymentMethod === "card" && (
-            <div className="space-y-4">
-              <div className="grid gap-2">
-                <Label htmlFor="card-number">Card Number</Label>
-                <Input
-                  id="card-number"
-                  value={cardInfo.number}
-                  onChange={(e) => handleCardInfoChange("number", e.target.value)}
-                  placeholder="1234 5678 9012 3456"
-                />
-              </div>
-
-              <div className="grid gap-2">
-                <Label htmlFor="card-name">Name on Card</Label>
-                <Input
-                  id="card-name"
-                  value={cardInfo.name}
-                  onChange={(e) => handleCardInfoChange("name", e.target.value)}
-                  placeholder="John Smith"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="expiry">Expiry Date</Label>
-                  <Input
-                    id="expiry"
-                    value={cardInfo.expiry}
-                    onChange={(e) => handleCardInfoChange("expiry", e.target.value)}
-                    placeholder="MM/YY"
-                  />
-                </div>
-
-                <div className="grid gap-2">
-                  <Label htmlFor="cvc">CVC</Label>
-                  <Input
-                    id="cvc"
-                    value={cardInfo.cvc}
-                    onChange={(e) => handleCardInfoChange("cvc", e.target.value)}
-                    placeholder="123"
-                  />
-                </div>
-              </div>
-            </div>
-          )}
-
-          <div className="flex items-start space-x-2 pt-2">
-            <div className="flex items-center h-5 mt-1">
-              <input
-                id="terms"
-                type="checkbox"
-                className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div className="text-sm">
-              <label htmlFor="terms" className="font-medium text-gray-900">
-                I agree to the{" "}
-                <a href="#" className="text-blue-500 hover:underline">
-                  Terms of Service
-                </a>{" "}
-                and{" "}
-                <a href="#" className="text-blue-500 hover:underline">
-                  Privacy Policy
-                </a>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-between">
-          <Button variant="outline" onClick={handlePreviousStep}>
-            <ChevronLeft className="mr-2 h-4 w-4" /> Back
-          </Button>
-          <Button
-            onClick={handleSubmitPayment}
-            disabled={
-              isLoading ||
-              (paymentMethod === "card" && (!cardInfo.number || !cardInfo.name || !cardInfo.expiry || !cardInfo.cvc))
-            }
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Processing...
-              </>
-            ) : (
-              <>Pay ${getSelectedServiceDetails()?.price.toFixed(2)}</>
-            )}
-          </Button>
-        </div>
-      </div>
-    )
-  }
-
-  const renderConfirmation = () => {
-    const selectedServiceDetails = getSelectedServiceDetails()
-
-    return (
-      <div className="space-y-8 text-center">
-        <div className="flex justify-center">
-          <div className="rounded-full bg-blue-50 p-4">
-            <Check className="h-12 w-12 text-blue-500" />
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <h2 className="text-3xl font-bold">Booking Confirmed!</h2>
-          <p className="text-gray-500">
-            Thank you for booking with PetSpa. We've sent a confirmation email to {contactInfo.email}.
+        <div className="space-y-2 text-center md:text-left">
+          <h2 className="text-2xl font-bold">Chọn nhân viên</h2>
+          <p className="text-muted-foreground">
+            Chọn người sẽ chăm sóc thú cưng của bạn cho dịch vụ {selectedService?.name}.
           </p>
         </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Booking Details</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid grid-cols-2 gap-4 text-left">
-              <div>
-                <p className="text-sm text-gray-500">Service</p>
-                <p className="font-medium">{selectedServiceDetails?.name}</p>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {availableStaff.map((staff) => (
+            <Card
+              key={staff._id}
+              className={cn(
+                "cursor-pointer transition-all hover:shadow-md overflow-hidden",
+                selectedStaff?._id === staff._id
+                  ? "border-primary shadow-md ring-2 ring-primary/20"
+                  : "hover:border-primary/20",
+              )}
+              onClick={() => handleStaffSelect(staff._id!)}
+            >
+              <div className="h-32 bg-gradient-to-r from-primary/20 to-primary/5 flex items-center justify-center">
+                <User className="h-16 w-16 text-primary/70" />
               </div>
-              <div>
-                <p className="text-sm text-gray-500">Date & Time</p>
-                <p className="font-medium">
-                  {date ? format(date, "PPP") : ""} at {timeSlot}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500">Pet</p>
-                <p className="font-medium">
-                  {petInfo.name} ({petInfo.breed})
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500">Total Paid</p>
-                <p className="font-medium">${selectedServiceDetails?.price.toFixed(2)}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <div className="flex flex-col space-y-2">
-          <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
-            <Info className="h-4 w-4" />
-            <p>Please arrive 10 minutes before your appointment time.</p>
-          </div>
-          <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
-            <Dog className="h-4 w-4" />
-            <p>Remember to bring your pet's vaccination records if this is your first visit.</p>
-          </div>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-center">{staff.full_name}</CardTitle>
+                <CardDescription className="text-center">{staff.email}</CardDescription>
+              </CardHeader>
+            </Card>
+          ))}
         </div>
 
-        <div className="flex justify-center pt-4">
-          <Button asChild>
-            <Link to="/">Return to Home</Link>
+        <div className="flex justify-between pt-4">
+          <Button variant="outline" onClick={handlePreviousStep} size="lg">
+            <ChevronLeft className="mr-2 h-4 w-4" /> Quay lại
+          </Button>
+          <Button
+            onClick={handleNextStep}
+            disabled={!selectedStaff}
+            className="transition-all duration-200 hover:scale-105"
+            size="lg"
+          >
+            Tiếp tục
           </Button>
         </div>
       </div>
     )
   }
 
+  const renderDateTimeSelection = () => (
+    <div className="space-y-6">
+      <div className="space-y-2 text-center md:text-left">
+        <h2 className="text-2xl font-bold">Chọn ngày và giờ</h2>
+        <p className="text-muted-foreground">Chọn thời gian bạn muốn đưa thú cưng đến.</p>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        <Card className="overflow-hidden">
+          <CardHeader>
+            <CardTitle className="text-center">Chọn ngày</CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              initialFocus
+              disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0)) || date.getDay() === 0}
+              className="rounded-md border border-gray-200 bg-white p-3"
+              modifiers={{
+                today: new Date(),
+              }}
+              modifiersClassNames={{
+                today: "today-bold",
+              }}
+            />
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-center">Chọn giờ</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 gap-2">
+              {timeSlots.map((slot) => (
+                <Button
+                  key={slot}
+                  variant={timeSlot === slot ? "default" : "outline"}
+                  className={cn(
+                    "w-full justify-center",
+                    timeSlot === slot
+                      ? "bg-primary text-primary-foreground font-bold shadow-md hover:bg-primary/90"
+                      : "text-gray-700 hover:bg-gray-100"
+                  )}
+                  onClick={() => setTimeSlot(slot)}
+                >
+                  {slot}
+                </Button>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="flex justify-between pt-4">
+        <Button variant="outline" onClick={handlePreviousStep} size="lg">
+          <ChevronLeft className="mr-2 h-4 w-4" /> Quay lại
+        </Button>
+        <Button
+          onClick={handleNextStep}
+          disabled={!date || !timeSlot}
+          className="transition-all duration-200 hover:scale-105"
+          size="lg"
+        >
+          Tiếp tục
+        </Button>
+      </div>
+    </div>
+  )
+
+  const renderPetInfoForm = () => (
+    <div className="space-y-6">
+      <div className="space-y-2 text-center md:text-left">
+        <h2 className="text-2xl font-bold">Thông tin thú cưng</h2>
+        <p className="text-muted-foreground">
+          Cho chúng tôi biết về thú cưng của bạn để chúng tôi có thể chăm sóc tốt nhất.
+        </p>
+      </div>
+
+      <Card>
+        <CardContent className="pt-6">
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="pet-name" className="text-sm font-medium">
+                Tên thú cưng
+              </Label>
+              <Input
+                id="pet-name"
+                value={petInfo.name}
+                onChange={(e) => handlePetInfoChange("name", e.target.value)}
+                placeholder="VD: Buddy"
+                className="transition-all focus:ring-2 focus:ring-primary/20"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="pet-species" className="text-sm font-medium">
+                Loài
+              </Label>
+              <Select onValueChange={(value) => handlePetInfoChange("species", value)} value={petInfo.species}>
+                <SelectTrigger id="pet-species" className="transition-all focus:ring-2 focus:ring-primary/20">
+                  <SelectValue placeholder="Chọn loài thú cưng" />
+                </SelectTrigger>
+                <SelectContent>
+                  {petTypes.map((type) => (
+                    <SelectItem key={type} value={type.toLowerCase()}>
+                      {type}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="pet-breed" className="text-sm font-medium">
+                Giống
+              </Label>
+              <Input
+                id="pet-breed"
+                value={petInfo.breed}
+                onChange={(e) => handlePetInfoChange("breed", e.target.value)}
+                placeholder="VD: Golden Retriever"
+                className="transition-all focus:ring-2 focus:ring-primary/20"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="pet-gender" className="text-sm font-medium">
+                Giới tính
+              </Label>
+              <Select onValueChange={(value) => handlePetInfoChange("gender", value)} value={petInfo.gender}>
+                <SelectTrigger id="pet-gender" className="transition-all focus:ring-2 focus:ring-primary/20">
+                  <SelectValue placeholder="Chọn giới tính" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="male">Đực</SelectItem>
+                  <SelectItem value="female">Cái</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="pet-age" className="text-sm font-medium">
+                Tuổi (năm)
+              </Label>
+              <Input
+                id="pet-age"
+                value={petInfo.age || ""}
+                onChange={(e) => handlePetInfoChange("age", Number.parseInt(e.target.value) || 0)}
+                placeholder="VD: 3"
+                type="number"
+                className="transition-all focus:ring-2 focus:ring-primary/20"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="pet-weight" className="text-sm font-medium">
+                Cân nặng (kg)
+              </Label>
+              <Input
+                id="pet-weight"
+                value={petInfo.weight || ""}
+                onChange={(e) => handlePetInfoChange("weight", Number.parseFloat(e.target.value) || 0)}
+                placeholder="VD: 5"
+                type="number"
+                className="transition-all focus:ring-2 focus:ring-primary/20"
+              />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <div className="flex justify-between pt-4">
+        <Button variant="outline" onClick={handlePreviousStep} size="lg">
+          <ChevronLeft className="mr-2 h-4 w-4" /> Quay lại
+        </Button>
+        <Button
+          onClick={handleNextStep}
+          disabled={!petInfo.name || !petInfo.species || !petInfo.gender}
+          className="transition-all duration-200 hover:scale-105"
+          size="lg"
+        >
+          Tiếp tục
+        </Button>
+      </div>
+    </div>
+  )
+
+  const renderContactInfoForm = () => (
+    <div className="space-y-6">
+      <div className="space-y-2 text-center md:text-left">
+        <h2 className="text-2xl font-bold">Thông tin liên hệ</h2>
+        <p className="text-muted-foreground">Vui lòng cung cấp thông tin liên hệ của bạn để xác nhận đặt lịch.</p>
+      </div>
+
+      <Card>
+        <CardContent className="pt-6">
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="space-y-2 md:col-span-2">
+              <Label htmlFor="full-name" className="text-sm font-medium">
+                Họ và tên
+              </Label>
+              <Input
+                id="full-name"
+                value={contactInfo.full_name}
+                onChange={(e) => handleContactInfoChange("full_name", e.target.value)}
+                placeholder="VD: Nguyễn Văn A"
+                className="transition-all focus:ring-2 focus:ring-primary/20"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-sm font-medium">
+                Email
+              </Label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="email"
+                  type="email"
+                  value={contactInfo.email}
+                  onChange={(e) => handleContactInfoChange("email", e.target.value)}
+                  placeholder="VD: example@gmail.com"
+                  className="pl-10 transition-all focus:ring-2 focus:ring-primary/20"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="phone" className="text-sm font-medium">
+                Số điện thoại
+              </Label>
+              <div className="relative">
+                <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="phone"
+                  value={contactInfo.phone}
+                  onChange={(e) => handleContactInfoChange("phone", e.target.value)}
+                  placeholder="VD: 0912345678"
+                  className="pl-10 transition-all focus:ring-2 focus:ring-primary/20"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2 md:col-span-2">
+              <Label htmlFor="address" className="text-sm font-medium">
+                Địa chỉ
+              </Label>
+              <div className="relative">
+                <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="address"
+                  value={contactInfo.address}
+                  onChange={(e) => handleContactInfoChange("address", e.target.value)}
+                  placeholder="VD: 123 Đường ABC, Quận XYZ, TP. HCM"
+                  className="pl-10 transition-all focus:ring-2 focus:ring-primary/20"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2 md:col-span-2">
+              <Label htmlFor="notes" className="text-sm font-medium">
+                Ghi chú (Tùy chọn)
+              </Label>
+              <Textarea
+                id="notes"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                placeholder="Các hướng dẫn hoặc ghi chú bổ sung..."
+                rows={3}
+                className="transition-all focus:ring-2 focus:ring-primary/20"
+              />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <div className="flex justify-between pt-4">
+        <Button variant="outline" onClick={handlePreviousStep} size="lg">
+          <ChevronLeft className="mr-2 h-4 w-4" /> Quay lại
+        </Button>
+        <Button
+          onClick={handleNextStep}
+          disabled={!contactInfo.full_name || !contactInfo.email || !contactInfo.phone}
+          className="transition-all duration-200 hover:scale-105"
+          size="lg"
+        >
+          Tiếp tục
+        </Button>
+      </div>
+    </div>
+  )
+
+  const renderPaymentForm = () => (
+    <div className="space-y-6">
+      <div className="space-y-2 text-center md:text-left">
+        <h2 className="text-2xl font-bold">Thanh toán</h2>
+        <p className="text-muted-foreground">Hoàn tất đặt lịch bằng cách thanh toán.</p>
+      </div>
+
+      {/* Payment status notification */}
+      {paymentStatus && (
+        <div
+          className={cn(
+            "mt-4 p-6 rounded-lg border shadow-sm transition-all duration-300 animate-fade-in",
+            paymentStatus.includes("thành công") ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200",
+          )}
+        >
+          <p
+            className={cn(
+              "text-center text-lg font-medium",
+              paymentStatus.includes("thành công") ? "text-green-600" : "text-red-600",
+            )}
+          >
+            {paymentStatus}
+          </p>
+          <Button
+            onClick={() => setPaymentStatus(null)}
+            className="mt-4 w-full bg-gray-500 hover:bg-gray-600 text-white"
+            variant="secondary"
+          >
+            Đóng
+          </Button>
+        </div>
+      )}
+
+      <Card className="overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-primary/10 to-primary/5">
+          <CardTitle className="text-center">Tóm tắt đặt lịch</CardTitle>
+        </CardHeader>
+        <CardContent className="p-6">
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <p className="text-sm text-muted-foreground">Dịch vụ</p>
+                <p className="font-medium">{selectedService?.name}</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Danh mục</p>
+                <p className="font-medium">{selectedService?.category_id.name}</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Nhân viên</p>
+                <p className="font-medium">{selectedStaff?.full_name}</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Ngày</p>
+                <p className="font-medium">{date ? format(date, "PPP") : ""}</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Giờ</p>
+                <p className="font-medium">{timeSlot}</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Thú cưng</p>
+                <p className="font-medium">
+                  {petInfo.name} ({petInfo.species})
+                </p>
+              </div>
+            </div>
+
+            {notes && (
+              <div>
+                <p className="text-sm text-muted-foreground">Ghi chú</p>
+                <p className="font-medium">{notes}</p>
+              </div>
+            )}
+
+            <Separator className="my-4" />
+
+            <div className="flex justify-between items-center">
+              <span className="text-lg font-bold">Tổng cộng:</span>
+              <span className="text-2xl font-bold text-primary">${selectedService?.price.toLocaleString()}</span>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <div className="flex justify-between pt-4">
+        <Button variant="outline" onClick={handlePreviousStep} size="lg">
+          <ChevronLeft className="mr-2 h-4 w-4" /> Quay lại
+        </Button>
+        <Button
+          onClick={handlePayment}
+          disabled={isLoading}
+          className="bg-[#4CAF50] hover:bg-[#45a049] text-white transition-all duration-200 hover:scale-105"
+          size="lg"
+        >
+          {isLoading ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Đang xử lý...
+            </>
+          ) : (
+            <>
+              <CreditCard className="mr-2 h-4 w-4" />
+              Thanh toán VNPay ${selectedService?.price.toLocaleString()}
+            </>
+          )}
+        </Button>
+      </div>
+    </div>
+  )
+
+  const renderConfirmation = () => (
+    <div className="space-y-8">
+      <div className="flex flex-col items-center justify-center">
+        <div className="rounded-full bg-green-100 p-6 mb-4">
+          <Check className="h-12 w-12 text-green-600" />
+        </div>
+        <h2 className="text-3xl font-bold text-center">Đặt lịch thành công!</h2>
+        <p className="text-muted-foreground text-center mt-2">
+          Cảm ơn bạn đã đặt lịch tại PetSpa. Chúng tôi đã gửi email xác nhận đến {contactInfo.email}.
+        </p>
+      </div>
+
+      <Card className="overflow-hidden border-green-200">
+        <CardHeader className="bg-gradient-to-r from-green-100 to-green-50">
+          <CardTitle className="text-center">Chi tiết đặt lịch</CardTitle>
+        </CardHeader>
+        <CardContent className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <p className="text-sm text-muted-foreground">Dịch vụ</p>
+              <p className="font-medium">{selectedService?.name}</p>
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Danh mục</p>
+              <p className="font-medium">{selectedService?.category_id.name}</p>
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Nhân viên</p>
+              <p className="font-medium">{selectedStaff?.full_name}</p>
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Ngày & Giờ</p>
+              <p className="font-medium">
+                {date ? format(date, "PPP") : ""} lúc {timeSlot}
+              </p>
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Thú cưng</p>
+              <p className="font-medium">
+                {petInfo.name} ({petInfo.breed})
+              </p>
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Đã thanh toán</p>
+              <p className="font-medium text-green-600">${selectedService?.price.toLocaleString()}</p>
+            </div>
+            {notes && (
+              <div className="col-span-2">
+                <p className="text-sm text-muted-foreground">Ghi chú</p>
+                <p className="font-medium">{notes}</p>
+              </div>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
+      <div className="bg-blue-50 border border-blue-100 rounded-lg p-6">
+        <h3 className="font-medium text-blue-800 mb-3">Lưu ý quan trọng:</h3>
+        <div className="space-y-3">
+          <div className="flex items-start space-x-3">
+            <Info className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
+            <p className="text-blue-700">Vui lòng đến sớm 10 phút trước giờ hẹn.</p>
+          </div>
+          <div className="flex items-start space-x-3">
+            <Dog className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
+            <p className="text-blue-700">
+              Nhớ mang theo hồ sơ tiêm chủng của thú cưng nếu đây là lần đầu tiên bạn đến.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex justify-center pt-4">
+        <Button asChild size="lg" className="transition-all duration-200 hover:scale-105">
+          <Link to="/">Trở về trang chủ</Link>
+        </Button>
+      </div>
+    </div>
+  )
+
   return (
-    <div className="mx-auto max-w-4xl py-10">
+    <div className="mx-auto max-w-4xl py-10 px-4 md:px-6">
       <div className="mb-8">
-        <Button variant="ghost" asChild className="mb-4">
+        <Button variant="ghost" asChild className="mb-4 group">
           <Link to="/">
-            <ChevronLeft className="mr-2 h-4 w-4" />
-            Back to Home
+            <ChevronLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            Trở về trang chủ
           </Link>
         </Button>
-        <h1 className="text-3xl font-bold">Book Your Pet's Grooming Appointment</h1>
+        <h1 className="text-3xl font-bold text-center md:text-left">Đặt lịch chăm sóc thú cưng</h1>
       </div>
 
       {currentStep !== "confirmation" && renderStepIndicator()}
 
-      <div className="bg-white rounded-lg border p-6 shadow-sm">
+      <div className="bg-white rounded-lg border shadow-sm p-6 transition-all duration-300">
         {currentStep === "service" && renderServiceSelection()}
+        {currentStep === "staff" && renderStaffSelection()}
         {currentStep === "datetime" && renderDateTimeSelection()}
         {currentStep === "pet" && renderPetInfoForm()}
         {currentStep === "contact" && renderContactInfoForm()}
