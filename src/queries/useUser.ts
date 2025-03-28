@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
   
 export const useUser = (id: string) =>
   useQuery<User>({
-    queryKey: ["product", id],
+    queryKey: ["User", id],
     queryFn: () => fetchUserByIdApi(id),
     enabled: !!id,
   });
