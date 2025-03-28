@@ -1,7 +1,9 @@
-import { useProducts } from "@/queries/useProduct";
-import type React from "react";
-import { useNavigate } from "react-router-dom";
-import { PawPrintIcon as Paw, Star } from "lucide-react";
+import { useProducts } from "@/queries/useProduct"
+import type React from "react"
+import { useNavigate } from "react-router-dom"
+import { MessageCircle, PawPrintIcon as Paw, Star } from "lucide-react"
+import { Scissors, Dog, House } from 'lucide-react';
+import type { Product } from "@/interfaces/Product";
 import { useState } from "react";
 import Chat from "@/components/commons/chat";
 
@@ -21,23 +23,7 @@ const Home: React.FC = () => {
     { label: "Online Booking", href: "/booking", variant: "secondary" },
   ];
 
-  const services = [
-    {
-      title: "Cắt Tỉa Lông",
-      description: "Dịch vụ cắt tỉa lông chuyên nghiệp cho thú cưng của bạn",
-      icon: "✂️",
-    },
-    {
-      title: "Tắm Spa",
-      description: "Spa và làm đẹp cao cấp cho thú cưng",
-      icon: "🛁",
-    },
-    {
-      title: "Khám Bệnh",
-      description: "Dịch vụ khám và chăm sóc sức khỏe tận nhà",
-      icon: "🩺",
-    },
-  ];
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white font-sans relative">
@@ -56,7 +42,7 @@ const Home: React.FC = () => {
 
             <h1 className="text-5xl md:text-6xl font-bold text-blue-900 mb-6 leading-tight">
               DỊCH VỤ THÚ CƯNG <br />
-              <span className="text-blue-600">TẠI NHÀ</span>
+              
             </h1>
 
             <p className="text-lg text-gray-600 mb-8 max-w-md leading-relaxed">
@@ -111,51 +97,66 @@ const Home: React.FC = () => {
         </div>
 
         <div className="mb-16" id="services">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-blue-900 mb-4">
-              Dịch Vụ Của Chúng Tôi
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Chúng tôi cung cấp các dịch vụ chăm sóc thú cưng chuyên nghiệp tại
-              nhà với đội ngũ nhân viên giàu kinh nghiệm
-            </p>
-          </div>
+  <div className="text-center mb-10">
+    <h2 className="text-3xl font-bold text-blue-900 mb-4">Dịch Vụ Của Chúng Tôi</h2>
+    <p className="text-gray-600 max-w-2xl mx-auto">
+      Chúng tôi cung cấp các dịch vụ chăm sóc thú cưng chuyên nghiệp tại nhà với đội ngũ nhân viên giàu kinh nghiệm
+    </p>
+  </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100"
-              >
-                <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-xl font-semibold text-blue-900 mb-2">
-                  {service.title}
-                </h3>
-                <p className="text-gray-600">{service.description}</p>
-                <button
-                  onClick={() => navigate("/services")}
-                  className="mt-4 text-blue-600 font-medium flex items-center hover:text-blue-800"
-                >
-                  Chi tiết
-                  <svg
-                    className="w-4 h-4 ml-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    {/* Card 1: Grooming */}
+    <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col items-center">
+      <div className="text-4xl mb-4">
+        <Scissors  />
+      </div>
+      <h3 className="text-xl font-semibold text-blue-900 mb-2">GROOMING</h3>
+      <p className="text-gray-600 text-center">
+        Chúng tôi biết cách làm thế nào để thú cưng của bạn trở nên đáng yêu và cả tinh hơn. Với dịch vụ cắt tỉa lông thú cưng chúng tôi sẽ giúp các bé trở thành phiên bản hoàn hảo nhất...
+      </p>
+      <button
+        onClick={() => navigate("/services")}
+        className="mt-4 bg-gray-100 text-gray-800 font-medium py-2 px-4 rounded-full hover:bg-gray-200 transition-all"
+      >
+        Xem Thêm
+      </button>
+    </div>
+
+    {/* Card 2: Shop */}
+    <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col items-center">
+      <div className="text-4xl mb-4">
+        <Dog  />
+      </div>
+      <h3 className="text-xl font-semibold text-blue-900 mb-2">SHOP</h3>
+      <p className="text-gray-600 text-center">
+        Cung với hơn 3.000 khách hàng đã tin tưởng, đóng góp, chúng tôi luôn đặt ra những mục tiêu và thực thách mới. PET SERVICE cung cấp các sản phẩm, phụ kiện rất đa dạng...
+      </p>
+      <button
+        onClick={() => navigate("/services")}
+        className="mt-4 bg-gray-100 text-gray-800 font-medium py-2 px-4 rounded-full hover:bg-gray-200 transition-all"
+      >
+        Xem Thêm
+      </button>
+    </div>
+
+    {/* Card 3: Hotel */}
+    <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col items-center">
+      <div className="text-4xl mb-4">
+        <House />
+      </div>
+      <h3 className="text-xl font-semibold text-blue-900 mb-2">HOTEL</h3>
+      <p className="text-gray-600 text-center">
+        Mỗi hành động ở PET SERVICE đều bắt đầu từ sự mềm mại trao đi yêu thương. Mỗi thú cưng khi đến với chúng tôi đều được quan tâm đặc biệt bởi đội ngũ nhân viên nhiệt huyết...
+      </p>
+      <button
+        onClick={() => navigate("/services")}
+        className="mt-4 bg-gray-100 text-gray-800 font-medium py-2 px-4 rounded-full hover:bg-gray-200 transition-all"
+      >
+        Xem Thêm
+      </button>
+    </div>
+  </div>
+</div>
 
         <div className="mb-16">
           <div className="flex justify-between items-center mb-8">
