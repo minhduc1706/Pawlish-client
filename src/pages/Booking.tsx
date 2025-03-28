@@ -19,7 +19,7 @@ import { useStaff } from "@/queries/useStaff"
 import { useServiceCategory } from "@/queries/useServiceCategory"
 import type { Appointment, Pet, Staff } from "@/interfaces/Appointment"
 import type { User as UserType } from "@/interfaces/User"
-import type { Service } from "@/interfaces/service"
+import type { Service } from "@/interfaces/Service"
 import { createVNPayPayment } from "@/api/payment"
 
 const petTypes = ["Dog", "Cat", "Rabbit", "Other"]
