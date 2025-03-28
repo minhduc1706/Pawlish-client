@@ -1,12 +1,11 @@
-
-
 import { useProducts } from "@/queries/useProduct"
 import type React from "react"
 import { useNavigate } from "react-router-dom"
 import { MessageCircle, PawPrintIcon as Paw, Star } from "lucide-react"
 import { Scissors, Dog, House } from 'lucide-react';
-
 import type { Product } from "@/interfaces/Product";
+import { useState } from "react";
+import Chat from "@/components/commons/chat";
 
 interface ButtonProps {
   label: string;
@@ -17,6 +16,7 @@ interface ButtonProps {
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const { data: products, isLoading, isError } = useProducts();
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   const buttons: ButtonProps[] = [
     { label: "Xem Thêm", href: "#services", variant: "primary" },
@@ -66,7 +66,6 @@ const Home: React.FC = () => {
               ))}
             </div>
 
-            {/* Trust indicators */}
             <div className="flex items-center mt-8 text-gray-600">
               <div className="flex">
                 {[1, 2, 3, 4, 5].map((star) => (
@@ -82,7 +81,6 @@ const Home: React.FC = () => {
             </div>
           </div>
 
-          {/* Image Section */}
           <div className="relative flex-1 flex justify-end">
             <div className="absolute inset-0 bg-blue-200 rounded-full blur-3xl opacity-20 transform translate-x-10 translate-y-10"></div>
             <div className="relative bg-white p-3 rounded-2xl shadow-xl transform rotate-2 z-10">
@@ -98,7 +96,6 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* Services Section */}
         <div className="mb-16" id="services">
   <div className="text-center mb-10">
     <h2 className="text-3xl font-bold text-blue-900 mb-4">Dịch Vụ Của Chúng Tôi</h2>
@@ -167,7 +164,7 @@ const Home: React.FC = () => {
               Sản Phẩm Nổi Bật
             </h2>
             <button
-              onClick={() => navigate("/products")}
+              onClick={() => navigate("shop/products")}
               className="text-blue-600 font-medium flex items-center hover:text-blue-800"
             >
               Xem tất cả
@@ -207,7 +204,7 @@ const Home: React.FC = () => {
           {products && (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {Array.isArray(products) &&
-                products.slice(0, 3).map((product: Product) => (
+                products.slice(0, 3).map((product) => (
                   <div
                     key={product._id}
                     className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group"
@@ -275,15 +272,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </main>
-
-      <button
-        onClick={() => navigate("#chat")}
-        className="fixed bottom-6 right-6 bg-blue-600 text-white px-6 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1 z-50"
-      >
-        <MessageCircle className="h-5 w-5 mr-2" />
-        <span className="font-medium">Chat với mình nhé</span>
-        <span className="ml-2 text-xl">😊</span>
-      </button>
+      <Chat isOpen={isChatOpen} toggleChat={() => setIsChatOpen(!isChatOpen)} />
     </div>
   );
 };
