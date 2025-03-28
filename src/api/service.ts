@@ -1,4 +1,4 @@
-import { Service } from "@/interfaces/service";
+import { Service } from "@/interfaces/Service";
 import apiClient from "../config/axiosClient";
 
 
