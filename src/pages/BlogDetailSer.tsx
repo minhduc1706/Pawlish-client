@@ -100,7 +100,7 @@ export default function BlogPostDetailSer() {
         <div style="display: flex; justify-content: space-between; align-items: center; background-color: #f4f4f4; padding: 20px; border-radius: 10px; width: 100%;margin-top:30px">
           <div>
             <h2 style="margin: 0; color: #1f2a5a; font-weight: bold;">MAI LAN</h2>
-            <a href="#" style="color: #a0a0a0; text-decoration: none; font-size: 14px;">ALL ARTICLES »</a>
+            <a  style="color: #a0a0a0; text-decoration: none; font-size: 14px;">ALL ARTICLES »</a>
           </div>
           <div style="width: 60px; height: 60px; border-radius: 50%; background-color: #ddd; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#fff" viewBox="0 0 24 24"><path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.865 0-7 3.135-7 7h14c0-3.865-3.135-7-7-7z"/></svg>
@@ -114,7 +114,7 @@ export default function BlogPostDetailSer() {
             <span style="font-size: 20px;">&#9664;</span>
             <div>
               <h3 style="margin: 0; font-size: 16px; color: #7f8c8d; font-weight: bold;">BACK</h3>
-              <a href="#" style="text-decoration: none; color: #4a5a7a; font-size: 14px;">Husky Care Tips: Important Things to Know</a>
+              <a  style="text-decoration: none; color: #4a5a7a; font-size: 14px;">Husky Care Tips: Important Things to Know</a>
             </div>
           </div>
 
@@ -122,7 +122,7 @@ export default function BlogPostDetailSer() {
           <div style="display: flex; align-items: center; gap: 5px; color: #7f8c8d; cursor: pointer;">
             <div style="text-align: right;">
               <h3 style="margin: 0; font-size: 16px; color: #7f8c8d; font-weight: bold;">NEXT</h3>
-              <a href="#" style="text-decoration: none; color: #4a5a7a; font-size: 14px;">Top 5 Most Reputable Pet Spas in District 7, 2025</a>
+              <a  style="text-decoration: none; color: #4a5a7a; font-size: 14px;">Top 5 Most Reputable Pet Spas in District 7, 2025</a>
             </div>
             <span style="font-size: 20px;">&#9654;</span>
           </div>
@@ -218,7 +218,7 @@ export default function BlogPostDetailSer() {
         <div style="display: flex; justify-content: space-between; align-items: center; background-color: #f4f4f4; padding: 20px; border-radius: 10px; width: 100%;margin-top:30px">
           <div>
             <h2 style="margin: 0; color: #1f2a5a; font-weight: bold;">MAI LAN</h2>
-            <a href="#" style="color: #a0a0a0; text-decoration: none; font-size: 14px;">ALL ARTICLES »</a>
+            <a  style="color: #a0a0a0; text-decoration: none; font-size: 14px;">ALL ARTICLES »</a>
           </div>
           <div style="width: 60px; height: 60px; border-radius: 50%; background-color: #ddd; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#fff" viewBox="0 0 24 24"><path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.865 0-7 3.135-7 7h14c0-3.865-3.135-7-7-7z"/></svg>
@@ -232,7 +232,7 @@ export default function BlogPostDetailSer() {
             <span style="font-size: 20px;">&#9664;</span>
             <div>
               <h3 style="margin: 0; font-size: 16px; color: #7f8c8d; font-weight: bold;">BACK</h3>
-              <a href="#" style="text-decoration: none; color: #4a5a7a; font-size: 14px;">Husky Care Tips: Important Things to Know</a>
+              <a  style="text-decoration: none; color: #4a5a7a; font-size: 14px;">Husky Care Tips: Important Things to Know</a>
             </div>
           </div>
 
@@ -240,7 +240,7 @@ export default function BlogPostDetailSer() {
           <div style="display: flex; align-items: center; gap: 5px; color: #7f8c8d; cursor: pointer;">
             <div style="text-align: right;">
               <h3 style="margin: 0; font-size: 16px; color: #7f8c8d; font-weight: bold;">NEXT</h3>
-              <a href="#" style="text-decoration: none; color: #4a5a7a; font-size: 14px;">Top 5 Most Reputable Pet Spas in District 7, 2025</a>
+              <a  style="text-decoration: none; color: #4a5a7a; font-size: 14px;">Top 5 Most Reputable Pet Spas in District 7, 2025</a>
             </div>
             <span style="font-size: 20px;">&#9654;</span>
           </div>
@@ -330,7 +330,7 @@ export default function BlogPostDetailSer() {
         <div style="display: flex; justify-content: space-between; align-items: center; background-color: #f4f4f4; padding: 20px; border-radius: 10px; width: 100%;margin-top:30px">
           <div>
             <h2 style="margin: 0; color: #1f2a5a; font-weight: bold;">MAI LAN</h2>
-            <a href="#" style="color: #a0a0a0; text-decoration: none; font-size: 14px;">ALL ARTICLES »</a>
+            <a  style="color: #a0a0a0; text-decoration: none; font-size: 14px;">ALL ARTICLES »</a>
           </div>
           <div style="width: 60px; height: 60px; border-radius: 50%; background-color: #ddd; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#fff" viewBox="0 0 24 24"><path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.865 0-7 3.135-7 7h14c0-3.865-3.135-7-7-7z"/></svg>
@@ -344,7 +344,7 @@ export default function BlogPostDetailSer() {
             <span style="font-size: 20px;">&#9664;</span>
             <div>
               <h3 style="margin: 0; font-size: 16px; color: #7f8c8d; font-weight: bold;">BACK</h3>
-              <a href="#" style="text-decoration: none; color: #4a5a7a; font-size: 14px;">Husky Care Tips: Important Things to Know</a>
+              <a  style="text-decoration: none; color: #4a5a7a; font-size: 14px;">Husky Care Tips: Important Things to Know</a>
             </div>
           </div>
 
@@ -352,7 +352,7 @@ export default function BlogPostDetailSer() {
           <div style="display: flex; align-items: center; gap: 5px; color: #7f8c8d; cursor: pointer;">
             <div style="text-align: right;">
               <h3 style="margin: 0; font-size: 16px; color: #7f8c8d; font-weight: bold;">NEXT</h3>
-              <a href="#" style="text-decoration: none; color: #4a5a7a; font-size: 14px;">Top 5 Most Reputable Pet Spas in District 7, 2025</a>
+              <a  style="text-decoration: none; color: #4a5a7a; font-size: 14px;">Top 5 Most Reputable Pet Spas in District 7, 2025</a>
             </div>
             <span style="font-size: 20px;">&#9654;</span>
           </div>
@@ -466,7 +466,7 @@ export default function BlogPostDetailSer() {
         <div style="display: flex; justify-content: space-between; align-items: center; background-color: #f4f4f4; padding: 20px; border-radius: 10px; width: 100%;margin-top:30px">
           <div>
             <h2 style="margin: 0; color: #1f2a5a; font-weight: bold;">MAI LAN</h2>
-            <a href="#" style="color: #a0a0a0; text-decoration: none; font-size: 14px;">ALL ARTICLES »</a>
+            <a  style="color: #a0a0a0; text-decoration: none; font-size: 14px;">ALL ARTICLES »</a>
           </div>
           <div style="width: 60px; height: 60px; border-radius: 50%; background-color: #ddd; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#fff" viewBox="0 0 24 24"><path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.865 0-7 3.135-7 7h14c0-3.865-3.135-7-7-7z"/></svg>
@@ -480,7 +480,7 @@ export default function BlogPostDetailSer() {
             <span style="font-size: 20px;">&#9664;</span>
             <div>
               <h3 style="margin: 0; font-size: 16px; color: #7f8c8d; font-weight: bold;">BACK</h3>
-              <a href="#" style="text-decoration: none; color: #4a5a7a; font-size: 14px;">Husky Care Tips: Important Things to Know</a>
+              <a  style="text-decoration: none; color: #4a5a7a; font-size: 14px;">Husky Care Tips: Important Things to Know</a>
             </div>
           </div>
 
@@ -488,7 +488,7 @@ export default function BlogPostDetailSer() {
           <div style="display: flex; align-items: center; gap: 5px; color: #7f8c8d; cursor: pointer;">
             <div style="text-align: right;">
               <h3 style="margin: 0; font-size: 16px; color: #7f8c8d; font-weight: bold;">NEXT</h3>
-              <a href="#" style="text-decoration: none; color: #4a5a7a; font-size: 14px;">Top 5 Most Reputable Pet Spas in District 7, 2025</a>
+              <a  style="text-decoration: none; color: #4a5a7a; font-size: 14px;">Top 5 Most Reputable Pet Spas in District 7, 2025</a>
             </div>
             <span style="font-size: 20px;">&#9654;</span>
           </div>

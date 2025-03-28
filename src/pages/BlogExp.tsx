@@ -2,49 +2,53 @@ import Footer from '@/components/commons/Footer';
 import { Header } from '@/components/commons/Header';
 import TopBar from '@/components/commons/TopBar';
 import { Link } from 'react-router-dom';
+import { Blog as BlogType } from "../interfaces/Blog";
+import { useState } from 'react';
+
 export default function BlogExp() {
-  const posts = [
-    {
-      id: 1,
-      title: 'How to groom a long-haired dog at home? Pawlish is here!',
-      description:
-        'At Pawlish, we understand that taking care of a long-haired dog can be a challenge',
-      date: '06/08/2024',
-      comments: 'No comments',
-      image:
-        'https://vcdn1-giadinh.vnecdn.net/2021/11/09/207812257-308076537713445-6475-6662-7552-1636468053.jpg?w=460&h=0&q=100&dpr=2&fit=crop&s=vQnyjLxVCwLW086xDIJHSQ',
-    },
-    {
-      id: 2,
-      title: 'Experience of raising a Husky: Important things to note',
-      description:
-        'Husky is a breed of energetic, intelligent and popular with many people. However...',
-      date: '01/08/2024',
-      comments: 'No comments',
-      image:
-        'https://www.dogster.com/wp-content/uploads/2023/09/siberian-husky-dog-standing-on-grass_Edalin-Photography_Shutterstock.jpg',
-    },
-    {
-      id: 3,
-      title: 'Experience of raising a French Bulldog: Proper care',
-      description:
-        'French Bulldog is one of the most popular breeds and is loved for its personality',
-      date: '01/08/2024',
-      comments: 'No comments',
-      image:
-        'https://thepetlabco.com/learn/_next/image?url=https%3A%2F%2Fblog.thepetlabco.com%2Fwp-content%2Fuploads%2F2024%2F05%2Fshutterstock_1974509900-1.jpg&w=3840&q=75',
-    },
-    {
-      id: 4,
-      title: 'Experience of raising a Beagle: Effective training secrets',
-      description:
-        'Raising a Beagle is an experience that is great but also has its challenges. Beagle is known for its',
-      date: '01/08/2024',
-      comments: 'No comments',
-      image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShpVgOTjh2Bqb_fR8O6_30xppY1bQ-GwGPLoFnW6BxFyHgVAgbhg4HUWYifry7gNVB-AoFzXHaYNO-JjRIuk8u1w',
-    }
-  ];
+  const [blogs, setBlogs] = useState<BlogType[]>([]);
+  // const blogs = [
+  //   {
+  //     id: 1,
+  //     title: 'How to groom a long-haired dog at home? Pawlish is here!',
+  //     description:
+  //       'At Pawlish, we understand that taking care of a long-haired dog can be a challenge',
+  //     date: '06/08/2024',
+  //     comments: 'No comments',
+  //     image:
+  //       'https://vcdn1-giadinh.vnecdn.net/2021/11/09/207812257-308076537713445-6475-6662-7552-1636468053.jpg?w=460&h=0&q=100&dpr=2&fit=crop&s=vQnyjLxVCwLW086xDIJHSQ',
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'Experience of raising a Husky: Important things to note',
+  //     description:
+  //       'Husky is a breed of energetic, intelligent and popular with many people. However...',
+  //     date: '01/08/2024',
+  //     comments: 'No comments',
+  //     image:
+  //       'https://www.dogster.com/wp-content/uploads/2023/09/siberian-husky-dog-standing-on-grass_Edalin-Photography_Shutterstock.jpg',
+  //   },
+  //   {
+  //     id: 3,
+  //     title: 'Experience of raising a French Bulldog: Proper care',
+  //     description:
+  //       'French Bulldog is one of the most popular breeds and is loved for its personality',
+  //     date: '01/08/2024',
+  //     comments: 'No comments',
+  //     image:
+  //       'https://thepetlabco.com/learn/_next/image?url=https%3A%2F%2Fblog.thepetlabco.com%2Fwp-content%2Fuploads%2F2024%2F05%2Fshutterstock_1974509900-1.jpg&w=3840&q=75',
+  //   },
+  //   {
+  //     id: 4,
+  //     title: 'Experience of raising a Beagle: Effective training secrets',
+  //     description:
+  //       'Raising a Beagle is an experience that is great but also has its challenges. Beagle is known for its',
+  //     date: '01/08/2024',
+  //     comments: 'No comments',
+  //     image:
+  //       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShpVgOTjh2Bqb_fR8O6_30xppY1bQ-GwGPLoFnW6BxFyHgVAgbhg4HUWYifry7gNVB-AoFzXHaYNO-JjRIuk8u1w',
+  //   }
+  // ];
 
   return (
     <div>
@@ -64,15 +68,15 @@ export default function BlogExp() {
 
       <div className='grid grid-cols-3 gap-4'>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 w-3xl col-span-2 ml-50 mt-10 mb-10">
-          {posts.map((post) => (
+          {blogs.map((blog) => (
             <div
-              key={post.id}
+              key={blog._id}
               className="bg-white shadow-lg rounded-2xl overflow-hidden"
             >
               <div className="relative">
                 <img
-                  src={post.image}
-                  alt="post thumbnail"
+                  src={blog.imgUrl}
+                  alt="blog thumbnail"
                   className="w-full h-48 object-cover"
                 />
                 <span className="absolute top-2 left-2 bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
@@ -81,17 +85,17 @@ export default function BlogExp() {
               </div>
 
               <div className="p-8">
-                <h2 className="text-lg font-bold text-gray-800">{post.title}</h2>
-                <p className="text-sm text-gray-600 mt-2">{post.description}</p>
+                <h2 className="text-lg font-bold text-gray-800">{blog.title}</h2>
+                <p className="text-sm text-gray-600 mt-2">{blog.content}</p>
                 <Link
-                  to={`/blog/experience/post/${post.id}`}
+                  to={`/blog/experience/post/${blog._id}`}
                   className="text-blue-600 hover:text-blue-800 font-medium"
                 >
                   READ MORE
                 </Link>
 
                 <div className="mt-2 text-gray-400 text-xs">
-                  {post.date} • {post.comments}
+                  {blog.createdAt} • {blog.no_comments}
                 </div>
               </div>
             </div>
