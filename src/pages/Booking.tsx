@@ -134,17 +134,17 @@ export default function BookingPage() {
 
     setIsLoading(true)
     try {
-      const appointment: Appointment = {
-        user_id: contactInfo,
-        pet_id: petInfo,
-        service_id: selectedService,
-        date: date!,
-        time: timeSlot,
-        status: "pending",
-        staff_id: selectedStaff,
-        notes: notes || undefined,
-        category_id: selectedService.category_id,
-      }
+      // const appointment: Appointment = {
+      //   user_id: contactInfo,
+      //   pet_id: petInfo,
+      //   service_id: selectedService,
+      //   date: date!,
+      //   time: timeSlot,
+      //   status: "pending",
+      //   staff_id: selectedStaff,
+      //   notes: notes || undefined,
+      //   category_id: selectedService.category_id,
+      // }
 
       // Call VNPay API
       const paymentUrl = await createVNPayPayment({
