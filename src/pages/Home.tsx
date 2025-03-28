@@ -1,7 +1,7 @@
 import { useProducts } from "@/queries/useProduct"
 import type React from "react"
 import { useNavigate } from "react-router-dom"
-import { MessageCircle, PawPrintIcon as Paw, Star } from "lucide-react"
+import { PawPrintIcon as Paw, Star } from "lucide-react"
 import { Scissors, Dog, House } from 'lucide-react';
 import type { Product } from "@/interfaces/Product";
 import { useState } from "react";
