@@ -1,12 +1,12 @@
-import { Link, useLocation } from "react-router-dom"; // Thêm useLocation
+import {  useLocation } from "react-router-dom"; 
 import { SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { RootState } from "@/store";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus, Trash2 } from "lucide-react";
-import { removeItemFromCart, addItemToCart } from "@/redux/cart/cartSlice";
+import { removeItemFromCart, addItemToCart, clearCart } from "@/redux/cart/cartSlice";
 import { CartItem } from "@/interfaces/Cart";
-import { useState, useEffect } from "react"; // Thêm useEffect
+import { useState, useEffect } from "react"; 
 import { createVNPayPayment } from "@/api/payment";
 
 const CartDropdown = () => {
@@ -14,9 +14,9 @@ const CartDropdown = () => {
     (state: RootState) => state.cart
   );
   const dispatch = useAppDispatch();
-  const location = useLocation(); // Lấy thông tin URL hiện tại
+  const location = useLocation(); 
   const [loading, setLoading] = useState<boolean>(false);
-  const [paymentStatus, setPaymentStatus] = useState<string | null>(null); // Trạng thái thanh toán
+  const [paymentStatus, setPaymentStatus] = useState<string | null>(null); 
 
   const handleRemoveItem = (id: string) => {
     dispatch(removeItemFromCart(id));
@@ -57,7 +57,6 @@ const CartDropdown = () => {
     }
   };
 
-  // Xử lý kết quả trả về từ VNPAY
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const responseCode = queryParams.get("vnp_ResponseCode");
@@ -66,8 +65,7 @@ const CartDropdown = () => {
     if (responseCode) {
       if (responseCode === "00") {
         setPaymentStatus(`Thanh toán thành công cho đơn hàng ${orderId}`);
-        // Xóa giỏ hàng sau khi thanh toán thành công (tùy chọn)
-        // dispatch(clearCart());
+        dispatch(clearCart());
       } else {
         setPaymentStatus("Thanh toán thất bại. Vui lòng thử lại.");
       }
@@ -81,7 +79,6 @@ const CartDropdown = () => {
         <SheetDescription>You have {totalQuantity} items in your cart</SheetDescription>
       </SheetHeader>
 
-      {/* Hiển thị thông báo thanh toán */}
       {paymentStatus && (
         <div className="mt-4 p-4 bg-gray-100 rounded">
           <p className={paymentStatus.includes("thành công") ? "text-green-600" : "text-red-600"}>
@@ -159,14 +156,6 @@ const CartDropdown = () => {
           className="w-full bg-[#4CAF50] hover:bg-[#45a049] text-white"
         >
           {loading ? "Processing..." : "Pay with VNPay"}
-        </Button>
-        <Button
-          disabled={loading || items.length === 0}
-          className="w-full bg-gray-500 hover:bg-gray-600 text-white"
-        >
-          <Link to="/checkout" className="w-full block text-center">
-            Checkout
-          </Link>
         </Button>
       </div>
     </SheetContent>
