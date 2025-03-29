@@ -15,3 +15,22 @@ export const createVNPayPayment = async (data: {
     throw error;
   }
 };
+
+export const createVNPayServicePayment = async (data: {
+  amount: number;
+  service: string;
+  staff: string;
+  date: string;
+  time: string;
+  pet: string;
+  user: string;
+  notes?: string;
+}) => {
+  try {
+    const response = await apiClient.post("/service-payment/vnpay", data);
+    return response.data.paymentUrl;
+  } catch (error) {
+    console.error("Error creating service VNPay payment:", error);
+    throw error;
+  }
+};

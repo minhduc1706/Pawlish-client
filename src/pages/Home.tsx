@@ -1,7 +1,7 @@
 import { useProducts } from "@/queries/useProduct"
 import type React from "react"
 import { useNavigate } from "react-router-dom"
-import { PawPrintIcon as Paw, Star } from "lucide-react"
+import {  PawPrintIcon as Paw, Star } from "lucide-react"
 import { Scissors, Dog, House } from 'lucide-react';
 import { useState } from "react";
 import Chat from "@/components/commons/chat";
@@ -18,7 +18,7 @@ const Home: React.FC = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   const buttons: ButtonProps[] = [
-    { label: "Xem Thêm", href: "#services", variant: "primary" },
+    { label: "Xem Thêm", href: "/services/Grooming", variant: "primary" },
     { label: "Online Booking", href: "/booking", variant: "secondary" },
   ];
 
@@ -114,7 +114,7 @@ const Home: React.FC = () => {
         Chúng tôi biết cách làm thế nào để thú cưng của bạn trở nên đáng yêu và cả tinh hơn. Với dịch vụ cắt tỉa lông thú cưng chúng tôi sẽ giúp các bé trở thành phiên bản hoàn hảo nhất...
       </p>
       <button
-        onClick={() => navigate("/services")}
+        onClick={() => navigate("/services/Grooming")}
         className="mt-4 bg-gray-100 text-gray-800 font-medium py-2 px-4 rounded-full hover:bg-gray-200 transition-all"
       >
         Xem Thêm
@@ -131,7 +131,7 @@ const Home: React.FC = () => {
         Cung với hơn 3.000 khách hàng đã tin tưởng, đóng góp, chúng tôi luôn đặt ra những mục tiêu và thực thách mới. PET SERVICE cung cấp các sản phẩm, phụ kiện rất đa dạng...
       </p>
       <button
-        onClick={() => navigate("/services")}
+        onClick={() => navigate("/shop/products")}
         className="mt-4 bg-gray-100 text-gray-800 font-medium py-2 px-4 rounded-full hover:bg-gray-200 transition-all"
       >
         Xem Thêm

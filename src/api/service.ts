@@ -1,5 +1,6 @@
+import { Service } from "@/interfaces/service";
 import { Service } from "@/interfaces/Service";
-import apiClient from "../config/axiosClient";
+
 
 
 export const getService = async (): Promise<Service[]> => {
@@ -12,3 +13,4 @@ export const getService = async (): Promise<Service[]> => {
     throw error;
   }
 };
+

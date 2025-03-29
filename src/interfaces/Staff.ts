@@ -1,4 +1,5 @@
-import { Service } from "./Service";
+import { Service } from "./service";
+
 
 export interface Staff {
     _id?: string;

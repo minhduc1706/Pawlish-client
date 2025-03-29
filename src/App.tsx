@@ -23,6 +23,7 @@ import ProductDetail from "./pages/shop/product/ProductDetail";
 import PaymentResult from "./pages/PaymentResult";
 import Profile from "./pages/Profile";
 import OrderHistory from "./pages/OrderHistory";
+import AppointmentHistoryPage from "./pages/AppointmentHistory";
 function App() {
   return (
     <BrowserRouter>
@@ -38,12 +39,12 @@ function App() {
           <Route path="/payment-result" element={<PaymentResult />} />
           <Route path="/services/PetCare" element={<PetCare />} />
           <Route path="/services/Massage" element={<Massage />} />
-
           <Route path="/services/HealthCheck" element={<HealthCheck />} />
           <Route path="/services/Boarding" element={<Boarding />} />
           <Route path="/services/Training" element={<Training />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/order-history" element={<OrderHistory />} />
+          <Route path="/appointment-history" element={<AppointmentHistoryPage />} />
           <Route path="/shop/products" element={<Product />} />
           <Route path="/product/:id" element={<ProductDetail />} />
         </Route>

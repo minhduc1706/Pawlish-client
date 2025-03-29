@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { socketClient, connectSocket, disconnectSocket } from "../../redux/chat/socket";
-import { setMessages, addMessage, setConnected, setRoomId } from "../../redux/chat/chatSlice";
+import { setMessages, addMessage, setConnected, setRoomId, setCskhStaffId, setError } from "../../redux/chat/chatSlice";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
@@ -15,53 +15,82 @@ interface ChatProps {
 
 const Chat: React.FC<ChatProps> = ({ isOpen, toggleChat }) => {
   const dispatch = useAppDispatch();
-  const { messages, isConnected, roomId } = useAppSelector((state) => state.chat);
+  const { messages, isConnected, roomId, cskhStaffId } = useAppSelector((state) => state.chat);
   const [input, setInput] = useState("");
-  const [cskhStaffId, setCskhStaffId] = useState<string | null>(null);
+  const [isLoadingStaffId, setIsLoadingStaffId] = useState(false);
 
+  // Lấy CSKH Staff ID và kết nối Socket.IO khi component mount
   useEffect(() => {
     const fetchCSKHStaffId = async () => {
-      const staffId = await getCSKHStaffId();
-      console.log("cskhStaffId:", staffId);
-      setCskhStaffId(staffId);
+      setIsLoadingStaffId(true);
+      try {
+        const staffId = await getCSKHStaffId();
+        console.log("cskhStaffId:", staffId);
+        dispatch(setCskhStaffId(staffId));
+      } catch (error) {
+        console.error("Error fetching CSKH staff ID:", error);
+        dispatch(setError("Không thể kết nối với CSKH"));
+      } finally {
+        setIsLoadingStaffId(false);
+      }
     };
-    fetchCSKHStaffId();
-  }, [dispatch]);
 
-  useEffect(() => {
-    if (isOpen && cskhStaffId) {
-      connectSocket();
+    connectSocket(); // Kết nối Socket.IO ngay khi component mount
 
-      socketClient.on("connect", () => {
-        console.log("Kết nối Socket.IO thành công:", socketClient.id);
-        dispatch(setConnected(true));
+    socketClient.on("connect", () => {
+      console.log("Kết nối Socket.IO thành công:", socketClient.id);
+      dispatch(setConnected(true));
+      if (cskhStaffId) {
         socketClient.emit("startChat", { cskhStaffId });
-      });
+      }
+    });
 
-      socketClient.on("chatStarted", (data: { roomId: string; cskhStaffId: string; messages: any[] }) => {
-        console.log("Chat bắt đầu:", data);
-        dispatch(setRoomId(data.roomId));
-        dispatch(setMessages(data.messages));
-      });
+    socketClient.on("chatStarted", (data: { roomId: string; cskhStaffId: string; messages: any[] }) => {
+      console.log("Chat bắt đầu:", data);
+      dispatch(setRoomId(data.roomId));
+      dispatch(setMessages(data.messages));
+      dispatch(setError(null));
+    });
 
-      socketClient.on("receiveMessage", (message) => {
-        dispatch(addMessage(message));
-      });
+    socketClient.on("receiveMessage", (message) => {
+      console.log("Guest received message:", message);
+      dispatch(addMessage(message));
+    });
 
-      return () => {
-        disconnectSocket();
-        socketClient.off("connect");
-        socketClient.off("chatStarted");
-        socketClient.off("receiveMessage");
-      };
+    socketClient.on("noStaffAvailable", (data: { message: string }) => {
+      console.log(data.message);
+    });
+
+    socketClient.on("chatEnded", () => {
+      console.log("Staff disconnected");
+    });
+
+    fetchCSKHStaffId();
+
+    return () => {
+      // Chỉ ngắt kết nối khi component unmount hoàn toàn
+      disconnectSocket();
+      socketClient.off("connect");
+      socketClient.off("chatStarted");
+      socketClient.off("receiveMessage");
+      socketClient.off("noStaffAvailable");
+      socketClient.off("chatEnded");
+    };
+  }, [dispatch, cskhStaffId]);
+
+  // Chỉ khởi động chat khi isOpen và có cskhStaffId
+  useEffect(() => {
+    if (isOpen && cskhStaffId && isConnected && !roomId) {
+      socketClient.emit("startChat", { cskhStaffId });
     }
-  }, [isOpen, cskhStaffId, dispatch]);
+  }, [isOpen, cskhStaffId, isConnected, roomId]);
 
   const handleSend = () => {
-    if (input.trim() && isConnected && roomId) {
+    if (input.trim() && isConnected && roomId && cskhStaffId) {
       const messageData = { message: input, receiverId: cskhStaffId };
       socketClient.emit("sendMessage", messageData);
       setInput("");
+      console.log("Guest sent message:", messageData);
     }
   };
 
@@ -80,19 +109,25 @@ const Chat: React.FC<ChatProps> = ({ isOpen, toggleChat }) => {
             <Button variant="ghost" onClick={toggleChat}>✕</Button>
           </div>
           <ScrollArea className="h-64 p-3">
-            {messages.map((msg) => (
-              <div
-                key={msg._id || `${msg.senderId}-${msg.createdAt}`}
-                className={`p-2 mb-2 rounded-lg max-w-[75%] ${
-                  msg.senderId === socketClient.id ? "bg-blue-100 ml-auto" : "bg-gray-100 mr-auto"
-                }`}
-              >
-                <p>{msg.message}</p>
-                <span className="text-xs text-gray-500">
-                  {msg.createdAt ? new Date(msg.createdAt).toLocaleTimeString() : "Just now"}
-                </span>
-              </div>
-            ))}
+            {isLoadingStaffId ? (
+              <p className="text-center text-gray-500">Đang tải...</p>
+            ) : messages.length > 0 ? (
+              messages.map((msg) => (
+                <div
+                  key={msg._id || `${msg.senderId}-${msg.createdAt}`}
+                  className={`p-2 mb-2 rounded-lg max-w-[75%] ${
+                    msg.senderId === socketClient.id ? "bg-blue-100 ml-auto" : "bg-gray-100 mr-auto"
+                  }`}
+                >
+                  <p>{msg.message}</p>
+                  <span className="text-xs text-gray-500">
+                    {msg.createdAt ? new Date(msg.createdAt).toLocaleTimeString() : "Just now"}
+                  </span>
+                </div>
+              ))
+            ) : (
+              <p className="text-center text-gray-500">Chưa có tin nhắn nào</p>
+            )}
           </ScrollArea>
           <div className="p-3 border-t flex gap-2">
             <Input
@@ -100,9 +135,11 @@ const Chat: React.FC<ChatProps> = ({ isOpen, toggleChat }) => {
               onChange={(e) => setInput(e.target.value)}
               placeholder="Nhập tin nhắn..."
               onKeyPress={(e) => e.key === "Enter" && handleSend()}
-              disabled={!isConnected || !roomId}
+              disabled={!isConnected || !roomId || isLoadingStaffId}
             />
-            <Button onClick={handleSend} disabled={!isConnected || !roomId}>Gửi</Button>
+            <Button onClick={handleSend} disabled={!isConnected || !roomId || isLoadingStaffId}>
+              Gửi
+            </Button>
           </div>
         </div>
       )}
