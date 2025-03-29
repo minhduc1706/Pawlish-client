@@ -43,9 +43,8 @@ import { createVNPayServicePayment } from "@/api/payment";
 import { useUser } from "@/queries/useUser";
 import type { Pet, Staff } from "@/interfaces/Appointment";
 import type { User as UserType } from "@/interfaces/User";
-import type { Service } from "@/interfaces/service";
+import type { Service } from "@/interfaces/Service";
 import { createPet } from "@/api/pet";
-import { isNull } from "util";
 
 const petTypes = ["dog", "cat", "rabbit", "other"];
 const timeSlots = [
