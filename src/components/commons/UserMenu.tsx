@@ -48,6 +48,15 @@ const UserMenu = ({ user }: { user: { email: string } }) => {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link
+            to="/appointment-history"
+            className="w-full px-3 py-2 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer"
+          >
+            Appointment History
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={handleLogout}
           className="w-full px-3 py-2 font-medium rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer"
