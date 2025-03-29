@@ -14,7 +14,6 @@ type MenuItem = {
 
 const menuItems: MenuItem[] = [
   { title: "Home", path: "/" },
-  { title: "About", path: "/about" },
   {
     title: "Services",
     path: "/services",
@@ -54,7 +53,6 @@ const menuItems: MenuItem[] = [
       { path: "/blog/entertainment", label: "Entertainment Corner" },
     ],
   },
-  { title: "Contact", path: "/contact" },
 ];
 
 export function Header() {
